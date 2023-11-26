@@ -16,13 +16,24 @@ class DashboardController extends Controller
         $countAccount = Accounts::where('role', 'police')->count();
 
 
-
         return view('dashboard',
         ['countSupervisor' => $countSupervisor,
         'countVehicle' => $countVehicle,
-        'countAccount' => $countAccount]
-
-
+        'countAccount' => $countAccount,
+       ]
         );
     }
+
+    // public function getLatestUser()
+    // {
+    //     // Get the latest added users based on timestamps
+    //     $latestUsers = Supervisors::orderBy('created_at', 'desc')->take(1)->get();
+
+    //     // return response()->json($latestUsers);
+    //     return view('dashboard', compact('latestUsers'));
+
+    // }
+
+
+
 }
