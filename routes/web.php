@@ -40,7 +40,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/supervisors', [SupervisorsController::class, 'index'])->middleware(['auth', 'verified'])->name('supervisors');
+// edit supervisor
+Route::get('/supervisors', [SupervisorsController::class, 'index'])->name('supervisors');
+Route::patch('/supervisors/update/{id}', [SupervisorsController::class, 'update'])->name('supervisors.update');
 
 
 Route::delete('/delete/{supervisor}', [SupervisorsController::class, 'supervisor_delete'])->name('supervisor_delete');
@@ -51,10 +53,6 @@ Route::delete('/delete1/{account}', [AccountsController::class, 'destroy']);
 Route::delete('/delete-vehicle/{vehicle}', [VehiclesController::class, 'destroy']);
 
 Route::get('/dashboard', [DashboardController::class, 'countUsersByRole'])->middleware(['auth', 'verified'])->name('dashboard');
-
-
-// Route::put('/supervisor/{supervisor}', [SupervisorsController::class, 'update']);
-Route::put('/supervisor-edit/{supervisor}', [SupervisorsController::class, 'supervisor_edit'])->name('supervisor_edit');
 
 
 Route::get('/accounts', [AccountsController::class, 'index'])->middleware(['auth', 'verified'])->name('accounts');

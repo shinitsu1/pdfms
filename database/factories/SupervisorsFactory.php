@@ -18,13 +18,10 @@ class SupervisorsFactory extends Factory
     public function definition(): array
     {
         return [
-            'first_name' => fake()->firstName(),
-            'last_name' => fake()->lastName(),
-            'gender' => fake()->randomElement(['Male', 'Female']),
-            'age' => fake()->numberBetween($min = 18, $max = 22),
+            'name' => fake()->name(),
             'role' => 'supervisor',
             'email' => fake()->unique()->safeEmail(),
-            'password' => Hash::make(12345),
+            'password' => Hash::make('12345'),
         ];
     }
 }
