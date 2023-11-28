@@ -7,6 +7,7 @@ use App\Http\Controllers\SupervisorsController;
 use App\Http\Controllers\VehiclesController;
 use App\Models\Supervisors;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SmsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,11 +46,12 @@ Route::get('/supervisors', [SupervisorsController::class, 'index'])->name('super
 Route::patch('/supervisors/update/{id}', [SupervisorsController::class, 'update'])->name('supervisors.update');
 Route::post('/supervisors/create', [SupervisorsController::class, 'create_supervisor'])->name('supervisors.create_supervisor');
 
+Route::patch('/accounts/update/{id}', [AccountsController::class, 'update_account'])->name('accounts.update_account');
 
 Route::delete('/delete/{supervisor}', [SupervisorsController::class, 'supervisor_delete'])->name('supervisor_delete');
 
 
-Route::delete('/delete1/{account}', [AccountsController::class, 'destroy']);
+Route::delete('/delete1/{account}', [AccountsController::class, 'destroy'])->name('accounts.delete');
 
 Route::delete('/delete-vehicle/{vehicle}', [VehiclesController::class, 'destroy']);
 
@@ -59,5 +61,11 @@ Route::get('/dashboard', [DashboardController::class, 'countUsersByRole'])->midd
 Route::get('/accounts', [AccountsController::class, 'index'])->middleware(['auth', 'verified'])->name('accounts');
 
 Route::get('/vehicles', [VehiclesController::class, 'index'])->middleware(['auth', 'verified'])->name('vehicles');;
+
+Route::get('/Messaging', function () {
+    return view('Messaging'); // Assumes "AboutUs.blade.php" is in the "resources/views" directory.
+})->name('Messaging');
+
+Route::post('/send-sms', [SmsController::class, 'sendSMS']);
 
 require __DIR__.'/auth.php';

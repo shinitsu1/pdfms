@@ -68,22 +68,23 @@ class SupervisorsController extends Controller
     public function create_supervisor(Request $request){
         $request->validate([
             'name' => 'required|string',
-            'username' => 'required', 'min:4',
-            'email' => 'required',
+            'username' => 'required|string',
             'phone' => 'required',
-            'role' => 'supervisor',
+            'role' => 'nullable|string|min:6',
             'email' => 'required', 'email', Rule::unique('students', 'email'),
-            'password' => '12345',
+            'password' => 'nullable|string|min:6',
         ]);
 
         Supervisors::create([
             'name' => $request->input('name'),
+            'username' => $request->input('username'),
             'email' => $request->input('email'),
-            'password' => ($request->password),
-            'role' => $request->input('role'),
-            'status' => $request->input('status'),
+            'phone' => $request->input('phone'),
+            'password' => '12345',
+            'role' => 'supervisor',
         ]);
 
+        return redirect()->route('supervisors')->with('message', 'User Added Successfully.');
     }
 }
 

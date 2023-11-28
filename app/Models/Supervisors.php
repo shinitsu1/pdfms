@@ -15,6 +15,7 @@ class Supervisors extends Model
         'email',
         'phone',
         'password',
+        'role',
         // Add other attributes as needed
     ];
 }
