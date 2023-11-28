@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
 // edit supervisor
 Route::get('/supervisors', [SupervisorsController::class, 'index'])->name('supervisors');
 Route::patch('/supervisors/update/{id}', [SupervisorsController::class, 'update'])->name('supervisors.update');
+Route::post('/supervisors/create', [SupervisorsController::class, 'create_supervisor'])->name('supervisors.create_supervisor');
 
 
 Route::delete('/delete/{supervisor}', [SupervisorsController::class, 'supervisor_delete'])->name('supervisor_delete');

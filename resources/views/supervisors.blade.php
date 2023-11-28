@@ -31,20 +31,20 @@
 </div>
 
     <!--Container-->
-    <div class="relative top-[70px] left-[3px] md:w-[calc(100%-256px)] md:ml-64 xl:w-[79%] mx-auto px-5 p-5 rounded-lg bg-gray-100">
+    <div class="relative top-[70px] md:w-[calc(100%-256px)] md:ml-64 xl:w-[80%] mx-auto px-2 p-5 rounded-lg bg-gray-100">
         <!--Card-->
-        <div id='recipients' class="p-8 mt-10 lg:mt-0 rounded shadow bg-gray-200">
-
-
+        <div id='recipients' class="p-8 mt-5 lg:mt-0 rounded shadow bg-gray-200">
             <!--AlphineModal-->
             <div x-data="{ supervisorDelete: false, adminNewUsers: false, supervisorEdit: false, itemToDelete: null, itemToEdit: null}">
-                <button @click="adminNewUsers = true">Add New Users</button>
+                <button @click="adminNewUsers = true" class="mb-2 text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center">Add New Users</button>
                 <table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>UserID</th>
                             <th>Name</th>
+                            <th>Username</th>
                             <th>Email</th>
+                            <th>Phone</th>
                             <th>Action</th>
                             <th>Action</th>
                         </tr>
@@ -54,7 +54,9 @@
                                 <tr x-on:click="itemToEdit = {{ $supervisor->id }};">
                                 <td class="text-center">{{ $supervisor->id }}</td>
                                 <td class="text-center">{{ $supervisor->name }}</td>
+                                <td class="text-center">{{ $supervisor->username }}</td>
                                 <td class="text-center">{{ $supervisor->email }}</td>
+                                <td class="text-center">{{ $supervisor->phone }}</td>
                                 <td class="text-center ">
                                     <button @click="supervisorEdit = true; itemToEdit = $event.target.getAttribute('data-item-id')" data-item-id="{{ $supervisor->id }}" class="bg-sky-600 text-white px-6 py-2 rounded">
                                         Edit
@@ -85,160 +87,175 @@
         x-transition:leave-start="opacity-100 transform scale-100"
         x-transition:leave-end="opacity-0 transform scale-95"
         class="bg-white rounded-lg overflow-hidden transform transition-all sm:max-w-lg sm:w-full">
-        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-col sm:items-center">
-            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to update this user?</h3>
-
+        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                Edit User Information
+            </h3>
+        </div>
             @foreach($data as $item)
             <div x-show="itemToEdit === {{ $item->id }}">
                     <form method="post" :action="`{{ route('supervisors.update', '') }}/${itemToEdit}`">
                     @csrf
                     @method('patch')
-                    <label for="id">ID:</label>
-                    <input type="text" name="id" value="{{ $item->id }}" disabled>
-                    <br>
-                    <label for="name">Name:</label>
-                    <input type="text" name="name" value="{{ $item->name }}" required>
-                    <br>
-                    <label for="email">Email:</label>
-                    <input type="text" name="email" value="{{ $item->email }}" required>
-                    <br>
-                    <label for="password">Password:</label>
-                    <input type="text" name="password" value="{{ $item->password }}" required>
-                    <br>
-                    <button type="submit"
-                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
+
+                    <div class="p-4 md:p-5 space-y-4">
+                        <div class="grid gap-4 mb-4 sm:grid-cols-2">
+                            <div>
+                                <label for="UserID" class="block mb-2 text-sm font-medium text-gray-900">UserID</label>
+                                <input type="text" name="id" value="{{ $item->id }}" class="bg-gray-100 border border-gray-300 text-gray-900" disabled>
+                            </div>
+                            <div>
+                                <label for="created_at" class="block mb-2 text-sm font-medium text-gray-900">Account Created</label>
+                                <input type="text" name="created_at" value="{{ $item->created_at }}" class="bg-gray-100 border border-gray-300 text-gray-900" disabled>
+                            </div>
+                            <div>
+                                <label for="name">Name:</label>
+                                <input type="text" name="name" value="{{ $item->name }}" class="bg-gray-100 border border-gray-600 text-gray-900" required>
+                            </div>
+
+                            <div>
+                                <label for="username">Username</label>
+                                <input type="text" name="username" value="{{ $item->username }}" class="bg-gray-100 border border-gray-600 text-gray-900" required>
+                            </div>
+
+                            <div>
+                                <label for="email">Email</label>
+                                <input type="text" name="email" value="{{ $item->email }}" class="bg-gray-100 border border-gray-600 text-gray-900" required>
+                            </div>
+
+                            <div>
+                                <label for="phone">Phone Number</label>
+                                <input type="text" name="phone" value="{{ $item->phone }}" class="bg-gray-100 border border-gray-600 text-gray-900" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Buttons-->
+                    <div class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                        <button type="submit"
+                                class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
                         Update
-                    </button>
+                        </button>
+                        <Button @click="supervisorEdit = false"
+                                type="button"
+                                class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                        Cancel
+                        </Button>
+                    </div>
+                    <!--Buttons-->
                 </form>
             </div>
             @endforeach
-
-            <button @click="supervisorEdit = false"
-                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
-                Cancel
-            </button>
-        </div>
     </div>
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-                <!-- Delete Modal -->
-                        <div x-show="supervisorDelete" class="fixed inset-0 overflow-y-auto flex items-center justify-center z-20" x-cloak>
-                            <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-                                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-                            </div>
-                                <div x-show="supervisorDelete" @click.away="supervisorDelete = false"
-                                    x-transition:enter="ease-out duration-300"
-                                    x-transition:enter-start="opacity-0 transform scale-95"
-                                    x-transition:enter-end="opacity-100 transform scale-100"
-                                    x-transition:leave="ease-in duration-200"
-                                    x-transition:leave-start="opacity-100 transform scale-100"
-                                    x-transition:leave-end="opacity-0 transform scale-95"
-                                    class="bg-white rounded-lg overflow-hidden transform transition-all sm:max-w-lg sm:w-full">
-                                        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                                User Confirmation Needed
-                                            </h3>
-                                        </div>
-                                        <!-- ... (modal content) ... -->
-                                    <div class="p-4 md:p-5 space-y-4">
-                                        <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                                            Are you sure you want to delete this account?
-                                        </p>
-                                        <div class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                                            <form method="post" :action="`{{ route('supervisor_delete', '') }}/${itemToDelete}`">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                        class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
-                                                    Delete
-                                                </button>
-                                            </form>
-                                            <button @click="supervisorDelete = false"
-                                                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
-                                                Cancel
-                                            </button>
-                                        </div>
-                                    </div>
-                                <!--End of ModalContent-->
-                            </div>
-                        </div>
-
-             <!-- Add New Users Modal -->
-             <div x-show="adminNewUsers" class="fixed inset-0 overflow-y-auto flex items-center justify-center z-20" x-cloak>
-                <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-                    <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+<!-- Delete Modal -->
+<div x-show="supervisorDelete" class="fixed inset-0 overflow-y-auto flex items-center justify-center z-20" x-cloak>
+    <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+    </div>
+        <div x-show="supervisorDelete" @click.away="supervisorDelete = false"
+            x-transition:enter="ease-out duration-300"
+            x-transition:enter-start="opacity-0 transform scale-95"
+            x-transition:enter-end="opacity-100 transform scale-100"
+            x-transition:leave="ease-in duration-200"
+            x-transition:leave-start="opacity-100 transform scale-100"
+            x-transition:leave-end="opacity-0 transform scale-95"
+            class="bg-white rounded-lg overflow-hidden transform transition-all sm:max-w-lg sm:w-full">
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                        User Confirmation Needed
+                    </h3>
                 </div>
-
-                <div x-show="adminNewUsers" @click.away="adminNewUsers = false"
-                    x-transition:enter="ease-out duration-300"
-                    x-transition:enter-start="opacity-0 transform scale-95"
-                    x-transition:enter-end="opacity-100 transform scale-100"
-                    x-transition:leave="ease-in duration-200"
-                    x-transition:leave-start="opacity-100 transform scale-100"
-                    x-transition:leave-end="opacity-0 transform scale-95"
-                    class="bg-white rounded-lg overflow-hidden transform transition-all sm:max-w-lg sm:w-full">
-                    <!--modal Header-->
-                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                            Register New Supervisor
-                        </h3>
-                    </div>
-                    <!-- ... (modal content) ... -->
-                    <form action="" method="POST">
-                    @csrf
-                    <div class="p-4 md:p-5 space-y-4">
-
-                            <div class="grid gap-4 mb-4 sm:grid-cols-2">
-                                <div>
-                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
-                                    <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="First name" required="" value={{old('first_name')}}>
-                                </div>
-                                <div>
-                                    <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
-                                    <input type="text" name="brand" id="brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Last name" required="">
-                                </div>
-                                <div>
-                                    <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                    <input type="text" name="brand" id="brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="sample@sample.com" required="">
-                                </div>
-                                <div>
-                                    <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                                    <input type="number" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="User Age" required="">
-                                </div>
-
-
-                            </div>
-
-                        <div class="flex items-center justify-end p-4 md:p-5 border-t border-gray-400 rounded-b dark:border-gray-600">
-                            <button type="submit"
-                                    class="text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
-                                Create
-                            </button>
-                        </form>
-                        </div>
-                        <button @click="adminNewUsers = false"
-                                class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
-                            Cancel
+                <!-- ... (modal content) ... -->
+            <div class="p-4 md:p-5 space-y-4">
+                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                    Are you sure you want to delete this account?
+                </p>
+                <div class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                    <form method="post" :action="`{{ route('supervisor_delete', '') }}/${itemToDelete}`">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                                class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
+                            Delete
                         </button>
-                    </div>
-
-
+                    </form>
+                    <button @click="supervisorDelete = false"
+                            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                        Cancel
+                    </button>
                 </div>
             </div>
+        <!--End of ModalContent-->
+    </div>
+</div>
 
+<div x-show="adminNewUsers" class="fixed inset-0 overflow-y-auto flex items-center justify-center" x-cloak>
+    <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+    </div>
 
+    <div x-show="adminNewUsers" @click.away="adminNewUsers = false"
+        x-transition:enter="ease-out duration-300"
+        x-transition:enter-start="opacity-0 transform scale-95"
+        x-transition:enter-end="opacity-100 transform scale-100"
+        x-transition:leave="ease-in duration-200"
+        x-transition:leave-start="opacity-100 transform scale-100"
+        x-transition:leave-end="opacity-0 transform scale-95"
+        class="bg-white rounded-lg overflow-hidden transform transition-all flex justify-start">
+        <!-- ... (modal content) ... -->
+        <div class="bg-white py-3 w-[410px] h-[485px]">
+            {{-- <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+            </svg> --}}
+            <div class="flex items-center justify-between">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white w-full pb-3 ml-5">
+                    Register New User
+                </h3>
             </div>
+            <hr class="bg-black border-gray-300 w-[410px]">
+            <form action="{{ route('supervisors.create_supervisor') }}" method="post" class="pl-5 pr-5 pt-3 pb-3">
+                @csrf
+                <label for="name" class="text-gray-800 block mb-1 font-bold text-sm tracking-wide">Name:</label>
+                <input type="text" name="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-2 w-[370px]" required>
+
+                <label for="email" class="text-gray-800 block mb-1 font-bold text-sm tracking-wide">Email:</label>
+                <input type="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-2 w-[370px]" required>
+
+                <label for="password" class="text-gray-800 block mb-1 font-bold text-sm tracking-wide">Password:</label>
+                <input type="password" name="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-2 w-[370px]" required>
+
+                <label for="role" class="text-gray-800 block mb-1 font-bold text-sm tracking-wide">Role:</label>
+                    <select name="role" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white w-[370px] mb-2" required>
+                        <option value="admin">Admin</option>
+                        <option value="collector">Collector</option>
+                        {{-- <option value="resident">Resident</option> --}}
+                    </select>
+
+                <label for="status" class="text-gray-800 block mb-1 font-bold text-sm tracking-wide">Status:</label>
+                <select name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white w-[370px]" required>
+                    <option value="active" selected>Active</option>
+                    <option value="inactive">Inactive</option>
+                    {{-- <option value="resident">Resident</option> --}}
+                </select>
+            <div class="flex justify-end mt-3">
+                <button type="submit"
+                        class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                    Create
+                </button>
+            </form>
+            <div class="absolute mr-[90px]">
+            <button @click="adminNewUsers = false"
+                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                Cancel
+            </button>
+            </div>
+        </div>
+        </div>
+    </div>
+</d iv>
         </div>
     </div>
 
@@ -264,6 +281,7 @@
 
 
         <!-- jQuery -->
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <!--Datatables -->
@@ -287,9 +305,6 @@
             $('#example').DataTable();
 
     });
-
-
-
 </script>
 
 {{-- <x-edit /> --}}

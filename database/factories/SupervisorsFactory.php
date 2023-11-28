@@ -18,9 +18,11 @@ class SupervisorsFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
             'role' => 'supervisor',
+            'name' => fake()->name(),
+            'username' =>fake()->userName(),
             'email' => fake()->unique()->safeEmail(),
+            'phone' => fake()->numerify('09#########'),
             'password' => Hash::make('12345'),
         ];
     }

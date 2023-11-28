@@ -11,7 +11,9 @@ class Supervisors extends Model
 
     protected $fillable = [
         'name',
+        'username',
         'email',
+        'phone',
         'password',
         // Add other attributes as needed
     ];

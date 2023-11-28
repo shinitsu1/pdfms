@@ -36,7 +36,9 @@ class SupervisorsController extends Controller
         // Validate the request
         $request->validate([
             'name' => 'required|string',
+            'username' => 'required|string',
             'email' => 'required|email|unique:users,email,' . $data->id,
+            'phone' => 'required|string',
             'password' => 'nullable|string|min:6',
             // 'role' => 'string',
         ]);
@@ -44,7 +46,9 @@ class SupervisorsController extends Controller
         // Update user information
         $data->update([
             'name' => $request->input('name'),
+            'username' => $request->input('username'),
             'email' => $request->input('email'),
+            'phone' => $request->input('phone'),
             'password' => $request->has('password') ? bcrypt($request->input('password')) : $data->password,
             // 'role' => $request->input('role'),
         ]);
@@ -59,19 +63,28 @@ class SupervisorsController extends Controller
          return redirect('supervisors')->with('message', 'User Account was deleted successfully.');
      }
 
+
+
+    public function create_supervisor(Request $request){
+        $request->validate([
+            'name' => 'required|string',
+            'username' => 'required', 'min:4',
+            'email' => 'required',
+            'phone' => 'required',
+            'role' => 'supervisor',
+            'email' => 'required', 'email', Rule::unique('students', 'email'),
+            'password' => '12345',
+        ]);
+
+        Supervisors::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => ($request->password),
+            'role' => $request->input('role'),
+            'status' => $request->input('status'),
+        ]);
+
     }
-
-
-    // public function new_supervisor(Request $request){
-    //     $request->validate([
-    //         "first_name" => ['required', 'min:4'],
-    //         "last_name" => ['required', 'min:4'],
-    //         "gender" => ['required'],
-    //         "age" => ['required'],
-    //         "role" => 'supervisor',
-    //         "email" => ['required', 'email', Rule::unique('students', 'email')],
-    //         "password" => '12345',
-    //     ]);
-    // }
+}
 
 
