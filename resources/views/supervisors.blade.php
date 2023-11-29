@@ -44,7 +44,7 @@
                             <th>Name</th>
                             <th>Username</th>
                             <th>Email</th>
-                            <th>Phone</th>
+                            <th>Phone #</th>
                             <th>Action</th>
                             <th>Action</th>
                         </tr>
@@ -64,7 +64,7 @@
                                 </td>
                                 <td class="text-red-500 text-center">
                                     <button @click="supervisorDelete = true; itemToDelete = $event.target.getAttribute('data-item-id')"
-                                    data-item-id="{{ $supervisor->id }}" class="bg-red-600 text-white px-4 py-2 rounded-xl">
+                                    data-item-id="{{ $supervisor->id }}" class="bg-red-500 text-white px-4 py-2 rounded-xl">
                                         Delete
                                     </button>
                                 </td>

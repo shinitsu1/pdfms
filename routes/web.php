@@ -30,43 +30,39 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::get('/supervisor', function () {
-//     return view('supervisor');
-
-// })->middleware(['auth', 'verified'])->name('supervisor');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// edit supervisor
-Route::get('/supervisors', [SupervisorsController::class, 'index'])->name('supervisors');
-Route::patch('/supervisors/update/{id}', [SupervisorsController::class, 'update'])->name('supervisors.update');
-Route::post('/supervisors/create', [SupervisorsController::class, 'create_supervisor'])->name('supervisors.create_supervisor');
-Route::delete('/delete/{supervisor}', [SupervisorsController::class, 'supervisor_delete'])->name('supervisor_delete');
+Route::controller(SupervisorsController::class)->group(function(){
+    Route::get('/supervisors','index')->middleware(['auth', 'verified'])->name('supervisors');
+    Route::patch('/supervisors/update/{id}','update')->name('supervisors.update');
+    Route::post('/supervisors/create','create_supervisor')->name('supervisors.create_supervisor');
+    Route::delete('/delete/{supervisor}','supervisor_delete')->name('supervisor_delete');
+});
+
+Route::controller(AccountsController::class)->group(function(){
+    Route::get('/accounts','index')->middleware(['auth', 'verified'])->name('accounts');
+    Route::patch('/accounts/update/{id}','update')->name('accounts.update');
+    Route::post('/accounts/create','create_account')->name('accounts.create_account');
+    Route::delete('/delete1/{account}','destroy')->name('accounts.delete');
+});
 
 
 
-Route::patch('/accounts/update/{id}', [AccountsController::class, 'update'])->name('accounts.update');
-Route::post('/accounts/create', [AccountsController::class, 'create_account'])->name('accounts.create_account');
+Route::controller(VehiclesController::class)->group(function(){
+    Route::get('/vehicles','index')->middleware(['auth', 'verified'])->name('vehicles');
+    Route::patch('/vehicles/update/{id}','update')->name('vehicles.update');
+    Route::delete('/vehicles/delete/{vehicle}','destroy')->name('vehicles.destroy');
+    Route::post('/vehicles/create','create_vehicle')->name('vehicles.create_vehicle');
+    Route::get('/download/{number}','downloadQR')->name('vehicles.downloadQR');
+});
 
 
-
-Route::delete('/delete1/{account}', [AccountsController::class, 'destroy'])->name('accounts.delete');
 
 Route::get('/dashboard', [DashboardController::class, 'countUsersByRole'])->middleware(['auth', 'verified'])->name('dashboard');
-
-
-Route::get('/accounts', [AccountsController::class, 'index'])->middleware(['auth', 'verified'])->name('accounts');
-
-Route::get('/vehicles', [VehiclesController::class, 'index'])->middleware(['auth', 'verified'])->name('vehicles');//good
-Route::patch('/vehicles/update/{id}', [VehiclesController::class, 'update'])->name('vehicles.update');//good
-Route::delete('/vehicles/delete/{vehicle}', [VehiclesController::class, 'destroy'])->name('vehicles.destroy');//good
-Route::post('/vehicles/create', [VehiclesController::class, 'create_vehicle'])->name('vehicles.create_vehicle');
-Route::get('/download/{number}', [VehiclesController::class, 'downloadQR'])->name('vehicles.downloadQR');
-
 
 
 Route::get('/messaging', function () {
