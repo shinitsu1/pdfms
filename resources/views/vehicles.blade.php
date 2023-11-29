@@ -44,7 +44,7 @@
         <!--Card-->
         <div id='recipients' class="p-5 mt-5 lg:mt-0 rounded-2xl shadow bg-gray-200">
             <!--AlphineModal-->
-            <div x-data="{ accountDelete: false, adminNewUsers: false, accountEdit: false, itemToDelete: null, itemToEdit: null }">
+            <div x-data="{ qrcode: false, accountDelete: false, adminNewUsers: false, accountEdit: false, itemToDelete: null, itemToEdit: null }">
                 <button @click="adminNewUsers = true"
                     class="mb-2 text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center"><i
                         class="ri-add-line mr-1 text-lg"></i>Add New Account</button>
@@ -56,6 +56,7 @@
                             {{-- <th>Phone</th> --}}
                             <th>Email</th>
                             <th>Role</th>
+                            <th>QrCode</th>
                             {{-- <th>Emergency Phone</th> --}}
                             <th>Action</th>
                             <th>Action</th>
@@ -68,11 +69,16 @@
                                 <td class="text-center">{{ $vehicle->name }}</td>
                                 <td class="text-center">{{ $vehicle->email }}</td>
                                 <td class="text-center">{{ $vehicle->role }}</td>
-                                {{-- <td class="text-center">{{ $account->shift }}</td>
-                               <td class="text-center">{{ $account->emergency_phone }}</td> --}}
+                                <td>
+                                    <button
+                                        @click="qrcode = true">
+                                        {!! DNS2D::getBarcodeHTML("$vehicle->vehicle_code", 'QRCODE',3,3, 'gray') !!}
+                                    </button>
+                                    </td>
+
                                 <td class="text-center ">
                                     <button
-                                        @click="accountEdit = true; itemToEdit = $event.target.getAttribute('data-item-id')"
+                                        @click="accountEdit = true;" itemToEdit = $event.target.getAttribute('data-item-id')"
                                         data-item-id="{{ $vehicle->id }}"
                                         class="bg-sky-600 text-white px-6 py-2 rounded-xl">
                                         Edit
@@ -262,13 +268,7 @@
                                         <input type="text" name="role"
                                             class="bg-gray-100 border border-gray-300 text-gray-900" required>
                                     </div>
-                                    {{-- <div>
-                                       <label for="emergency_phone"
-                                           class="block mb-2 text-sm font-medium text-gray-900">Emergency Phone</label>
-                                       <input type="text" name="emergency_phone"
-                                           class="bg-gray-100 border border-gray-300 text-gray-900"
-                                           required>
-                                   </div> --}}
+
                                 </div>
                             </div>
 
@@ -287,6 +287,38 @@
                     </div>
                 </div>
             </div>
+            <!--qrcode-->
+            <div x-show="qrcode"
+            class="fixed inset-0 overflow-y-auto flex items-center justify-center z-20" x-cloak>
+            <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+
+            <div x-show="qrcode" @click.away="qrcode = false"
+                x-transition:enter="ease-out duration-300"
+                x-transition:enter-start="opacity-0 transform scale-95"
+                x-transition:enter-end="opacity-100 transform scale-100"
+                x-transition:leave="ease-in duration-200"
+                x-transition:leave-start="opacity-100 transform scale-100"
+                x-transition:leave-end="opacity-0 transform scale-95"
+                class="bg-white rounded-lg overflow-hidden transform transition-all sm:max-w-lg sm:w-full">
+                <div class="flex items-center justify-center p-4 md:p-5 border-b rounded-t">
+                    <h3 class="text-xl font-semibold text-gray-900 items-center">
+                        Qr Code
+                        {!! DNS2D::getBarcodeHTML("$vehicle->vehicle_code", 'QRCODE',10,10, 'gray') !!}
+                    </h3>
+                </div>
+
+                <div class="absolute mr-[90px]">
+                    <button type="button" @click="qrcode = false"
+                        class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
         </div>
     </div>
     </div>

@@ -20,6 +20,7 @@ class VehiclesFactory extends Factory
             'role' => 'vehicle',
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
+            'vehicle_code' => fake()->numerify('##########'),
             // 'phone' => fake()->numerify('09#########'),
             // 'employee_id' => fake()->numerify('###-###-###'),
             // 'gender' => fake()->randomElement(['Male', 'Female']),

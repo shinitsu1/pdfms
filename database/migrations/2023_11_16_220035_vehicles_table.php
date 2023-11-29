@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('vehicle_code');
             // $table->string('phone');
             // $table->string('employee_id');
             // $table->string('gender');

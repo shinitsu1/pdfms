@@ -60,7 +60,7 @@ class SupervisorsController extends Controller
     public function supervisor_delete(Supervisors $supervisor){
         $supervisor->delete();
 
-         return redirect('supervisors')->with('message', 'User Account was deleted successfully.');
+         return redirect('supervisors')->with('message', 'Supervisor was deleted successfully.');
      }
 
 

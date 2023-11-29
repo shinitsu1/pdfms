@@ -50,6 +50,13 @@ class VehiclesController extends Controller
     }
 
     public function create_vehicle(Request $request){
+
+        $number = mt_rand(1000000000, 9999999999);
+        if ($this->vehicleCodeExists($number)) {
+            $number = mt_rand(1000000000, 9999999999);
+        }
+        $request['vehicle_code'] = $number;
+
         $request->validate([
             'name' => 'required|string',
             'email' => 'required',
@@ -59,17 +66,24 @@ class VehiclesController extends Controller
             'role' => 'string',
             // 'password' => 'string',
         ]);
-
-        Vehicles::create([
-            'name' => $request->input('name'),
-            // 'username' => $request->input('username'),
-            'email' => $request->input('email'),
-            // 'phone' => $request->input('phone'),
-            // 'emergency_phone' => $request->input('emergency_phone'),
-            // 'password' => '12345',
-            'role' => 'vehicle',
-        ]);
+        Vehicles::create($request->all());
+        // Vehicles::create([
+        //     'name' => $request->input('name'),
+        //     // 'username' => $request->input('username'),
+        //     'email' => $request->input('email'),
+        //     // 'phone' => $request->input('phone'),
+        //     // 'emergency_phone' => $request->input('emergency_phone'),
+        //     // 'password' => '12345',
+        //     'role' => 'vehicle',
+        //     'vehicle_code' => $request->input('vehicle_code'),
+        // ]);
 
         return redirect()->route('vehicles')->with('message', 'User Added Successfully.');
     }
+
+    public function vehicleCodeExists($number){
+
+        return Vehicles::whereVehicleCode($number)->exists();
+    }
+
 }

@@ -13,6 +13,7 @@ class Vehicles extends Model
         'name',
         'email',
         'role',
+        'vehicle_code',
         // 'username',
         // 'phone',
         // 'emergency_phone',
