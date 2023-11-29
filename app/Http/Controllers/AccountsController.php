@@ -59,7 +59,8 @@ class AccountsController extends Controller
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|string',
-            'role' => 'string',
+            'phone' => 'required|string',
+            'username' => 'required|string',
             // 'emergency_phone' => 'required|int',
 
         ]);
@@ -68,7 +69,8 @@ class AccountsController extends Controller
         $data->update([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'role' => $request->input('role'),
+            'phone' => $request->input('phone'),
+            'username' => $request->input('username'),
             // 'emergency_phone' => $request->input('emergency_phone'),
         ]);
 

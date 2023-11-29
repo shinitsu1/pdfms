@@ -32,18 +32,21 @@ class VehiclesController extends Controller
 
         // Validate the request
         $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|string',
-            'role' => 'string',
+            'plate' => 'required|string',
+            'brand' => 'required|string',
+            'model' => 'required|string',
+            'vin' => 'required|string',
             // 'emergency_phone' => 'required|int',
 
         ]);
 
         // Update user information
         $data->update([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'role' => $request->input('role'),
+            'plate' => $request->input('plate'),
+            'brand' => $request->input('brand'),
+            'model' => $request->input('model'),
+            'vin' => $request->input('vin'),
+
             // 'emergency_phone' => $request->input('emergency_phone'),
         ]);
 
@@ -59,8 +62,10 @@ class VehiclesController extends Controller
         $request['vehicle_code'] = $number;
 
         $request->validate([
-            'name' => 'required|string',
-            'email' => 'required',
+            'plate' => 'required|string',
+            'brand' => 'required|string',
+            'model' => 'required|string',
+            'vin' => 'required|string',
             // 'username' => 'required|string',
             // 'email' => 'required', 'email', Rule::unique('accounts', 'email'),
             // 'phone' => 'required',
@@ -69,9 +74,10 @@ class VehiclesController extends Controller
         ]);
         // Vehicles::create($request->all());
         Vehicles::create([
-            'name' => $request->input('name'),
-            // 'username' => $request->input('username'),
-            'email' => $request->input('email'),
+            'plate' => $request->input('plate'),
+            'brand' => $request->input('brand'),
+            'model' => $request->input('model'),
+            'vin' => $request->input('vin'),
             // 'phone' => $request->input('phone'),
             // 'emergency_phone' => $request->input('emergency_phone'),
             // 'password' => '12345',

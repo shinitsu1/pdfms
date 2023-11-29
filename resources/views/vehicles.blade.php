@@ -52,11 +52,11 @@
                     <thead>
                         <tr>
                             <th>UserID</th>
-                            <th>Name</th>
+                            <th>Plate Number</th>
                             {{-- <th>Phone</th> --}}
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th>QrCode</th>
+                            <th>Brand</th>
+                            <th>Model</th>
+                            <th>VIN</th>
                             {{-- <th>Emergency Phone</th> --}}
                             <th>Action</th>
                             <th>Action</th>
@@ -65,10 +65,10 @@
                     <tbody>
                         @foreach ($vehicles as $vehicle)
                             <tr x-on:click="itemToEdit = {{ $vehicle->id }};">
-                                <td class="text-center">{{ $vehicle->id }}</td>
-                                <td class="text-center">{{ $vehicle->name }}</td>
-                                <td class="text-center">{{ $vehicle->email }}</td>
-                                <td class="text-center">{{ $vehicle->role }}</td>
+                                <td class="text-center">{{ $vehicle->plate }}</td>
+                                <td class="text-center">{{ $vehicle->brand }}</td>
+                                <td class="text-center">{{ $vehicle->model }}</td>
+                                <td class="text-center">{{ $vehicle->vin }}</td>
                                 <td class="flex justify-center">
                                     <button @click="qrcode = true">
                                         {!! DNS2D::getBarcodeHTML("$vehicle->vehicle_code", 'QRCODE', 2, 2, 'gray') !!}

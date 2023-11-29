@@ -14,10 +14,11 @@ return new class extends Migration
         //
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->string('plate');
+            $table->string('brand');
+            $table->string('model');
+            $table->string('vin');
             $table->string('vehicle_code');
-            // $table->string('phone');
             // $table->string('employee_id');
             // $table->string('gender');
             // $table->string('address');

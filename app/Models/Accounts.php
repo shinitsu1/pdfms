@@ -13,8 +13,8 @@ class Accounts extends Model
         'name',
         'email',
         'role',
-        // 'username',
-        // 'phone',
+        'username',
+        'phone',
         // 'emergency_phone',
         // 'password',
     ];
