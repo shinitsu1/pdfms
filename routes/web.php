@@ -65,10 +65,12 @@ Route::get('/vehicles', [VehiclesController::class, 'index'])->middleware(['auth
 Route::patch('/vehicles/update/{id}', [VehiclesController::class, 'update'])->name('vehicles.update');//good
 Route::delete('/vehicles/delete/{vehicle}', [VehiclesController::class, 'destroy'])->name('vehicles.destroy');//good
 Route::post('/vehicles/create', [VehiclesController::class, 'create_vehicle'])->name('vehicles.create_vehicle');
+Route::get('/download/{number}', [VehiclesController::class, 'downloadQR'])->name('vehicles.downloadQR');
 
-Route::get('/Messaging', function () {
-    return view('Messaging'); // Assumes "AboutUs.blade.php" is in the "resources/views" directory.
-})->name('Messaging');
+
+
+Route::get('/messaging', function () {
+    return view('Messaging'); })->name('Messaging');
 
 Route::post('/send-sms', [SmsController::class, 'sendSMS']);
 

@@ -353,19 +353,19 @@
                     </a>
                 </li>
                 <li class="mb-1 group">
-                    <a href="{{ asset('vehicles') }}"
+                    <a href="{{ asset('tracking') }}"
                         class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
                         <i class="ri-account-pin-box-line mr-3 text-lg"></i>
                         <span class="font-poppins">Tracking</span>
                     </a>
                 </li>
-                <li class="mb-1 group">
+                {{-- <li class="mb-1 group">
                     <a href="{{ asset('calendar') }}"
                         class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
                         <i class="ri-user-fill mr-3 text-lg"></i>
                         <span class="font-poppins">Calendar</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="mb-1 group">
                     <a href="{{ asset('messages') }}"
                         class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
@@ -376,41 +376,284 @@
             </ul>
         </div>
 
+
         <!--Container-->
         <div
-            class="relative top-[86px] left-[3px] md:w-[calc(100%-256px)] md:ml-64 xl:w-[79%] mx-auto px-5 p-5 rounded-lg bg-gray-100 z-0">
+            class="relative top-[70px] md:w-[calc(100%-256px)] md:ml-64 xl:w-[80%] mx-auto px-2 p-5 rounded-lg bg-gray-100">
             <!--Card-->
-            <div id='recipients' class="p-8 mt-10 lg:mt-0 rounded shadow bg-gray-200">
-                <table id="myTable" class="stripe hover"
-                    style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                            <th>Age</th>
-                            <th>Action</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($accounts as $account)
+            <div id='recipients' class="p-5 mt-5 lg:mt-0 rounded-2xl shadow bg-gray-200">
+                <!--AlphineModal-->
+                <div x-data="{ accountDelete: false, adminNewUsers: false, accountEdit: false, itemToDelete: null, itemToEdit: null }">
+                    <button @click="adminNewUsers = true"
+                        class="mb-2 text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center"><i
+                            class="ri-add-line mr-1 text-lg"></i>Add New Account</button>
+                    <table id="example" class="stripe hover"
+                        style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+                        <thead>
                             <tr>
-                                <td>{{ $account->id }}</td>
-                                <td>{{ $account->first_name }}</td>
-                                <td>{{ $account->last_name }}</td>
-                                <td>{{ $account->email }}</td>
-                                <td>{{ $account->age }}</td>
-
+                                <th>UserID</th>
+                                <th>Name</th>
+                                {{-- <th>Phone</th> --}}
+                                <th>Email</th>
+                                <th>Role</th>
+                                {{-- <th>Emergency Phone</th> --}}
+                                <th>Action</th>
+                                <th>Action</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach ($accounts as $account)
+                                <tr x-on:click="itemToEdit = {{ $account->id }};">
+                                    <td class="text-center">{{ $account->id }}</td>
+                                    <td class="text-center">{{ $account->name }}</td>
+                                    <td class="text-center">{{ $account->email }}</td>
+                                    <td class="text-center">{{ $account->role }}</td>
+                                    {{-- <td class="text-center">{{ $account->shift }}</td>
+                                    <td class="text-center">{{ $account->emergency_phone }}</td> --}}
+                                    <td class="text-center ">
+                                        <button
+                                            @click="accountEdit = true; itemToEdit = $event.target.getAttribute('data-item-id')"
+                                            data-item-id="{{ $account->id }}"
+                                            class="bg-sky-600 text-white px-6 py-2 rounded-xl">
+                                            Edit
+                                        </button>
+                                    </td>
+                                    <td class="text-red-500 text-center">
+                                        <button
+                                            @click="accountDelete = true; itemToDelete = $event.target.getAttribute('data-item-id')"
+                                            data-item-id="{{ $account->id }}"
+                                            class="bg-[#2c50f1] text-white px-4 py-2 rounded-xl">
+                                            Send SMS
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                    <!-- Edit Modal -->
+                    <div x-show="accountEdit"
+                        class="fixed inset-0 overflow-y-auto flex items-center justify-center z-20" x-cloak>
+                        <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                            <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                        </div>
+
+                        <div x-show="accountEdit" @click.away="accountEdit = false"
+                            x-transition:enter="ease-out duration-300"
+                            x-transition:enter-start="opacity-0 transform scale-95"
+                            x-transition:enter-end="opacity-100 transform scale-100"
+                            x-transition:leave="ease-in duration-200"
+                            x-transition:leave-start="opacity-100 transform scale-100"
+                            x-transition:leave-end="opacity-0 transform scale-95"
+                            class="bg-white rounded-lg overflow-hidden transform transition-all sm:max-w-lg sm:w-full">
+                            <div
+                                class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white"><i
+                                        class="ri-edit-2-fill mr-1 text-lg bg-blue-200 p-4 rounded-full"></i>
+                                    Edit User Information
+                                </h3>
+                            </div>
+                            @foreach ($accounts as $account)
+                                <div x-show="itemToEdit === {{ $account->id }}">
+                                    <form method="post" :action="`{{ route('accounts.update', '') }}/${itemToEdit}`">
+                                        @csrf
+                                        @method('patch')
+
+                                        <div class="p-4 md:p-5 space-y-4">
+                                            <div class="grid gap-4 mb-4 sm:grid-cols-2">
+                                                <div>
+                                                    <label for="name"
+                                                        class="block mb-2 text-sm font-medium text-gray-900">Name</label>
+                                                    <input type="text" name="name" value="{{ $account->name }}"
+                                                        class="bg-gray-100 border border-gray-300 text-gray-900"
+                                                        required>
+                                                </div>
+                                                <div>
+                                                    <label for="email"
+                                                        class="block mb-2 text-sm font-medium text-gray-900">Email</label>
+                                                    <input type="text" name="email" value="{{ $account->email }}"
+                                                        class="bg-gray-100 border border-gray-300 text-gray-900"
+                                                        required>
+                                                </div>
+                                                <div>
+                                                    <label for="role"
+                                                        class="block mb-2 text-sm font-medium text-gray-900">role</label>
+                                                    <input type="text" name="role" value="{{ $account->role }}"
+                                                        class="bg-gray-100 border border-gray-300 text-gray-900"
+                                                        required>
+                                                </div>
+                                                {{-- <div>
+                                                    <label for="emergency_phone"
+                                                        class="block mb-2 text-sm font-medium text-gray-900">Emergency Phone</label>
+                                                    <input type="text" name="emergency_phone" value="{{ $account->emergency_phone }}"
+                                                        class="bg-gray-100 border border-gray-300 text-gray-900"
+                                                        required>
+                                                </div> --}}
+
+                                            </div>
+                                        </div>
+
+                                        <!--Buttons-->
+                                        <div
+                                            class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                            <button type="submit"
+                                                class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
+                                                Update
+                                            </button>
+                                            <Button @click="accountEdit = false" type="button"
+                                                class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                                                Cancel
+                                            </Button>
+                                        </div>
+                                        <!--Buttons-->
+                                    </form>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+
+                    <!-- Delete Modal -->
+                    <div x-show="accountDelete"
+                        class="fixed inset-0 overflow-y-auto flex items-center justify-center z-20" x-cloak>
+                        <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                            <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                        </div>
+                        <div x-show="accountDelete" @click.away="accountDelete = false"
+                            x-transition:enter="ease-out duration-300"
+                            x-transition:enter-start="opacity-0 transform scale-95"
+                            x-transition:enter-end="opacity-100 transform scale-100"
+                            x-transition:leave="ease-in duration-200"
+                            x-transition:leave-start="opacity-100 transform scale-100"
+                            x-transition:leave-end="opacity-0 transform scale-95"
+                            class="bg-white rounded-lg overflow-hidden transform transition-all sm:max-w-lg sm:w-full">
+                            <div
+                                class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white"><i
+                                        class="ri-mail-send-fill mr-1 text-xl bg-[#9daae4] p-4 rounded-full"></i>
+                                    Send Message to (Officer)
+                                </h3>
+                            </div>
+                            <!-- ... (modal content) ... -->
+                            <div class="p-4 md:p-5 space-y-4">
+                                <textarea class="resize-y rounded-md sm:max-w-lg sm:w-full" placeholder="Place your message here"></textarea>
+
+                                <!--Footer-->
+                                <div
+                                    class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                    <form method="post"
+                                        :action="`{{ route('accounts.delete', '') }}/${itemToDelete}`">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button"
+                                            class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
+                                            Send
+                                        </button>
+                                    </form>
+                                    <button @click="accountDelete = false"
+                                        class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                            <!--End of ModalContent-->
+                        </div>
+                    </div>
+
+
+                    <!--AdminModal-->
+                    <div x-show="adminNewUsers"
+                        class="fixed inset-0 overflow-y-auto flex items-center justify-center z-20" x-cloak>
+                        <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                            <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                        </div>
+
+                        <div x-show="adminNewUsers" @click.away="adminNewUsers = false"
+                            x-transition:enter="ease-out duration-300"
+                            x-transition:enter-start="opacity-0 transform scale-95"
+                            x-transition:enter-end="opacity-100 transform scale-100"
+                            x-transition:leave="ease-in duration-200"
+                            x-transition:leave-start="opacity-100 transform scale-100"
+                            x-transition:leave-end="opacity-0 transform scale-95"
+                            class="bg-white rounded-lg overflow-hidden transform transition-all sm:max-w-lg sm:w-full">
+                            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                                <h3 class="text-xl font-semibold text-gray-900"><i
+                                        class="ri-add-line mr-1 text-lg bg-blue-200 p-4 rounded-full"></i>
+                                    Add New Account
+                                </h3>
+                            </div>
+                            <hr class="bg-black w-[410px]">
+                            <form action="{{ route('accounts.create_account') }}" method="post"
+                                class="pl-5 pr-5 pt-3 pb-3">
+                                @csrf
+                                <div class="p-4 md:p-5 space-y-4">
+                                    <div class="grid gap-4 mb-4 sm:grid-cols-2">
+                                        <div>
+                                            <label for="name"
+                                                class="block mb-2 text-sm font-medium text-gray-900">Name</label>
+                                            <input type="text" name="name"
+                                                class="bg-gray-100 border border-gray-300 text-gray-900"
+                                                required>
+                                        </div>
+                                        <div>
+                                            <label for="email"
+                                                class="block mb-2 text-sm font-medium text-gray-900">email</label>
+                                            <input type="text" name="email"
+                                                class="bg-gray-100 border border-gray-300 text-gray-900"
+                                                required>
+                                        </div>
+                                        <div>
+                                            <label for="role"
+                                                class="block mb-2 text-sm font-medium text-gray-900">role</label>
+                                            <input type="text" name="role"
+                                                class="bg-gray-100 border border-gray-300 text-gray-900"
+                                                required>
+                                        </div>
+                                        {{-- <div>
+                                            <label for="emergency_phone"
+                                                class="block mb-2 text-sm font-medium text-gray-900">Emergency Phone</label>
+                                            <input type="text" name="emergency_phone"
+                                                class="bg-gray-100 border border-gray-300 text-gray-900"
+                                                required>
+                                        </div> --}}
+                                    </div>
+                                </div>
+
+                                <div class="flex justify-end mt-3">
+                                    <button type="submit"
+                                        class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                        Create
+                                    </button>
+                            </form>
+                            <div class="absolute mr-[90px]">
+                                <button type="button" @click="adminNewUsers = false"
+                                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!--/Card-->
         </div>
-        <!--End of Container-->
+        </div>
+
+
+        <script>
+            function deleteItem(itemId) {
+                // Set the itemToDelete value based on the clicked item's ID
+                this.itemToDelete = itemId;
+            }
+        </script>
+
+        <script>
+            window.addEventListener('DOMContentLoaded', () => {
+                Alpine.data('yourComponentName', () => ({
+                    supervisorEdit: false,
+                    itemToEdit: null, // Variable to store the selected item
+                }));
+            });
+        </script>
 
     @endif
     <!-- jQuery -->

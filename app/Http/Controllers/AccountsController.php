@@ -25,7 +25,7 @@ class AccountsController extends Controller
 
     public function create_account(Request $request){
         $request->validate([
-            'name' => 'required|string',
+            'name' => 'required|string||regex:/^[a-zA-Z]+$/',
             'email' => 'required',
             // 'username' => 'required|string',
             // 'email' => 'required', 'email', Rule::unique('accounts', 'email'),
