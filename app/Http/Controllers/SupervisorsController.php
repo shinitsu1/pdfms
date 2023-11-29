@@ -64,7 +64,6 @@ class SupervisorsController extends Controller
      }
 
 
-
     public function create_supervisor(Request $request){
         $request->validate([
             'name' => 'required|string',

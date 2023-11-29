@@ -45,22 +45,26 @@ Route::middleware('auth')->group(function () {
 Route::get('/supervisors', [SupervisorsController::class, 'index'])->name('supervisors');
 Route::patch('/supervisors/update/{id}', [SupervisorsController::class, 'update'])->name('supervisors.update');
 Route::post('/supervisors/create', [SupervisorsController::class, 'create_supervisor'])->name('supervisors.create_supervisor');
-
-Route::patch('/accounts/update/{id}', [AccountsController::class, 'update_account'])->name('accounts.update_account');
-
 Route::delete('/delete/{supervisor}', [SupervisorsController::class, 'supervisor_delete'])->name('supervisor_delete');
 
 
-Route::delete('/delete1/{account}', [AccountsController::class, 'destroy'])->name('accounts.delete');
 
-Route::delete('/delete-vehicle/{vehicle}', [VehiclesController::class, 'destroy']);
+Route::patch('/accounts/update/{id}', [AccountsController::class, 'update'])->name('accounts.update');
+Route::post('/accounts/create', [AccountsController::class, 'create_account'])->name('accounts.create_account');
+
+
+
+Route::delete('/delete1/{account}', [AccountsController::class, 'destroy'])->name('accounts.delete');
 
 Route::get('/dashboard', [DashboardController::class, 'countUsersByRole'])->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::get('/accounts', [AccountsController::class, 'index'])->middleware(['auth', 'verified'])->name('accounts');
 
-Route::get('/vehicles', [VehiclesController::class, 'index'])->middleware(['auth', 'verified'])->name('vehicles');;
+Route::get('/vehicles', [VehiclesController::class, 'index'])->middleware(['auth', 'verified'])->name('vehicles');//good
+Route::patch('/vehicles/update/{id}', [VehiclesController::class, 'update'])->name('vehicles.update');//good
+Route::delete('/vehicles/delete/{vehicle}', [VehiclesController::class, 'destroy'])->name('vehicles.destroy');//good
+Route::post('/vehicles/create', [VehiclesController::class, 'create_vehicle'])->name('vehicles.create_vehicle');
 
 Route::get('/Messaging', function () {
     return view('Messaging'); // Assumes "AboutUs.blade.php" is in the "resources/views" directory.

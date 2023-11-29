@@ -1,4 +1,6 @@
 <x-app-layout>
+    <!--AllFine-->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
 
     @if (Auth::user()->role == 'admin')
 
@@ -46,17 +48,17 @@
                 <div x-data="{ accountDelete: false, adminNewUsers: false, accountEdit: false, itemToDelete: null, itemToEdit: null }">
                     <button @click="adminNewUsers = true"
                         class="mb-2 text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center"><i
-                            class="ri-add-line mr-1 text-lg"></i>Add New Supervisor</button>
+                            class="ri-add-line mr-1 text-lg"></i>Add New Account</button>
                     <table id="example" class="stripe hover"
                         style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                         <thead>
                             <tr>
                                 <th>UserID</th>
                                 <th>Name</th>
-                                <th>Phone</th>
-                                <th>Username</th>
-                                <th>Shift</th>
-                                <th>Emergency Phone</th>
+                                {{-- <th>Phone</th> --}}
+                                <th>Email</th>
+                                <th>Role</th>
+                                {{-- <th>Emergency Phone</th> --}}
                                 <th>Action</th>
                                 <th>Action</th>
                             </tr>
@@ -66,10 +68,10 @@
                                 <tr x-on:click="itemToEdit = {{ $account->id }};">
                                     <td class="text-center">{{ $account->id }}</td>
                                     <td class="text-center">{{ $account->name }}</td>
-                                    <td class="text-center">{{ $account->phone }}</td>
-                                    <td class="text-center">{{ $account->username }}</td>
-                                    <td class="text-center">{{ $account->shift }}</td>
-                                    <td class="text-center">{{ $account->emergency_phone }}</td>
+                                    <td class="text-center">{{ $account->email }}</td>
+                                    <td class="text-center">{{ $account->role }}</td>
+                                    {{-- <td class="text-center">{{ $account->shift }}</td>
+                                    <td class="text-center">{{ $account->emergency_phone }}</td> --}}
                                     <td class="text-center ">
                                         <button
                                             @click="accountEdit = true; itemToEdit = $event.target.getAttribute('data-item-id')"
@@ -115,51 +117,41 @@
                             </div>
                             @foreach ($accounts as $account)
                                 <div x-show="itemToEdit === {{ $account->id }}">
-                                    <form method="post"
-                                        :action="`{{ route('accounts.update_account', '') }}/${itemToEdit}`">
+                                    <form method="post" :action="`{{ route('accounts.update', '') }}/${itemToEdit}`">
                                         @csrf
                                         @method('patch')
 
                                         <div class="p-4 md:p-5 space-y-4">
                                             <div class="grid gap-4 mb-4 sm:grid-cols-2">
-                                                {{-- <div>
-                                <label for="id" class="block mb-2 text-sm font-medium text-gray-900">UserID</label>
-                                <input type="text" name="id" value="{{ $account->id }}" class="bg-gray-100 border border-gray-300 text-gray-900" disabled>
-                            </div> --}}
                                                 <div>
                                                     <label for="name"
                                                         class="block mb-2 text-sm font-medium text-gray-900">Name</label>
                                                     <input type="text" name="name" value="{{ $account->name }}"
                                                         class="bg-gray-100 border border-gray-300 text-gray-900"
-                                                        disabled>
-                                                </div>
-                                                <div>
-                                                    <label for="phone">Phone Number</label>
-                                                    <input type="text" name="phone" value="{{ $account->phone }}"
-                                                        class="bg-gray-100 border border-gray-600 text-gray-900"
                                                         required>
                                                 </div>
-
                                                 <div>
-                                                    <label for="username">Username</label>
-                                                    <input type="text" name="username"
-                                                        value="{{ $account->username }}"
-                                                        class="bg-gray-100 border border-gray-600 text-gray-900"
+                                                    <label for="email"
+                                                        class="block mb-2 text-sm font-medium text-gray-900">Email</label>
+                                                    <input type="text" name="email" value="{{ $account->email }}"
+                                                        class="bg-gray-100 border border-gray-300 text-gray-900"
                                                         required>
                                                 </div>
-
+                                                <div>
+                                                    <label for="role"
+                                                        class="block mb-2 text-sm font-medium text-gray-900">role</label>
+                                                    <input type="text" name="role" value="{{ $account->role }}"
+                                                        class="bg-gray-100 border border-gray-300 text-gray-900"
+                                                        required>
+                                                </div>
                                                 {{-- <div>
-                                <label for="shift">Shift</label>
-                                <select name="shift" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block mb-3 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white w-11/12 " required>
-                                    <option value="Day" {{ $account->shift === 'Day' ? 'selected' : '' }}>Day</option>
-                                    <option value="Night" {{ $account->shift === 'Night' ? 'selected' : '' }}>Night</option>
-                                </select>
-                            </div>
+                                                    <label for="emergency_phone"
+                                                        class="block mb-2 text-sm font-medium text-gray-900">Emergency Phone</label>
+                                                    <input type="text" name="emergency_phone" value="{{ $account->emergency_phone }}"
+                                                        class="bg-gray-100 border border-gray-300 text-gray-900"
+                                                        required>
+                                                </div> --}}
 
-                            <div>
-                                <label for="emergency_phone">Emergency Phone Number</label>
-                                <input type="text" name="emergency_phone" value="{{ $account->emergency_phone }}" class="bg-gray-100 border border-gray-600 text-gray-900" required>
-                            </div> --}}
                                             </div>
                                         </div>
 
@@ -253,39 +245,39 @@
                                 </h3>
                             </div>
                             <hr class="bg-black w-[410px]">
-                            <form action="{{ route('supervisors.create_supervisor') }}" method="post"
+                            <form action="{{ route('accounts.create_account') }}" method="post"
                                 class="pl-5 pr-5 pt-3 pb-3">
                                 @csrf
                                 <div class="p-4 md:p-5 space-y-4">
                                     <div class="grid gap-4 mb-4 sm:grid-cols-2">
                                         <div>
-                                            <label for="created_at"
+                                            <label for="name"
                                                 class="block mb-2 text-sm font-medium text-gray-900">Name</label>
                                             <input type="text" name="name"
-                                                class="bg-gray-100 border border-gray-300 text-gray-900" required>
+                                                class="bg-gray-100 border border-gray-300 text-gray-900"
+                                                required>
                                         </div>
-
                                         <div>
-                                            <label for="created_at"
-                                                class="block mb-2 text-sm font-medium text-gray-900">Username</label>
-                                            <input type="text" name="username"
-                                                class="bg-gray-100 border border-gray-300 text-gray-900" required>
-                                        </div>
-
-                                        <div>
-                                            <label for="created_at"
-                                                class="block mb-2 text-sm font-medium text-gray-900">Email</label>
+                                            <label for="email"
+                                                class="block mb-2 text-sm font-medium text-gray-900">email</label>
                                             <input type="text" name="email"
-                                                class="bg-gray-100 border border-gray-300 text-gray-900" required>
+                                                class="bg-gray-100 border border-gray-300 text-gray-900"
+                                                required>
                                         </div>
-
                                         <div>
-                                            <label for="created_at"
-                                                class="block mb-2 text-sm font-medium text-gray-900">Phone
-                                                Number</label>
-                                            <input type="text" name="phone"
-                                                class="bg-gray-100 border border-gray-300 text-gray-900" required>
+                                            <label for="role"
+                                                class="block mb-2 text-sm font-medium text-gray-900">role</label>
+                                            <input type="text" name="role"
+                                                class="bg-gray-100 border border-gray-300 text-gray-900"
+                                                required>
                                         </div>
+                                        {{-- <div>
+                                            <label for="emergency_phone"
+                                                class="block mb-2 text-sm font-medium text-gray-900">Emergency Phone</label>
+                                            <input type="text" name="emergency_phone"
+                                                class="bg-gray-100 border border-gray-300 text-gray-900"
+                                                required>
+                                        </div> --}}
                                     </div>
                                 </div>
 
@@ -422,7 +414,7 @@
 
     @endif
     <!-- jQuery -->
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
     <!--Datatables -->

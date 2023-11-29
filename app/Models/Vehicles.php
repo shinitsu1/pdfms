@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Vehicles extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'email',
+        'role',
+        // 'username',
+        // 'phone',
+        // 'emergency_phone',
+        // 'password',
+    ];
 }

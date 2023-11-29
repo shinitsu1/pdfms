@@ -13,7 +13,7 @@ class AccountsController extends Controller
 
     public function index() {
 
-        $accounts = Accounts::all();
+        $accounts = Accounts::where('role', 'police')->get();
 
         return view('accounts', compact('accounts'));
     }
@@ -26,27 +26,28 @@ class AccountsController extends Controller
     public function create_account(Request $request){
         $request->validate([
             'name' => 'required|string',
-            'username' => 'required|string',
-            'email' => 'required', 'email', Rule::unique('accounts', 'email'),
-            'phone' => 'required',
-            'employee_id' => 'required',
-            'role' => 'nullable|string|min:6',
-            'password' => 'nullable|string|min:6',
+            'email' => 'required',
+            // 'username' => 'required|string',
+            // 'email' => 'required', 'email', Rule::unique('accounts', 'email'),
+            // 'phone' => 'required',
+            'role' => 'string',
+            // 'password' => 'string',
         ]);
 
         Accounts::create([
             'name' => $request->input('name'),
-            'username' => $request->input('username'),
+            // 'username' => $request->input('username'),
             'email' => $request->input('email'),
-            'phone' => $request->input('phone'),
-            'password' => '12345',
-            'role' => 'supervisor',
+            // 'phone' => $request->input('phone'),
+            // 'emergency_phone' => $request->input('emergency_phone'),
+            // 'password' => '12345',
+            'role' => 'police',
         ]);
 
-        return redirect()->route('supervisors')->with('message', 'User Added Successfully.');
+        return redirect()->route('accounts')->with('message', 'User Added Successfully.');
     }
 
-    public function update_account(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $data = Accounts::find($id);
 
@@ -57,34 +58,22 @@ class AccountsController extends Controller
         // Validate the request
         $request->validate([
             'name' => 'required|string',
-            // 'email' => 'required|email|unique:users,email,' . $data->id,
-            'phone' => 'required|string',
-            // 'employee_id' => 'required|string',
-            // 'gender' => 'required|string',
-            // 'address' => 'required|string',
-            // 'username' => 'required|string',
-            // 'shift' => 'required|string',
-            // 'password' => 'nullable|string|min:6',
-            // 'emergency_phone' => 'required|string',
-            // 'role' => 'string',
+            'email' => 'required|string',
+            'role' => 'string',
+            // 'emergency_phone' => 'required|int',
+
         ]);
 
         // Update user information
         $data->update([
             'name' => $request->input('name'),
-            // 'email' => $request->input('email'),
-            'phone' => $request->input('phone'),
-            // 'employee_id' => $request->input('employee_id'),
-            // 'gender' => $request->input('gender'),
-            // 'address' => $request->input('address'),
-            // 'username' => $request->input('username'),
-            // 'shift' => $request->input('shift'),
+            'email' => $request->input('email'),
+            'role' => $request->input('role'),
             // 'emergency_phone' => $request->input('emergency_phone'),
-            // 'password' => $request->has('password') ? bcrypt($request->input('password')) : $data->password,
-
-            // 'role' => $request->input('role'),
         ]);
 
-        return redirect()->route('supervisors')->with('message', 'User updated successfully');
+        return redirect()->route('accounts')->with('message', 'User updated successfully');
     }
+
+
 }

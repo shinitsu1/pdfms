@@ -11,15 +11,11 @@ class Accounts extends Model
 
     protected $fillable = [
         'name',
-        // 'email',
-        'phone',
-        // 'employee_id',
-        // 'gender',
-        // 'address',
+        'email',
+        'role',
         // 'username',
-        // 'shift',
-        // 'password',
+        // 'phone',
         // 'emergency_phone',
-        // Add other attributes as needed
+        // 'password',
     ];
 }
