@@ -40,7 +40,7 @@
         <!--Card-->
         <div id='recipients' class="p-5 mt-5 lg:mt-0 rounded-2xl shadow bg-gray-200">
             <!--AlphineModal-->
-            <div x-data="{ supervisorDelete: false, adminNewUsers: false, supervisorEdit: false, itemToDelete: null, itemToEdit: null }">
+            <div x-data="{ supervisorDelete: false, adminNewUsers: false, supervisorEdit: false, itemToDelete: null, itemToEdit: null, isPhoneNumber:false }">
                 <button @click="adminNewUsers = true"
                     class="mb-2 text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center"><i
                         class="ri-add-line mr-1 text-lg"></i>Add New Supervisor</button>
@@ -60,10 +60,10 @@
                         @foreach ($data as $supervisor)
                             <tr x-on:click="itemToEdit = {{ $supervisor->id }};">
                                 <td class="text-center">{{ $supervisor->id }}</td>
-                                <td class="text-center">{{ $supervisor->name }}</td>
-                                <td class="text-center">{{ $supervisor->username }}</td>
-                                <td class="text-center">{{ $supervisor->email }}</td>
-                                <td class="text-center">{{ $supervisor->phone }}</td>
+                                <td>{{ $supervisor->name }}</td>
+                                <td>{{ $supervisor->username }}</td>
+                                <td>{{ $supervisor->email }}</td>
+                                <td>{{ $supervisor->phone }}</td>
                                 <td class="text-center ">
                                     <button
                                         @click="supervisorEdit = true; itemToEdit = $event.target.getAttribute('data-item-id')"
@@ -251,8 +251,14 @@
                                     <div>
                                         <label for="created_at"
                                             class="block mb-2 text-sm font-medium text-gray-900">Name</label>
-                                        <input type="text" name="name"
+                                        <input type="text" name="name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')"
                                             class="bg-gray-100 border border-gray-300 text-gray-900" required>
+
+                                            @error('name')
+                                            <p class="text-red-500 text-xs p-1">
+                                                {{$message}}
+                                            </p>
+                                            @enderror
                                     </div>
 
                                     <div>
@@ -272,7 +278,7 @@
                                     <div>
                                         <label for="created_at"
                                             class="block mb-2 text-sm font-medium text-gray-900">Phone Number</label>
-                                        <input type="text" name="phone"
+                                        <input type="text" name="phone" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                             class="bg-gray-100 border border-gray-300 text-gray-900" required>
                                     </div>
                                 </div>

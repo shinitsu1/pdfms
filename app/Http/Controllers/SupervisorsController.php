@@ -38,7 +38,7 @@ class SupervisorsController extends Controller
             'name' => 'required|string',
             'username' => 'required|string',
             'email' => 'required|email|unique:users,email,' . $data->id,
-            'phone' => 'required|string',
+            'phone' => 'required|size:12|regex:/^\+63\d+$/',
             'password' => 'nullable|string|min:6',
             // 'role' => 'string',
         ]);

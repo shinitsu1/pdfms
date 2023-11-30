@@ -69,7 +69,7 @@ class VehiclesController extends Controller
             // 'username' => 'required|string',
             // 'email' => 'required', 'email', Rule::unique('accounts', 'email'),
             // 'phone' => 'required',
-            'role' => 'string',
+            // 'role' => 'string',
             // 'password' => 'string',
         ]);
         // Vehicles::create($request->all());

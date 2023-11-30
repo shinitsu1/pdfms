@@ -80,5 +80,7 @@ class AccountsController extends Controller
         return redirect()->route('accounts')->with('message', 'User updated successfully');
     }
 
-
+    public function mobile(){
+        return view('mobile');
+    }
 }
