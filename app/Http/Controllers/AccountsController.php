@@ -27,21 +27,24 @@ class AccountsController extends Controller
         $request->validate([
             'name' => 'required|string||regex:/^[a-zA-Z]+$/',
             'email' => 'required',
-            // 'username' => 'required|string',
+            'username' => 'required|string',
             // 'email' => 'required', 'email', Rule::unique('accounts', 'email'),
             // 'phone' => 'required',
             'role' => 'string',
+            'phone' => 'string',
+
             // 'password' => 'string',
         ]);
 
         Accounts::create([
             'name' => $request->input('name'),
-            // 'username' => $request->input('username'),
+            'username' => $request->input('username'),
             'email' => $request->input('email'),
             // 'phone' => $request->input('phone'),
             // 'emergency_phone' => $request->input('emergency_phone'),
             // 'password' => '12345',
             'role' => 'police',
+            'phone' => $request->input('phone'),
         ]);
 
         return redirect()->route('accounts')->with('message', 'User Added Successfully.');

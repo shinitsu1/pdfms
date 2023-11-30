@@ -57,6 +57,7 @@
                             <th>Brand</th>
                             <th>Model</th>
                             <th>VIN</th>
+                            <th>QrCode</th>
                             {{-- <th>Emergency Phone</th> --}}
                             <th>Action</th>
                             <th>Action</th>
@@ -65,6 +66,7 @@
                     <tbody>
                         @foreach ($vehicles as $vehicle)
                             <tr x-on:click="itemToEdit = {{ $vehicle->id }};">
+                                <td class="text-center">{{ $vehicle->id }}</td>
                                 <td class="text-center">{{ $vehicle->plate }}</td>
                                 <td class="text-center">{{ $vehicle->brand }}</td>
                                 <td class="text-center">{{ $vehicle->model }}</td>
@@ -250,15 +252,30 @@
                             <div class="p-4 md:p-5 space-y-4">
                                 <div class="grid gap-4 mb-4 sm:grid-cols-2">
                                     <div>
-                                        <label for="name"
-                                            class="block mb-2 text-sm font-medium text-gray-900">Name</label>
-                                        <input type="text" name="name"
+                                        <label for="plate"
+                                            class="block mb-2 text-sm font-medium text-gray-900">Plate #</label>
+                                        <input type="text" name="plate"
                                             class="bg-gray-100 border border-gray-300 text-gray-900" required>
                                     </div>
+
                                     <div>
-                                        <label for="email"
-                                            class="block mb-2 text-sm font-medium text-gray-900">email</label>
-                                        <input type="text" name="email"
+                                        <label for="brand"
+                                            class="block mb-2 text-sm font-medium text-gray-900">Brand</label>
+                                        <input type="text" name="username"
+                                            class="bg-gray-100 border border-gray-300 text-gray-900" required>
+                                    </div>
+
+                                    <div>
+                                        <label for="model"
+                                            class="block mb-2 text-sm font-medium text-gray-900">Model</label>
+                                        <input type="text" name="model"
+                                            class="bg-gray-100 border border-gray-300 text-gray-900" required>
+                                    </div>
+
+                                    <div>
+                                        <label for="vin"
+                                            class="block mb-2 text-sm font-medium text-gray-900">VIN</label>
+                                        <input type="text" name="vin"
                                             class="bg-gray-100 border border-gray-300 text-gray-900" required>
                                     </div>
 

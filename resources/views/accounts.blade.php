@@ -260,25 +260,31 @@
                                 <div class="p-4 md:p-5 space-y-4">
                                     <div class="grid gap-4 mb-4 sm:grid-cols-2">
                                         <div>
-                                            <label for="name"
+                                            <label for="created_at"
                                                 class="block mb-2 text-sm font-medium text-gray-900">Name</label>
                                             <input type="text" name="name"
-                                                class="bg-gray-100 border border-gray-300 text-gray-900"
-                                                required>
+                                                class="bg-gray-100 border border-gray-300 text-gray-900" required>
                                         </div>
+
                                         <div>
-                                            <label for="email"
-                                                class="block mb-2 text-sm font-medium text-gray-900">email</label>
+                                            <label for="created_at"
+                                                class="block mb-2 text-sm font-medium text-gray-900">Username</label>
+                                            <input type="text" name="username"
+                                                class="bg-gray-100 border border-gray-300 text-gray-900" required>
+                                        </div>
+
+                                        <div>
+                                            <label for="created_at"
+                                                class="block mb-2 text-sm font-medium text-gray-900">Email</label>
                                             <input type="text" name="email"
-                                                class="bg-gray-100 border border-gray-300 text-gray-900"
-                                                required>
+                                                class="bg-gray-100 border border-gray-300 text-gray-900" required>
                                         </div>
+
                                         <div>
-                                            <label for="role"
-                                                class="block mb-2 text-sm font-medium text-gray-900">role</label>
-                                            <input type="text" name="role"
-                                                class="bg-gray-100 border border-gray-300 text-gray-900"
-                                                required>
+                                            <label for="created_at"
+                                                class="block mb-2 text-sm font-medium text-gray-900">Phone Number</label>
+                                            <input type="text" name="phone"
+                                                class="bg-gray-100 border border-gray-300 text-gray-900" required>
                                         </div>
                                         {{-- <div>
                                             <label for="emergency_phone"

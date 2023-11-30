@@ -41,6 +41,7 @@ Route::controller(SupervisorsController::class)->group(function(){
     Route::patch('/supervisors/update/{id}','update')->name('supervisors.update');
     Route::post('/supervisors/create','create_supervisor')->name('supervisors.create_supervisor');
     Route::delete('/delete/{supervisor}','supervisor_delete')->name('supervisor_delete');
+    Route::get('/sms','App\Http\Controllers\SmsController@sms');
 });
 
 Route::controller(AccountsController::class)->group(function(){
@@ -49,8 +50,6 @@ Route::controller(AccountsController::class)->group(function(){
     Route::post('/accounts/create','create_account')->name('accounts.create_account');
     Route::delete('/delete1/{account}','destroy')->name('accounts.delete');
 });
-
-
 
 Route::controller(VehiclesController::class)->group(function(){
     Route::get('/vehicles','index')->middleware(['auth', 'verified'])->name('vehicles');
@@ -61,13 +60,5 @@ Route::controller(VehiclesController::class)->group(function(){
 });
 
 
-
 Route::get('/dashboard', [DashboardController::class, 'countUsersByRole'])->middleware(['auth', 'verified'])->name('dashboard');
-
-
-Route::get('/messaging', function () {
-    return view('Messaging'); })->name('Messaging');
-
-Route::post('/send-sms', [SmsController::class, 'sendSMS']);
-
 require __DIR__.'/auth.php';
