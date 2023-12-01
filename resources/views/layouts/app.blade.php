@@ -22,7 +22,50 @@
         <!--flowbite-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
 
-        <style>
+        
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+            integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
+            crossorigin=""/>
+            <!-- Make sure you put this AFTER Leaflet's CSS -->
+            <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+            integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
+            crossorigin=""></script>
+
+
+                <style>
+                      .active {
+            background-color: #60a5fa; 
+            color: #fff; 
+          
+        }
+        
+        #map {
+            height: 590px; 
+            position: absolute;
+            top: 89px; 
+            right: 20px; 
+            width: 54rem;
+            z-index: 1; 
+        }
+        #location-details {
+            overflow-y: auto; 
+        }
+        #location-details p {
+            margin: 5px 0;
+            cursor: pointer;
+            font-weight: bold;
+            color: #333;
+        }
+        #side-container {
+            display: inline-block;
+            flex-direction: column;
+            width: 200px; 
+        
+            padding: 10px;
+            height: 580px; 
+            
+        }
+
             .dataTables_wrapper select,
             .dataTables_wrapper .dataTables_filter input {
                 color: #4a5568;
