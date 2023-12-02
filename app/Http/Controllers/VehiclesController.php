@@ -32,10 +32,10 @@ class VehiclesController extends Controller
 
         // Validate the request
         $request->validate([
-            'plate' => 'required|string',
-            'brand' => 'required|string',
-            'model' => 'required|string',
-            'vin' => 'required|string',
+            'plate' => 'string',
+            'brand' => 'string',
+            'model' => 'string',
+            'vin' => 'string',
             // 'emergency_phone' => 'required|int',
 
         ]);
@@ -63,7 +63,7 @@ class VehiclesController extends Controller
 
         $request->validate([
             'plate' => 'required|string',
-            'brand' => 'required|string',
+            'brand' => 'string',
             'model' => 'required|string',
             'vin' => 'required|string',
             // 'username' => 'required|string',

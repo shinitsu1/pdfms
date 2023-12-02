@@ -10,13 +10,13 @@
                         <span class="font-poppins">Dashboard</span>
                     </a>
                 </li>
-                <li class="mb-1 group">
+                {{-- <li class="mb-1 group">
                     <a href="{{ asset('supervisors') }}"
                         class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
                         <i class="ri-admin-fill mr-3 text-lg"></i>
                         <span class="font-poppins">Admins</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="mb-1 group">
                     <a href="{{ asset('supervisors') }}"
                         class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
@@ -45,7 +45,7 @@
         <main
             class="fixed top-[86px] w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
             <!-- START DASHBOARD -->
-            <div class="bg-slate-200 h-screen w-full overflow-y-auto rounded-2xl ml-2">
+            <div class="bg-slate-200 h-screen w-full overflow-y-auto rounded-2xl ml-2 pb-[100px]">
                 <main>
                     <!-- Content -->
                     <div class="mt-2">
@@ -76,7 +76,8 @@
                             </a>
                             <!-- Users card -->
                             <a href="{{ asset('accounts') }}">
-                                <div class="flex items-center justify-between p-4 bg-white hover:bg-blue-200 rounded-md dark:bg-darker">
+                                <div
+                                    class="flex items-center justify-between p-4 bg-white hover:bg-blue-200 rounded-md dark:bg-darker">
                                     <div class="ml-4">
                                         <h6
                                             class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light">
@@ -96,7 +97,8 @@
                             </a>
                             <!-- Orders card -->
                             <a href="{{ asset('vehicles') }}">
-                                <div class="flex items-center justify-between p-4 bg-white hover:bg-blue-200 rounded-md dark:bg-darker">
+                                <div
+                                    class="flex items-center justify-between p-4 bg-white hover:bg-blue-200 rounded-md dark:bg-darker">
                                     <div class="ml-4">
                                         <h6
                                             class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light">
@@ -116,7 +118,8 @@
                             </a>
                             <!-- Tickets card -->
                             <a href="{{ asset('vehicles') }}">
-                                <div class="flex items-center justify-between p-4 bg-white hover:bg-blue-200 rounded-md dark:bg-darker">
+                                <div
+                                    class="flex items-center justify-between p-4 bg-white hover:bg-blue-200 rounded-md dark:bg-darker">
                                     <div>
                                         <h6
                                             class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light">
@@ -148,9 +151,52 @@
                                     </div>
                                 </div>
 
-                                <!-- Chart -->
-                                <div class="relative p-4 h-72">
-                                    <canvas id="barChart"></canvas>
+                                <!-- BarChart //relative p-4 h-72-->
+                                <div class="p-2">
+                                    <div class="w-[100%] h-[100%] flex justify-center items-center">
+                                        <canvas id="myBarChart" class="w-[100%] h-[100%]"></canvas>
+                                    </div>
+
+                                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                                    <script>
+                                        const barchart = document.getElementById('myBarChart');
+
+                                        new Chart(barchart, {
+                                            type: 'bar',
+                                            data: {
+                                                labels: ['Supervisors', 'Administrators', 'Officers'],
+                                                datasets: [{
+                                                    label: 'Admin',
+                                                    data: [
+                                                        {{ $countSupervisor }},
+                                                        {{ $countAccount }},
+                                                        {{ $countVehicle }}
+                                                    ],
+                                                    backgroundColor: [
+                                  'rgba(255, 99, 132, 0.2)',
+                                  'rgba(255, 159, 64, 0.2)',
+                                  'rgba(255, 205, 86, 0.2)',
+
+                                ],
+                                borderColor: [
+                                  'rgb(255, 99, 132)',
+                                  'rgb(255, 159, 64)',
+                                  'rgb(255, 205, 86)',
+
+                                ],
+                                borderWidth: 1
+                                                }]
+                                            },
+                                            options: {
+                                                scales: {
+                                                    y: {
+                                                        beginAtZero: true
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    </script>
                                 </div>
                             </div>
 
@@ -158,65 +204,99 @@
                             <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
                                 <!-- Card header -->
                                 <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Doughnut Chart</h4>
+                                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Polar Area Chart</h4>
                                     <div class="flex items-center">
 
                                     </div>
                                 </div>
-                                <!-- Chart -->
-                                <div class="relative p-4 h-72">
-                                    <canvas id="doughnutChart"></canvas>
+                                {{-- Doughnut Chart --}}
+                                <div>
+                                    <canvas id="myChart" class="w-[70%] h-[20%]"></canvas>
                                 </div>
+
+                                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                                <script>
+                                    const ctx = document.getElementById('myChart');
+
+                                    new Chart(ctx, {
+                                        type: 'polarArea',
+                                        data: {
+                                            labels: ['Supervisors', 'Police', 'Vehicles'],
+                                            datasets: [{
+                                                label: 'Number of Users',
+                                                data: [
+                                                    {{ $countSupervisor }},
+                                                    {{ $countAccount }},
+                                                    {{ $countVehicle }}
+                                                ],
+                                                borderWidth: 1
+                                            }]
+                                        },
+                                        options: {
+                                            scales: {
+                                                y: {
+                                                    beginAtZero: true
+                                                }
+                                            }
+                                        }
+                                    });
+                                </script>
+                            </div>
+                            {{-- Doughnut Chart --}}
+                        </div>
+                    </div>
+
+                    <!-- Two grid columns -->
+                    <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-3">
+                        <!-- Active users chart -->
+                        <div class="col-span-1 bg-white rounded-md dark:bg-darker">
+                            <!-- Card header -->
+                            <div class="p-4 border-b dark:border-primary">
+                                <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Active users right
+                                    now</h4>
+                            </div>
+                            <p class="p-4">
+                                <span class="text-2xl font-medium text-gray-500 dark:text-light"
+                                    id="usersCount">0</span>
+                                <span class="text-sm font-medium text-gray-500 dark:text-primary">Users</span>
+                            </p>
+                            <!-- Chart -->
+                            <div class="relative p-4">
+                                <canvas id="activeUsersChart"></canvas>
                             </div>
                         </div>
 
-                        <!-- Two grid columns -->
-                        <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-3">
-                            <!-- Active users chart -->
-                            <div class="col-span-1 bg-white rounded-md dark:bg-darker">
-                                <!-- Card header -->
-                                <div class="p-4 border-b dark:border-primary">
-                                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Active users right
-                                        now</h4>
-                                </div>
-                                <p class="p-4">
-                                    <span class="text-2xl font-medium text-gray-500 dark:text-light"
-                                        id="usersCount">0</span>
-                                    <span class="text-sm font-medium text-gray-500 dark:text-primary">Users</span>
-                                </p>
-                                <!-- Chart -->
-                                <div class="relative p-4">
-                                    <canvas id="activeUsersChart"></canvas>
+                        <!-- Line chart card -->
+                        <div class="col-span-2 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
+                            <!-- Card header -->
+                            <div class="flex items-center justify-between p-4 border-b dark:border-primary">
+                                <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Line Chart</h4>
+                                <div class="flex items-center">
+                                    <button class="relative focus:outline-none" x-cloak
+                                        @click="isOn = !isOn; $parent.updateLineChart()">
+                                        <div
+                                            class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
+                                        </div>
+                                        <div class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
+                                            :class="{
+                                                'translate-x-0  bg-white dark:bg-primary-100': !
+                                                    isOn,
+                                                'translate-x-6 bg-primary-light dark:bg-primary': isOn
+                                            }">
+                                        </div>
+                                    </button>
                                 </div>
                             </div>
-
-                            <!-- Line chart card -->
-                            <div class="col-span-2 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
-                                <!-- Card header -->
-                                <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Line Chart</h4>
-                                    <div class="flex items-center">
-                                        <button class="relative focus:outline-none" x-cloak
-                                            @click="isOn = !isOn; $parent.updateLineChart()">
-                                            <div
-                                                class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
-                                            </div>
-                                            <div class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
-                                                :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !
-                                                    isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }">
-                                            </div>
-                                        </button>
-                                    </div>
-                                </div>
-                                <!-- Chart -->
-                                <div class="relative p-4 h-72">
-                                    <canvas id="lineChart"></canvas>
-                                </div>
+                            <!-- Chart -->
+                            <div class="relative p-4 h-72">
+                                <canvas id="lineChart"></canvas>
                             </div>
                         </div>
                     </div>
-                </main>
             </div>
+        </main>
+        </div>
         </main>
     @endif
 
@@ -372,90 +452,7 @@
                                 <!-- Card header -->
                                 <div class="flex items-center justify-between p-4 border-b dark:border-primary">
                                     <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Bar Chart</h4>
-                                    <div class="flex items-center space-x-2">
-                                        <h2 class="text-xl font-bold">Waste Collection</h2>
-                                        <span class="text-sm font-semibold text-gray-500">OCTOBER 2023</span>
-                                        <div class="flex items-end flex-grow w-full mt-2 space-x-2 sm:space-x-3">
-                                            <div class="relative flex flex-col items-center flex-grow pb-5 group">
-                                                <span class="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">300</span>
-                                                <div class="relative flex justify-center w-full h-8 bg-indigo-200"></div>
-                                                <div class="relative flex justify-center w-full h-6 bg-indigo-300"></div>
-                                                <div class="relative flex justify-center w-full h-16 bg-indigo-400"></div>
-                                                <span class="absolute bottom-0 text-xs font-bold">178</span>
-                                            </div>
-                                            <div class="relative flex flex-col items-center flex-grow pb-5 group">
-                                                <span class="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">350</span>
-                                                <div class="relative flex justify-center w-full h-10 bg-indigo-200"></div>
-                                                <div class="relative flex justify-center w-full h-6 bg-indigo-300"></div>
-                                                <div class="relative flex justify-center w-full h-20 bg-indigo-400"></div>
-                                                <span class="absolute bottom-0 text-xs font-bold">179</span>
-                                            </div>
-                                            <div class="relative flex flex-col items-center flex-grow pb-5 group">
-                                                <span class="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">360</span>
-                                                <div class="relative flex justify-center w-full h-10 bg-indigo-200"></div>
-                                                <div class="relative flex justify-center w-full h-8 bg-indigo-300"></div>
-                                                <div class="relative flex justify-center w-full h-20 bg-indigo-400"></div>
-                                                <span class="absolute bottom-0 text-xs font-bold">180</span>
-                                            </div>
-                                            <div class="relative flex flex-col items-center flex-grow pb-5 group">
-                                                <span class="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">370</span>
-                                                <div class="relative flex justify-center w-full h-10 bg-indigo-200"></div>
-                                                <div class="relative flex justify-center w-full h-6 bg-indigo-300"></div>
-                                                <div class="relative flex justify-center w-full h-24 bg-indigo-400"></div>
-                                                <span class="absolute bottom-0 text-xs font-bold">181</span>
-                                            </div>
-                                            <div class="relative flex flex-col items-center flex-grow pb-5 group">
-                                                <span class="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">365</span>
-                                                <div class="relative flex justify-center w-full h-10 bg-indigo-200"></div>
-                                                <div class="relative flex justify-center w-full h-8 bg-indigo-300"></div>
-                                                <div class="relative flex justify-center w-full h-20 bg-indigo-400"></div>
-                                                <span class="absolute bottom-0 text-xs font-bold">182</span>
-                                            </div>
-                                            <div class="relative flex flex-col items-center flex-grow pb-5 group">
-                                                <span class="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">380</span>
-                                                <div class="relative flex justify-center w-full h-12 bg-indigo-200"></div>
-                                                <div class="relative flex justify-center w-full h-8 bg-indigo-300"></div>
-                                                <div class="relative flex justify-center w-full h-24 bg-indigo-400"></div>
-                                                <span class="absolute bottom-0 text-xs font-bold">183</span>
-                                            </div>
-                                            <div class="relative flex flex-col items-center flex-grow pb-5 group">
-                                                <span class="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">410</span>
-                                                <div class="relative flex justify-center w-full h-12 bg-indigo-200"></div>
-                                                <div class="relative flex justify-center w-full h-16 bg-indigo-300"></div>
-                                                <div class="relative flex justify-center w-full h-20 bg-indigo-400"></div>
-                                                <span class="absolute bottom-0 text-xs font-bold">184</span>
-                                            </div>
-                                            <div class="relative flex flex-col items-center flex-grow pb-5 group">
-                                                <span class="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">390</span>
-                                                <div class="relative flex justify-center w-full h-12 bg-indigo-200"></div>
-                                                <div class="relative flex justify-center w-full h-10 bg-indigo-300"></div>
-                                                <div class="relative flex justify-center w-full h-24 bg-indigo-400"></div>
-                                                <span class="absolute bottom-0 text-xs font-bold">185</span>
-                                            </div>
-                                            <div class="relative flex flex-col items-center flex-grow pb-5 group">
-                                                <span class="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">480</span>
-                                                <div class="relative flex justify-center w-full h-12 bg-indigo-200"></div>
-                                                <div class="relative flex justify-center w-full h-10 bg-indigo-300"></div>
-                                                <div class="relative flex justify-center w-full h-32 bg-indigo-400"></div>
-                                                <span class="absolute bottom-0 text-xs font-bold">186</span>
-                                            </div>
-                                            <div class="relative flex flex-col items-center flex-grow pb-5 group">
-                                                <span class="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">470</span>
-                                                <div class="relative flex justify-center w-full h-12 bg-indigo-200"></div>
-                                                <div class="relative flex justify-center w-full h-12 bg-indigo-300"></div>
-                                                <div class="relative flex justify-center w-full bg-indigo-400 h-28"></div>
-                                                <span class="absolute bottom-0 text-xs font-bold">187</span>
-                                            </div>
-                                            <div class="relative flex flex-col items-center flex-grow pb-5 group">
-                                                <span class="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">500</span>
-                                                <div class="relative flex justify-center w-full h-8 bg-indigo-200"></div>
-                                                <div class="relative flex justify-center w-full h-8 bg-indigo-300"></div>
-                                                <div class="relative flex justify-center w-full h-40 bg-indigo-400"></div>
-                                                <span class="absolute bottom-0 text-xs font-bold">188</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </div>
+
                                 </div>
 
                                 <!-- Chart -->
@@ -510,8 +507,11 @@
                                                 class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
                                             </div>
                                             <div class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
-                                                :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !
-                                                    isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }">
+                                                :class="{
+                                                    'translate-x-0  bg-white dark:bg-primary-100': !
+                                                        isOn,
+                                                    'translate-x-6 bg-primary-light dark:bg-primary': isOn
+                                                }">
                                             </div>
                                         </button>
                                     </div>

@@ -16,15 +16,20 @@ class UserAccounts extends Seeder
     {
         //
         $admin = User::create([
-            'name' => 'Karl Lewis T. Doctolero',
-            'email' => 'karl@gmail.com',
+            'photo' => '12345',
+            'last_name' => 'Doctolero',
+            'first_name' => 'Karl Lewis',
+            'email' => 'karllewistdoctolero@gmail.com',
             'password' => Hash::make('12345'),
             'role' => 'admin',
+
         ]);
 
         // seeding collector
         $collector = User::create([
-            'name' => 'Kurt Axel D. Nanalis',
+            'photo' => '12345',
+            'last_name' => 'Nanalis',
+            'first_name' => 'Kurt Axel',
             'email' => 'kurt@gmail.com',
             'password' => Hash::make('12345'),
             'role' => 'supervisor',
@@ -32,7 +37,9 @@ class UserAccounts extends Seeder
 
         // seeding residents
         $police = User::create([
-            'name' => 'Ma. Leah R. Oquindo',
+            'photo' => '12345',
+            'last_name' => 'Oquindo',
+            'first_name' => 'Ma. Leah',
             'email' => 'leah@gmail.com',
             'password' => Hash::make('12345'),
             'role' => 'police',

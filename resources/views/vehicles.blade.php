@@ -262,7 +262,7 @@
                                     <div>
                                         <label for="brand"
                                             class="block mb-2 text-sm font-medium text-gray-900">Brand</label>
-                                        <input type="text" name="username"
+                                        <input type="text" name="brand"
                                             class="bg-gray-100 border border-gray-300 text-gray-900" required>
                                     </div>
 

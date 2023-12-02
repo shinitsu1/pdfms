@@ -13,6 +13,8 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;1,400&display=swap" rel="stylesheet">
 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
+
         <!-- Icons -->
         <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
@@ -22,7 +24,7 @@
         <!--flowbite-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
 
-        
+
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
             integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
             crossorigin=""/>
@@ -34,21 +36,21 @@
 
                 <style>
                       .active {
-            background-color: #60a5fa; 
-            color: #fff; 
-          
+            background-color: #60a5fa;
+            color: #fff;
+
         }
-        
+
         #map {
-            height: 590px; 
+            height: 590px;
             position: absolute;
-            top: 89px; 
-            right: 20px; 
+            top: 89px;
+            right: 20px;
             width: 54rem;
-            z-index: 1; 
+            z-index: 1;
         }
         #location-details {
-            overflow-y: auto; 
+            overflow-y: auto;
         }
         #location-details p {
             margin: 5px 0;
@@ -59,11 +61,11 @@
         #side-container {
             display: inline-block;
             flex-direction: column;
-            width: 200px; 
-        
+            width: 200px;
+
             padding: 10px;
-            height: 580px; 
-            
+            height: 580px;
+
         }
 
             .dataTables_wrapper select,

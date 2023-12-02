@@ -1,4 +1,6 @@
 <x-app-layout>
+
+<x-message />
     <!--AllFine-->
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
 
@@ -53,12 +55,11 @@
                         style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                         <thead>
                             <tr>
-                                <th>UserID</th>
-                                <th>Name</th>
-                                <th>Username</th>
+                                <th>ID</th>
+                                <th>Image</th>
+                                <th>Lastname</th>
+                                <th>Firstname</th>
                                 <th>Email</th>
-                                <th>Phone</th>
-                                {{-- <th>Emergency Phone</th> --}}
                                 <th>Action</th>
                                 <th>Action</th>
                             </tr>
@@ -67,12 +68,14 @@
                             @foreach ($accounts as $account)
                                 <tr x-on:click="itemToEdit = {{ $account->id }};">
                                     <td class="text-center">{{ $account->id }}</td>
-                                    <td class="text-center">{{ $account->name }}</td>
-                                    <td class="text-center">{{ $account->username }}</td>
+                                    <td class="flex justify-center items-center">
+                                        <img src="{{ asset($account->photo) }}" width='30' height="30">
+                                    </td>
+                                    <td class="text-center">{{ $account->last_name }}</td>
+                                    <td class="text-center">{{ $account->first_name }}</td>
                                     <td class="text-center">{{ $account->email }}</td>
-                                    <td class="text-center">{{ $account->phone }}</td>
-                                    {{-- <td class="text-center">{{ $account->shift }}</td>
-                                    <td class="text-center">{{ $account->emergency_phone }}</td> --}}
+
+
                                     <td class="text-center ">
                                         <button
                                             @click="accountEdit = true; itemToEdit = $event.target.getAttribute('data-item-id')"
@@ -138,14 +141,14 @@
                                                         class="bg-gray-100 border border-gray-300 text-gray-900" disabled>
                                                 </div>
                                                 <div>
-                                                    <label for="name">Name:</label>
-                                                    <input type="text" name="name" value="{{ $account->name }}"
+                                                    <label for="last_name">Lastname</label>
+                                                    <input type="text" name="last_name" value="{{ $account->last_name }}"
                                                         class="bg-gray-100 border border-gray-600 text-gray-900" required>
                                                 </div>
 
                                                 <div>
-                                                    <label for="username">Username</label>
-                                                    <input type="text" name="username" value="{{ $account->username }}"
+                                                    <label for="first_name">Firstname</label>
+                                                    <input type="text" name="first_name" value="{{ $account->first_name }}"
                                                         class="bg-gray-100 border border-gray-600 text-gray-900" required>
                                                 </div>
 
@@ -254,46 +257,41 @@
                                 </h3>
                             </div>
                             <hr class="bg-black w-[410px]">
-                            <form action="{{ route('accounts.create_account') }}" method="post"
+                            <form action="{{ route('accounts.create_account') }}" method="post" enctype="multipart/form-data"
                                 class="pl-5 pr-5 pt-3 pb-3">
                                 @csrf
                                 <div class="p-4 md:p-5 space-y-4">
                                     <div class="grid gap-4 mb-4 sm:grid-cols-2">
                                         <div>
-                                            <label for="created_at"
-                                                class="block mb-2 text-sm font-medium text-gray-900">Name</label>
-                                            <input type="text" name="name"
+                                            <label for="last_name"
+                                                class="block mb-2 text-sm font-medium text-gray-900">Lastname</label>
+                                            <input type="text" name="last_name"
                                                 class="bg-gray-100 border border-gray-300 text-gray-900" required>
                                         </div>
 
                                         <div>
-                                            <label for="created_at"
-                                                class="block mb-2 text-sm font-medium text-gray-900">Username</label>
-                                            <input type="text" name="username"
+                                            <label for="first_name"
+                                                class="block mb-2 text-sm font-medium text-gray-900">Firstname</label>
+                                            <input type="text" name="first_name"
                                                 class="bg-gray-100 border border-gray-300 text-gray-900" required>
                                         </div>
 
                                         <div>
-                                            <label for="created_at"
+                                            <label for="email"
                                                 class="block mb-2 text-sm font-medium text-gray-900">Email</label>
                                             <input type="text" name="email"
                                                 class="bg-gray-100 border border-gray-300 text-gray-900" required>
                                         </div>
 
                                         <div>
-                                            <label for="created_at"
+                                            <label for="phone"
                                                 class="block mb-2 text-sm font-medium text-gray-900">Phone Number</label>
                                             <input type="text" name="phone"
                                                 class="bg-gray-100 border border-gray-300 text-gray-900" required>
                                         </div>
-                                        {{-- <div>
-                                            <label for="emergency_phone"
-                                                class="block mb-2 text-sm font-medium text-gray-900">Emergency Phone</label>
-                                            <input type="text" name="emergency_phone"
-                                                class="bg-gray-100 border border-gray-300 text-gray-900"
-                                                required>
-                                        </div> --}}
                                     </div>
+                                    <input class="form-control" name="photo" type="file" id="photo">
+
                                 </div>
 
                                 <div class="flex justify-end mt-3">
@@ -678,6 +676,17 @@
     <!--Datatables -->
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+    <script>
+      const input = document.querySelector("#phone");
+      window.intlTelInput(input, {
+        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+      });
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
+
+
     <script>
         $(document).ready(function() {
 

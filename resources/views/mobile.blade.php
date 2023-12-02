@@ -129,7 +129,7 @@
             <!-- Left side content -->
             <main class="p-5 md:w-3/4 min-h-screen">
                 <div class="flex items-center justify-center">
-                    <div class="flex bg-white text-white rounded-2xl flex items-center">
+                    <div class="flex bg-white text-white rounded-2xl items-center">
                         <div class="flex justify-around items-center py-2" id="iconContainer">
                             <!-- Icons for the first layer -->
                             <!-- Icon 1 -->
