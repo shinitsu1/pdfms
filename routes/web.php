@@ -8,6 +8,7 @@ use App\Http\Controllers\VehiclesController;
 use App\Models\Supervisors;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SmsController;
+use App\Http\Controllers\LocationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,3 +68,5 @@ Route::get('/dashboard', function () {
 
 Route::get('/dashboard', [DashboardController::class, 'countUsersByRole'])->middleware(['auth', 'verified'])->name('dashboard');
 require __DIR__.'/auth.php';
+
+Route::get('/tracking', [LocationController::class, 'index'])->name('tracking');
