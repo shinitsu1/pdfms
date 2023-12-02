@@ -455,7 +455,52 @@
 
                                 </div>
 
-                                <!-- Chart -->
+                                <div class="p-2">
+                                    <div class="w-[100%] h-[100%] flex justify-center items-center">
+                                        <canvas id="myBarChart" class="w-[100%] h-[100%]"></canvas>
+                                    </div>
+
+                                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                                    <script>
+                                        const barchart = document.getElementById('myBarChart');
+
+                                        new Chart(barchart, {
+                                            type: 'bar',
+                                            data: {
+                                                labels: ['Supervisors', 'Administrators', 'Officers'],
+                                                datasets: [{
+                                                    label: 'Admin',
+                                                    data: [
+                                                        {{ $countSupervisor }},
+                                                        {{ $countAccount }},
+                                                        {{ $countVehicle }}
+                                                    ],
+                                                    backgroundColor: [
+                                  'rgba(255, 99, 132, 0.2)',
+                                  'rgba(255, 159, 64, 0.2)',
+                                  'rgba(255, 205, 86, 0.2)',
+
+                                ],
+                                borderColor: [
+                                  'rgb(255, 99, 132)',
+                                  'rgb(255, 159, 64)',
+                                  'rgb(255, 205, 86)',
+
+                                ],
+                                borderWidth: 1
+                                                }]
+                                            },
+                                            options: {
+                                                scales: {
+                                                    y: {
+                                                        beginAtZero: true
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    </script>
+                                </div>
 
                             </div>
 
@@ -463,16 +508,47 @@
                             <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
                                 <!-- Card header -->
                                 <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Doughnut Chart</h4>
+                                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Polar Area Chart</h4>
                                     <div class="flex items-center">
 
                                     </div>
                                 </div>
-                                <!-- Chart -->
-                                <div class="relative p-4 h-72">
-                                    <canvas id="doughnutChart"></canvas>
+                                {{-- Doughnut Chart --}}
+                                <div>
+                                    <canvas id="myChart" class="w-[70%] h-[20%]"></canvas>
                                 </div>
+
+                                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                                <script>
+                                    const ctx = document.getElementById('myChart');
+
+                                    new Chart(ctx, {
+                                        type: 'polarArea',
+                                        data: {
+                                            labels: ['Supervisors', 'Police', 'Vehicles'],
+                                            datasets: [{
+                                                label: 'Number of Users',
+                                                data: [
+                                                    {{ $countSupervisor }},
+                                                    {{ $countAccount }},
+                                                    {{ $countVehicle }}
+                                                ],
+                                                borderWidth: 1
+                                            }]
+                                        },
+                                        options: {
+                                            scales: {
+                                                y: {
+                                                    beginAtZero: true
+                                                }
+                                            }
+                                        }
+                                    });
+                                </script>
                             </div>
+                            {{-- Doughnut Chart --}}
+                        </div
                         </div>
 
                         <!-- Two grid columns -->

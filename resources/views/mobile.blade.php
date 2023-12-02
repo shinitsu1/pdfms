@@ -22,11 +22,11 @@
 @media (max-width: 767px) {
   .md\\:hidden.md\\:flex {
     display: flex;
-    flex-direction: column-reverse; 
+    flex-direction: column-reverse;
   }
 
   .md\\:hidden.md\\:flex ul {
-    margin-top: auto; 
+    margin-top: auto;
 
     flex-direction: column-reverse; /* Display the bottom navigation at the bottom */
   }
@@ -64,19 +64,19 @@
                 border-bottom-left-radius: 50% 20%;
                 border-bottom-right-radius: 50% 20%;"></div>
 
-        
+
             <!-- Logo (visible on larger screens) -->
             <div class="md:flex items-center space-x-4 hide-on-small z-10 relative">
                 <img src="{{ asset('image/FLT_White.png') }}"  alt="FleetLink Logo" class="h-10 w-30" /> <!-- Your logo -->
             </div>
-        
+
             <!-- Hello, Name -->
             <div class="flex flex-col text-white md:flex-row md:items-right md:space-x-2 md:ml-auto z-10 relative">
                 <span class="text-lg font-normal">Good Day!,</span>
 
                 <span class="text-xl font-bold">Kurt Nanalis</span> <!-- Replace with user's name -->
             </div>
-        
+
             <!-- Profile Image -->
             <div class="rounded-full h-9 w-9 flex items-center justify-center overflow-hidden ml-auto z-10 relative">
                 <!-- This assumes you have a 'public' folder where your images are stored -->
@@ -121,7 +121,7 @@
                       </a></li>
                     <li> <a href="#" class="text-blue-500 flex items-center py-2">
 
-                        <i class="fas fa-phone-alt mr-2"></i> 
+                        <i class="fas fa-phone-alt mr-2"></i>
                         <!-- Maps icon -->
                         Logs
                       </a></li>
@@ -131,7 +131,7 @@
                         </a>
                       </li>
                       <li>
-    <a href="{{ route('calendar') }}" class="text-blue-500 flex items-center py-2">
+    <a href="{{ asset('calendar') }}" class="text-blue-500 flex items-center py-2">
         <i class="far fa-calendar-alt mr-2"></i> <!-- Calendar icon -->
         Calendar
     </a>
@@ -179,16 +179,16 @@ gi
                           More
                         </a>
 
-                      </li>          
+                      </li>
                   </ul>
                 </nav>
               </aside>
-            
-              
+
+
             <!-- Left side content -->
             <main class="p-5 md:w-3/4 min-h-screen">
                 <div class="flex items-center justify-center">
-                    <div class="flex bg-white text-white rounded-2xl flex items-center">
+                    <div class="flex bg-white text-white rounded-2xl items-center">
 
                       </li>
                   </ul>
@@ -209,14 +209,14 @@ gi
                                 <img src="{{ asset('image/telephone.png') }}" alt="Your Image" class="w-10 h-auto rounded-lg">
                                 <span style="font-size: 0.75rem;" class="text-black font-bold mt-1">Voice Call</span>
                             </div>
-                            
+
                             <!-- Icon 2 -->
                             <div class="ml-6 flex flex-col items-center">
                                 <img src="{{ asset('image/comment.png') }}" alt="Your Image" class="w-10 h-auto rounded-lg">
                                 <span style="font-size: 0.75rem;" class="text-black font-bold mt-1">Send SMS</span>
                             </div>
 
-                            
+
                             <!-- Icon 3 -->
                             <a href="{{ url('/qr') }}">
     <div id="qrButton" class="ml-6 mr-6 flex flex-col items-center">
@@ -226,20 +226,20 @@ gi
 </a>
 
 
-                    
+
                         </div>
                     </div>
                 </div>
-                
+
             <!-- Search bar -->
             <div class="flex items-center justify-center mt-0 relative p-4 ">
-              <input 
-                type="text" 
-                placeholder="Search..." 
+              <input
+                type="text"
+                placeholder="Search..."
                 class="w-full px-5 py-2 rounded-3xl border-gray-300   "
               />
-              <button 
-              type="button" 
+              <button
+              type="button"
 
                                 <img src="{{ asset('image/call.png') }}" alt="Your Image" class="w-10 h-auto rounded-lg">
                                 <span style="font-size: 0.75rem;" class="text-black font-bold mt-1">Video Call</span>
@@ -275,10 +275,10 @@ gi
                 <i class="fas fa-search text-white"></i>
               </span>
 
-              
+
             </button>
-            
-            
+
+
             </div>
             <div class="flex items-center">
     <!-- Content on the left side -->
@@ -296,9 +296,9 @@ gi
     </div>
 </div>
 
-    
+
        <!-- Sidebar for larger screens -->
-  
+
 
             </button>
 
@@ -441,7 +441,7 @@ gi
   </script>
 </body>
 </html>
-  
+
 
   </script>
 </body>

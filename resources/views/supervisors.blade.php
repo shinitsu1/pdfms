@@ -283,7 +283,7 @@
                                             class="block mb-2 text-sm font-medium text-gray-900">Phone Number</label>
                                         <input type="tel" name="phone"
                                             oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 11)"
-                                            id="phone" data-default-country="PH"
+                                            id="phone" data-default-country="ph"
                                             class="bg-gray-100 border border-gray-300 text-gray-900" required>
                                     </div>
                                 </div>
