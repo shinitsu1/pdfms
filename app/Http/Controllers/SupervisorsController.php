@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Supervisors;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
@@ -35,20 +36,20 @@ class SupervisorsController extends Controller
 
         // Validate the request
         $request->validate([
-            'name' => 'required|string',
-            'username' => 'required|string',
-            'email' => 'required|email|unique:users,email,' . $data->id,
-            'phone' => 'required|string',
+            'last_name' => 'string',
+            'first_name' => 'string',
+            'email' => 'email',
+            // 'phone' => 'string',
             'password' => 'nullable|string|min:6',
             // 'role' => 'string',
         ]);
 
         // Update user information
         $data->update([
-            'name' => $request->input('name'),
-            'username' => $request->input('username'),
+            'last_name' => $request->input('last_name'),
+            'first_name' => $request->input('first_name'),
             'email' => $request->input('email'),
-            'phone' => $request->input('phone'),
+            // 'phone' => $request->input('phone'),
             'password' => $request->has('password') ? bcrypt($request->input('password')) : $data->password,
             // 'role' => $request->input('role'),
         ]);
@@ -66,17 +67,37 @@ class SupervisorsController extends Controller
 
     public function create_supervisor(Request $request){
         $request->validate([
-            'name' => 'required|string',
-            'username' => 'required|string',
-            'phone' => 'required',
+            'photo' => 'image',
+            'last_name' => 'required|string',
+            'first_name' => 'required|string',
+            'phone' => 'string',
             'role' => 'nullable|string|min:6',
             'email' => 'required', 'email', Rule::unique('students', 'email'),
             'password' => 'nullable|string|min:6',
         ]);
 
+        $accountsData = $request->all();
+
+        if ($request->hasFile('photo')) {
+            $fileName = time().$request->file('photo')->getClientOriginalName();
+            $path = $request->file('photo')->storeAs('images', $fileName, 'public');
+            $accountsData["photo"] = '/storage/'.$path;
+        }
+
         Supervisors::create([
-            'name' => $request->input('name'),
-            'username' => $request->input('username'),
+            'photo' => $accountsData["photo"], // Use the modified variable here
+            'last_name' => $request->input('last_name'),
+            'first_name' => $request->input('first_name'),
+            'email' => $request->input('email'),
+            'phone' => $request->input('phone'),
+            'password' => '12345',
+            'role' => 'supervisor',
+        ]);
+
+        User::create([
+            'photo' => $accountsData["photo"], // Use the modified variable here
+            'last_name' => $request->input('last_name'),
+            'first_name' => $request->input('first_name'),
             'email' => $request->input('email'),
             'phone' => $request->input('phone'),
             'password' => '12345',

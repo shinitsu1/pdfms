@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Accounts;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
@@ -24,29 +25,47 @@ class AccountsController extends Controller
     }
 
     public function create_account(Request $request){
+
+
         $request->validate([
-            'name' => 'required|string||regex:/^[a-zA-Z]+$/',
+            'last_name' => 'required',
+            'first_name' => 'required',
             'email' => 'required',
-            'username' => 'required|string',
+
             // 'email' => 'required', 'email', Rule::unique('accounts', 'email'),
             // 'phone' => 'required',
             'role' => 'string',
             'phone' => 'string',
-
+            'photo' => 'image',
             // 'password' => 'string',
         ]);
 
+        $accountsData = $request->all();
+
+        if ($request->hasFile('photo')) {
+            $fileName = time().$request->file('photo')->getClientOriginalName();
+            $path = $request->file('photo')->storeAs('images', $fileName, 'public');
+            $accountsData["photo"] = '/storage/'.$path;
+        }
+
         Accounts::create([
-            'name' => $request->input('name'),
-            'username' => $request->input('username'),
+            'last_name' => $request->input('last_name'),
+            'first_name' => $request->input('first_name'),
             'email' => $request->input('email'),
-            // 'phone' => $request->input('phone'),
-            // 'emergency_phone' => $request->input('emergency_phone'),
-            // 'password' => '12345',
             'role' => 'police',
             'phone' => $request->input('phone'),
+            'photo' => $accountsData["photo"], // Use the modified variable here
         ]);
 
+        User::create([
+            'photo' => $accountsData["photo"], // Use the modified variable here
+            'last_name' => $request->input('last_name'),
+            'first_name' => $request->input('first_name'),
+            'email' => $request->input('email'),
+            'phone' => $request->input('phone'),
+            'password' => '12345',
+            'role' => 'supervisor',
+        ]);
         return redirect()->route('accounts')->with('message', 'User Added Successfully.');
     }
 
@@ -60,25 +79,29 @@ class AccountsController extends Controller
 
         // Validate the request
         $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|string',
-            'phone' => 'required|string',
-            'username' => 'required|string',
+            'last_name' => 'string',
+            'first_name' => 'string',
+            'email' => 'email',
+            'phone' => 'string',
+
             // 'emergency_phone' => 'required|int',
 
         ]);
 
         // Update user information
         $data->update([
-            'name' => $request->input('name'),
+            'last_name' => $request->input('last_name'),
+            'first_name' => $request->input('first_name'),
             'email' => $request->input('email'),
             'phone' => $request->input('phone'),
-            'username' => $request->input('username'),
+
             // 'emergency_phone' => $request->input('emergency_phone'),
         ]);
 
         return redirect()->route('accounts')->with('message', 'User updated successfully');
     }
 
-
+    public function mobile(){
+        return view('mobile');
+    }
 }

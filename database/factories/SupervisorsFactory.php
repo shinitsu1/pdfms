@@ -19,8 +19,9 @@ class SupervisorsFactory extends Factory
     {
         return [
             'role' => 'supervisor',
-            'name' => fake()->name(),
-            'username' =>fake()->userName(),
+            'photo' => fake()->numerify('09#########'),
+            'last_name' => fake()->lastName(),
+            'first_name' =>fake()->firstName(),
             'email' => fake()->unique()->safeEmail(),
             'phone' => fake()->numerify('09#########'),
             'password' => Hash::make('12345'),

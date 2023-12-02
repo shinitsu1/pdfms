@@ -8,6 +8,7 @@ use App\Http\Controllers\VehiclesController;
 use App\Models\Supervisors;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SmsController;
+use App\Http\Controllers\LocationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,7 @@ Route::controller(AccountsController::class)->group(function(){
     Route::patch('/accounts/update/{id}','update')->name('accounts.update');
     Route::post('/accounts/create','create_account')->name('accounts.create_account');
     Route::delete('/delete1/{account}','destroy')->name('accounts.delete');
+    Route::get('mobile', 'mobile')->name('mobile.mobile');
 });
 
 Route::controller(VehiclesController::class)->group(function(){
@@ -72,5 +74,11 @@ Route::controller(VehiclesController::class)->group(function(){
 });
 
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
 Route::get('/dashboard', [DashboardController::class, 'countUsersByRole'])->middleware(['auth', 'verified'])->name('dashboard');
 require __DIR__.'/auth.php';
+
+Route::get('/tracking', [LocationController::class, 'index'])->name('tracking');

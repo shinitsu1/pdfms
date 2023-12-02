@@ -40,18 +40,19 @@
         <!--Card-->
         <div id='recipients' class="p-5 mt-5 lg:mt-0 rounded-2xl shadow bg-gray-200">
             <!--AlphineModal-->
-            <div x-data="{ supervisorDelete: false, adminNewUsers: false, supervisorEdit: false, itemToDelete: null, itemToEdit: null }">
+            <div x-data="{ supervisorDelete: false, adminNewUsers: false, supervisorEdit: false, itemToDelete: null, itemToEdit: null, isPhoneNumber: false }">
                 <button @click="adminNewUsers = true"
                     class="mb-2 text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center"><i
                         class="ri-add-line mr-1 text-lg"></i>Add New Supervisor</button>
                 <table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                     <thead>
                         <tr>
-                            <th>UserID</th>
-                            <th>Name</th>
-                            <th>Username</th>
+                            <th>ID</th>
+                            <th>Photo</th>
+                            <th>Lastname</th>
+                            <th>Firstname</th>
                             <th>Email</th>
-                            <th>Phone #</th>
+                            {{-- <th>Phone #</th> --}}
                             <th>Action</th>
                             <th>Action</th>
                         </tr>
@@ -60,23 +61,26 @@
                         @foreach ($data as $supervisor)
                             <tr x-on:click="itemToEdit = {{ $supervisor->id }};">
                                 <td class="text-center">{{ $supervisor->id }}</td>
-                                <td class="text-center">{{ $supervisor->name }}</td>
-                                <td class="text-center">{{ $supervisor->username }}</td>
-                                <td class="text-center">{{ $supervisor->email }}</td>
-                                <td class="text-center">{{ $supervisor->phone }}</td>
+                                <td class="flex justify-center items-center">
+                                    <img src="{{ asset($supervisor->photo) }}" width='30' height="30">
+                                </td>
+                                <td>{{ $supervisor->last_name }}</td>
+                                <td>{{ $supervisor->first_name }}</td>
+                                <td>{{ $supervisor->email }}</td>
+                                {{-- <td>{{ $supervisor->phone }}</td> --}}
                                 <td class="text-center ">
                                     <button
                                         @click="supervisorEdit = true; itemToEdit = $event.target.getAttribute('data-item-id')"
                                         data-item-id="{{ $supervisor->id }}"
-                                        class="bg-sky-600 text-white px-6 py-2 rounded-xl">
+                                        class= "text-blue-600 hover:bg-blue-600 hover:text-white px-6 py-2 rounded-xl">
                                         Edit
                                     </button>
                                 </td>
-                                <td class="text-red-500 text-center">
+                                <td class="text-center">
                                     <button
                                         @click="supervisorDelete = true; itemToDelete = $event.target.getAttribute('data-item-id')"
                                         data-item-id="{{ $supervisor->id }}"
-                                        class="bg-red-500 text-white px-4 py-2 rounded-xl">
+                                        class="text-red-600 hover:bg-red-600 hover:text-white px-4 py-2 rounded-xl">
                                         Delete
                                     </button>
                                 </td>
@@ -129,14 +133,16 @@
                                                     class="bg-gray-100 border border-gray-300 text-gray-900" disabled>
                                             </div>
                                             <div>
-                                                <label for="name">Name:</label>
-                                                <input type="text" name="name" value="{{ $item->name }}"
+                                                <label for="last_name">Lastname:</label>
+                                                <input type="text" name="last_name" value="{{ $item->last_name }}"
+                                                    oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')"
                                                     class="bg-gray-100 border border-gray-600 text-gray-900" required>
                                             </div>
 
                                             <div>
-                                                <label for="username">Username</label>
-                                                <input type="text" name="username" value="{{ $item->username }}"
+                                                <label for="first_name">Firstname</label>
+                                                <input type="text" name="first_name" value="{{ $item->first_name }}"
+                                                oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')"
                                                     class="bg-gray-100 border border-gray-600 text-gray-900" required>
                                             </div>
 
@@ -146,11 +152,11 @@
                                                     class="bg-gray-100 border border-gray-600 text-gray-900" required>
                                             </div>
 
-                                            <div>
+                                            {{-- <div>
                                                 <label for="phone">Phone Number</label>
                                                 <input type="text" name="phone" value="{{ $item->phone }}"
                                                     class="bg-gray-100 border border-gray-600 text-gray-900" required>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
 
@@ -244,38 +250,44 @@
                         </div>
                         <hr class="bg-black w-[410px]">
                         <form action="{{ route('supervisors.create_supervisor') }}" method="post"
+                        enctype="multipart/form-data"
                             class="pl-5 pr-5 pt-3 pb-3">
                             @csrf
                             <div class="p-4 md:p-5 space-y-4">
                                 <div class="grid gap-4 mb-4 sm:grid-cols-2">
                                     <div>
-                                        <label for="created_at"
-                                            class="block mb-2 text-sm font-medium text-gray-900">Name</label>
-                                        <input type="text" name="name"
+                                        <label for="last_name"
+                                            class="block mb-2 text-sm font-medium text-gray-900">Lastname</label>
+                                        <input type="text" name="last_name"
+                                            oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')"
                                             class="bg-gray-100 border border-gray-300 text-gray-900" required>
                                     </div>
 
                                     <div>
-                                        <label for="created_at"
-                                            class="block mb-2 text-sm font-medium text-gray-900">Username</label>
-                                        <input type="text" name="username"
+                                        <label for="first_name"
+                                            class="block mb-2 text-sm font-medium text-gray-900">Firstname</label>
+                                        <input type="text" name="first_name"
+                                            oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')"
                                             class="bg-gray-100 border border-gray-300 text-gray-900" required>
                                     </div>
 
                                     <div>
-                                        <label for="created_at"
+                                        <label for="email"
                                             class="block mb-2 text-sm font-medium text-gray-900">Email</label>
                                         <input type="text" name="email"
                                             class="bg-gray-100 border border-gray-300 text-gray-900" required>
                                     </div>
 
                                     <div>
-                                        <label for="created_at"
+                                        <label for="phone"
                                             class="block mb-2 text-sm font-medium text-gray-900">Phone Number</label>
-                                        <input type="text" name="phone"
+                                        <input type="tel" name="phone"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 11)"
+                                            id="phone" data-default-country="PH"
                                             class="bg-gray-100 border border-gray-300 text-gray-900" required>
                                     </div>
                                 </div>
+                                <input class="form-control" name="photo" type="file" id="photo">
                             </div>
 
                             <div class="flex justify-end mt-3">
@@ -298,21 +310,32 @@
     </div>
 
 
+
+
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
     <script>
+
         function deleteItem(itemId) {
             // Set the itemToDelete value based on the clicked item's ID
             this.itemToDelete = itemId;
         }
-    </script>
 
-    <script>
         window.addEventListener('DOMContentLoaded', () => {
             Alpine.data('yourComponentName', () => ({
                 supervisorEdit: false,
                 itemToEdit: null, // Variable to store the selected item
             }));
         });
+
+        const input = document.querySelector("#phone");
+        window.intlTelInput(input, {
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+        });
     </script>
+
+
+
 
 
 

@@ -129,31 +129,32 @@
                                     <div class="p-4 md:p-5 space-y-4">
                                         <div class="grid gap-4 mb-4 sm:grid-cols-2">
                                             <div>
-                                                <label for="name"
-                                                    class="block mb-2 text-sm font-medium text-gray-900">Name</label>
-                                                <input type="text" name="name" value="{{ $vehicle->name }}"
-                                                    class="bg-gray-100 border border-gray-300 text-gray-900" required>
+                                                <label for="plate"
+                                                    class="block mb-2 text-sm font-medium text-gray-900">Plate #</label>
+                                                <input type="text" name="plate"
+                                                    class="bg-gray-100 border border-gray-300 text-gray-900" value="{{$vehicle->plate}}" required>
                                             </div>
-                                            <div>
-                                                <label for="email"
-                                                    class="block mb-2 text-sm font-medium text-gray-900">Email</label>
-                                                <input type="text" name="email" value="{{ $vehicle->email }}"
-                                                    class="bg-gray-100 border border-gray-300 text-gray-900" required>
-                                            </div>
-                                            <div>
-                                                <label for="role"
-                                                    class="block mb-2 text-sm font-medium text-gray-900">role</label>
-                                                <input type="text" name="role" value="{{ $vehicle->role }}"
-                                                    class="bg-gray-100 border border-gray-300 text-gray-900" required>
-                                            </div>
-                                            {{-- <div>
-                                               <label for="emergency_phone"
-                                                   class="block mb-2 text-sm font-medium text-gray-900">Emergency Phone</label>
-                                               <input type="text" name="emergency_phone" value="{{ $account->emergency_phone }}"
-                                                   class="bg-gray-100 border border-gray-300 text-gray-900"
-                                                   required>
-                                           </div> --}}
 
+                                            <div>
+                                                <label for="brand"
+                                                    class="block mb-2 text-sm font-medium text-gray-900">Brand</label>
+                                                <input type="text" name="brand"
+                                                    class="bg-gray-100 border border-gray-300 text-gray-900" value="{{$vehicle->brand}}" required>
+                                            </div>
+
+                                            <div>
+                                                <label for="model"
+                                                    class="block mb-2 text-sm font-medium text-gray-900">Model</label>
+                                                <input type="text" name="model"
+                                                    class="bg-gray-100 border border-gray-300 text-gray-900" value="{{$vehicle->model}}" required>
+                                            </div>
+
+                                            <div>
+                                                <label for="vin"
+                                                    class="block mb-2 text-sm font-medium text-gray-900">VIN</label>
+                                                <input type="text" name="vin"
+                                                    class="bg-gray-100 border border-gray-300 text-gray-900" value="{{$vehicle->vin}}" required>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -261,7 +262,7 @@
                                     <div>
                                         <label for="brand"
                                             class="block mb-2 text-sm font-medium text-gray-900">Brand</label>
-                                        <input type="text" name="username"
+                                        <input type="text" name="brand"
                                             class="bg-gray-100 border border-gray-300 text-gray-900" required>
                                     </div>
 
@@ -342,7 +343,7 @@
 
     <script>
         function deleteItem(itemId) {
-            // Set the itemToDelete value based on the clicked item's ID
+
             this.itemToDelete = itemId;
         }
     </script>
