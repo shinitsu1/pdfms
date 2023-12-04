@@ -603,25 +603,59 @@
             </div>
         </main>
     @endif
-
+ 
     @if (Auth::user()->role == 'police')
-        {{-- <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot> --}}
-        <div class="fixed left-[40%] top-[87px] w-[240px]">
-            <div class="grid grid-cols-3 gap-2">
-                <div class="flex items-center justify-center bg-red-500 rounded-lg shadow-xl min-h-[50px]">Call</div>
-                <a href="">
-                    <div class="flex items-center justify-center bg-blue-500 rounded-lg shadow-xl min-h-[50px]">Scan
-                    </div>
-                </a>
-                <div class="flex items-center justify-center bg-green-500 rounded-lg shadow-xl min-h-[50px]">Message
-                </div>
-            </div>
+    <div class="fixed left-[40%] top-[87px] w-[240px]">
+        <div class="grid grid-cols-3 gap-2">
+            <div class="flex items-center justify-center bg-red-500 rounded-lg shadow-xl min-h-[50px]">Call</div>
+            <button id="scanButton" type="button" class="flex items-center justify-center bg-blue-500 rounded-lg shadow-xl min-h-[50px]">
+                Scan
+            </button>
+            <div class="flex items-center justify-center bg-green-500 rounded-lg shadow-xl min-h-[50px]">Message</div>
         </div>
-    @endif
 
+        <div class="container" id="video-container" style="display: none;">
+            <video id="video-preview" playsinline autoplay></video>
+        </div>
 
+        <script src="https://cdn.jsdelivr.net/npm/@zxing/library@3.0.0/build/zxing.min.js"></script>
+        <script>
+            document.getElementById('scanButton').addEventListener('click', function () {
+                openDefaultCamera();
+            });
+
+            async function openDefaultCamera() {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+
+                    const videoContainer = document.getElementById('video-container');
+                    videoContainer.style.display = 'flex';
+
+                    const videoElement = document.getElementById('video-preview');
+                    videoElement.srcObject = stream;
+
+                    const codeReader = new ZXing.BrowserQRCodeReader();
+                    codeReader.decodeFromVideoDevice(undefined, 'video-preview', (result, err) => {
+                        if (result) {
+                            alert('QR Code Scanned: ' + result.text);
+                            // Do something with the scanned result
+
+                            const tracks = stream.getTracks();
+                            tracks.forEach(track => track.stop());
+
+                            videoContainer.style.display = 'none';
+                        }
+                        if (err && !(err instanceof ZXing.NotFoundException)) {
+                            console.error(err);
+                        }
+                    });
+                } catch (error) {
+                    console.error('Error opening camera:', error);
+                }
+            }
+        </script>
+    </div>
+@endif
 </x-app-layout>
+
+
