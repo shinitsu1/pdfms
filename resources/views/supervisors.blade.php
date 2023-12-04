@@ -1,6 +1,7 @@
 <x-app-layout>
     <x-message />
 
+    <!--SideBar-->
     <div class="fixed left-3 top-[86px] w-[240px] h-[86%] bg-blue-200 rounded-3xl p-4">
         <ul class="mt-2">
             <li class="mb-1 group">
@@ -33,6 +34,7 @@
             </li>
         </ul>
     </div>
+    <!--EndofSidebar-->
 
     <!--Container-->
     <div
@@ -103,7 +105,7 @@
                         x-transition:leave="ease-in duration-200"
                         x-transition:leave-start="opacity-100 transform scale-100"
                         x-transition:leave-end="opacity-0 transform scale-95"
-                        class="bg-white rounded-lg overflow-hidden transform transition-all sm:max-w-lg sm:w-full">
+                        class="bg-white rounded-lg overflow-hidden transform transition-all sm:max-w-3xl sm:w-full">
                         <div
                             class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                             <h3 class="text-xl font-semibold text-gray-900 dark:text-white"><i
@@ -118,7 +120,11 @@
                                     @method('patch')
 
                                     <div class="p-4 md:p-5 space-y-4">
-                                        <div class="grid gap-4 mb-4 sm:grid-cols-2">
+                                        <div class="grid gap-3 mb-4 sm:grid-cols-3">
+                                            <div>
+                                                <img src="{{ asset($supervisor->photo) }}" width='150' height="150" class="mb-2 flex justify-center">
+                                                <input class="form-control" name="photo" type="file" id="photo">
+                                            </div>
                                             <div>
                                                 <label for="UserID"
                                                     class="block mb-2 text-sm font-medium text-gray-900">UserID</label>
@@ -142,7 +148,7 @@
                                             <div>
                                                 <label for="first_name">Firstname</label>
                                                 <input type="text" name="first_name" value="{{ $item->first_name }}"
-                                                oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')"
+                                                    oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')"
                                                     class="bg-gray-100 border border-gray-600 text-gray-900" required>
                                             </div>
 
@@ -250,8 +256,7 @@
                         </div>
                         <hr class="bg-black w-[410px]">
                         <form action="{{ route('supervisors.create_supervisor') }}" method="post"
-                        enctype="multipart/form-data"
-                            class="pl-5 pr-5 pt-3 pb-3">
+                            enctype="multipart/form-data" class="pl-5 pr-5 pt-3 pb-3">
                             @csrf
                             <div class="p-4 md:p-5 space-y-4">
                                 <div class="grid gap-4 mb-4 sm:grid-cols-2">
@@ -283,7 +288,7 @@
                                             class="block mb-2 text-sm font-medium text-gray-900">Phone Number</label>
                                         <input type="tel" name="phone"
                                             oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 11)"
-                                            id="phone" data-default-country="PH"
+                                            id="phone" data-default-country="ph"
                                             class="bg-gray-100 border border-gray-300 text-gray-900" required>
                                     </div>
                                 </div>
@@ -314,8 +319,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
-    <script>
 
+    <script>
         function deleteItem(itemId) {
             // Set the itemToDelete value based on the clicked item's ID
             this.itemToDelete = itemId;

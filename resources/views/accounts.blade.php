@@ -69,7 +69,7 @@
                                 <tr x-on:click="itemToEdit = {{ $account->id }};">
                                     <td class="text-center">{{ $account->id }}</td>
                                     <td class="flex justify-center items-center">
-                                        <img src="{{ asset($account->photo) }}" width='30' height="30">
+                                        <img src="{{ asset($account->photo) }}" width='30' height="30" class="justiy-items-center">
                                     </td>
                                     <td class="text-center">{{ $account->last_name }}</td>
                                     <td class="text-center">{{ $account->first_name }}</td>

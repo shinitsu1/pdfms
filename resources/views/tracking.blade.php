@@ -1,5 +1,5 @@
 <x-app-layout>
-   
+
     @if (Auth::user()->role == 'admin')
         <div class="fixed left-3 top-[87px] w-[240px] h-[86%] bg-blue-200 rounded-3xl p-4">
             <ul class="mt-2">
@@ -293,7 +293,7 @@
                     </div>
                 </div>
                 <!-- End of Tailwind UI Search Bar -->
-        
+
                 <div id="side-container">
                     <div id="location-details">
                         @foreach($locations as $loc)
@@ -307,9 +307,9 @@
 </div>
 <div id="map" class="fixed"></div>
     @endif
-  
+
     <script>
-    var locations = @json($locations); // Convert PHP variable to JavaScript array
+    var locations = @json($locations);
 
     var map = L.map('map').setView([51.505, -0.09], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -317,38 +317,37 @@
         attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
-    // Loop through the locations array and add markers to the map
     locations.forEach(function(location) {
         L.marker([location.latitude, location.longitude])
             .bindPopup(`<b>${location.vehicle_name}</b><br>${location.vehiclePlate}`)
             .addTo(map);
     });
 
-        
+
         let marker, circle, zoomed;
-        
+
         navigator.geolocation.getCurrentPosition(success, error);
-        
+
         function success(pos) {
             const lat = pos.coords.latitude;
             const lng = pos.coords.longitude;
             const accuracy = pos.coords.accuracy;
-        
+
             if (marker) {
                 map.removeLayer(marker);
                 map.removeLayer(circle);
             }
-        
+
             marker = L.marker([lat, lng]).addTo(map);
             circle = L.circle([lat, lng], { radius: accuracy }).addTo(map);
-        
+
             if (!zoomed) {
                 zoomed = map.fitBounds(circle.getBounds());
             }
-        
+
             map.setView([lat, lng]);
         }
-        
+
         function error(err) {
             if (err.code === 1) {
                 alert("Please allow geolocation access");
@@ -356,12 +355,12 @@
                 alert("Cannot get current location");
             }
         }
-        
+
         document.getElementById('searchInput').addEventListener('click', function () {
             const query = document.getElementById('searchInput').value;
             searchLocation(query);
         });
-        
+
         function searchLocation(query) {
             fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}`)
                 .then(response => response.json())
@@ -370,11 +369,11 @@
                         const lat = parseFloat(data[0].lat);
                         const lon = parseFloat(data[0].lon);
                         const displayName = data[0].display_name;
-        
+
                         if (marker) {
                             map.removeLayer(marker);
                         }
-        
+
                         marker = L.marker([lat, lon]).addTo(map);
                         marker.bindPopup(displayName).openPopup();
                         map.setView([lat, lon], 13);
@@ -386,37 +385,31 @@
                     console.error('Error:', error);
                     alert("Error fetching location data");
                 });
-                
-    
+
+
             }
-                // Click event for updating marker
-          
-        
+
+
         </script>
         <script>
-            // Your existing code...
-         
-            // Click event for updating marker
+
             document.getElementById('side-container').addEventListener('click', function(event) {
         if (event.target.tagName === 'P') {
             var selectedName = event.target.textContent.trim();
-            // Find the selected data in the locations array
             var selectedLocation = locations.find(function(location) {
                 return location.vehiclePlate === selectedName;
             });
-            // Update the markers and map view based on the selected data
             if (selectedLocation) {
                 updateMarker(selectedLocation);
             }
                 }
             });
-        
-            // Function to update the marker and map view
+
             function updateMarker(selectedLocation) {
         map.setView([selectedLocation.latitude, selectedLocation.longitude], 13);
         marker.setLatLng([selectedLocation.latitude, selectedLocation.longitude]);
         marker.bindPopup(`<b>${selectedLocation.vehicle_name}</b><br>${selectedLocation.vehiclePlate}`).openPopup();
     }
 </script>
-        
+
 </x-app-layout>

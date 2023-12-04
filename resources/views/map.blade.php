@@ -10,23 +10,21 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-// Fetch data from the "locations" table
+
 $sql = "SELECT * FROM locations";
 $result = mysqli_query($conn, $sql);
 
-// Check for errors in the SQL query
 if (!$result) {
     die("Error: " . mysqli_error($conn));
 }
 
-// Fetch all rows from the result set and encode them as JSON
+
 $rows = array();
 while ($row = mysqli_fetch_assoc($result)) {
     $rows[] = $row;
 }
 $encodedRows = json_encode($rows);
 
-// Close the database connection
 mysqli_close($conn);
 ?>
 
@@ -75,11 +73,9 @@ mysqli_close($conn);
         attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
-    // Sample database response (replace with your own)
     var databaseResponse = <?php echo $encodedRows; ?>;
     var markers = [];
 
-    // Initialize markers with default data
     for (var i = 0; i < databaseResponse.length; i++) {
         var data = databaseResponse[i];
         var marker = L.marker([data.latitude, data.longitude])
@@ -88,7 +84,6 @@ mysqli_close($conn);
         markers.push(marker);
     }
 
-    // Function to update marker based on selected data
     function updateMarker(index) {
         for (var i = 0; i < markers.length; i++) {
             if (i === index) {
@@ -100,15 +95,12 @@ mysqli_close($conn);
         }
     }
 
-    // Click event for updating marker
     document.getElementById('side-container').addEventListener('click', function(event) {
         if (event.target.tagName === 'P') {
             var selectedName = event.target.textContent.trim();
-            // Find the selected data in the database response
             var selectedRow = databaseResponse.find(function(row) {
                 return row.name === selectedName;
             });
-            // Update the markers and map view based on the selected data
             if (selectedRow) {
                 var selectedIndex = databaseResponse.indexOf(selectedRow);
                 updateMarker(selectedIndex);
@@ -120,7 +112,6 @@ mysqli_close($conn);
 
   <input type="text" id="searchInput" placeholder="Search by name or plate number">
   <?php
-  // Display names and vehicle plates
   foreach ($rows as $row) {
       echo "<p>{$row['name']}</p>";
       echo "<p>{$row['vehiclePlate']}</p>";
