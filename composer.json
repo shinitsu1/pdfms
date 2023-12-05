@@ -11,6 +11,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "milon/barcode": "^10.0",
+        "munafio/chatify": "^1.6",
         "phpmyadmin/phpmyadmin": "^4.7",
         "simplesoftwareio/simple-qrcode": "^4.2",
         "twilio/sdk": "*",
