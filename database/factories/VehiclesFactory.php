@@ -31,7 +31,7 @@ class VehiclesFactory extends Factory
             'brand' => $vehicle['brand'],
             'model' => $vehicle['model'],
             'vin' => $this->faker->vin,
-            'vehicle_code' => fake()->numerify('##########'),
+            'unique_identifier' => fake()->numerify('##########'),
             // 'phone' => fake()->numerify('09#########'),
             // 'employee_id' => fake()->numerify('###-###-###'),
             // 'gender' => fake()->randomElement(['Male', 'Female']),

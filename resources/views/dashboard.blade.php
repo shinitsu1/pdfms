@@ -46,7 +46,7 @@
                     <a href="{{ asset('accounts') }}"
                         class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
                         <i class="ri-account-pin-box-line mr-3 text-lg"></i>
-                        <span class="font-poppins">Accounts</span>
+                        <span class="font-poppins">Officers</span>
                     </a>
                 </li>
                 <li class="mb-1 group">
@@ -96,10 +96,14 @@
                             <a href="{{ asset('accounts') }}">
                                 <div
                                     class="flex items-center justify-between p-4 bg-white hover:bg-blue-200 rounded-md dark:bg-darker">
-                                    <div class="ml-4">
+
+                                   
+
+                                    <div class="ml-1">
+
                                         <h6
                                             class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light">
-                                            Police Accounts
+                                            Officer Accounts
                                         </h6>
                                         <span class="text-xl font-semibold">{{ $countAccount }}</span>
                                         {{-- <span class="inline-block px-2 py-px ml-2 text-xs text-green-500 bg-green-100 rounded-md">
@@ -129,7 +133,7 @@
                                     </div>
                                     <div>
                                         <span>
-                                            <i class="ri-checkbox-circle-line ml-3 text-6xl text-green-500"></i>
+                                            <i class="ri-steering-2-line ml-3 text-6xl text-blue-500"></i>
                                         </span>
                                     </div>
                                 </div>
@@ -138,7 +142,11 @@
                             <a href="{{ asset('vehicles') }}">
                                 <div
                                     class="flex items-center justify-between p-4 bg-white hover:bg-blue-200 rounded-md dark:bg-darker">
-                                    <div>
+
+                              
+
+                                    <div class="ml-1">
+
                                         <h6
                                             class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light">
                                             Available Vehicle
@@ -150,7 +158,7 @@
                                     </div>
                                     <div>
                                         <span>
-                                            <i class="ri-steering-2-line ml-3 text-6xl text-blue-500"></i>
+                                            <i class="ri-checkbox-circle-line ml-3 text-6xl text-blue-500"></i>
                                         </span>
                                     </div>
                                 </div>
@@ -683,71 +691,22 @@
                 </li>
                 <li class="mb-1 group">
 
-                    <a href="{{ asset('chatting') }}"
-                        class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
-                        <i class="fas fa-comments mr-3 text-lg"></i>
-                        <span class="font-poppins">Chats</span>
-                    </a>
-                </li>
-                {{-- <li class="mb-1 group">
-                <a href="{{ asset('calendar')}}" class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
-                    <i class="ri-user-fill mr-3 text-lg"></i>
-                    <span class="font-poppins">Calendar</span>
-                </a>
-            </li> --}}
-                <li class="mb-1 group">
-                    <a href="{{ asset('/') }}"
-                        class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
-                        <i class="fas fa-cog mr-3 text-lg"></i>
-                        <span class="font-poppins">Settings</span>
-                    </a>
-                </li>
-            </ul>
+
+
+
+    @if (Auth::user()->role == 'police')
+    <div class="fixed left-[40%] top-[87px] w-[240px]">
+        <div class="grid grid-cols-3 gap-2">
+            <div class="flex items-center justify-center bg-red-500 rounded-lg shadow-xl min-h-[50px]">Call</div>
+            <button id="scanButton" type="button" class="flex items-center justify-center bg-blue-500 rounded-lg shadow-xl min-h-[50px]">
+                Scan
+            </button>
+            <div class="flex items-center justify-center bg-green-500 rounded-lg shadow-xl min-h-[50px]">Message</div>
         </div>
-    </div>
-      
-    
-    <!----Resize mobile----->
-   <nav id="mobileMenu" class="hidden md:block fixed bottom-5 w-full">
-    <div class="flex flex-col">
-        <!-- First layer of icons -->
-        <div class="flex justify-center items-center py-3 gap-20">
-            <!-- Icon 1 -->
-            <div class="bg-blue-400 bg-opacity-50 rounded p-3">
-                <div class="text-blue-200 flex flex-col items-center p-2">
-                    <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
-                        <i class="fas fa-inbox text-blue-600"></i>
-                    </div>
-                    <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Inbox</span>
-                </div>
-            </div>
-                <!-- Icon 2 -->
-                <div class="bg-blue-400 bg-opacity-50 rounded p-3">
-                    <div class="text-blue-200 flex flex-col items-center p-2">
-                        <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
-                            <i class="fas fa-map-marker-alt text-blue-600"></i>
-                        </div>
-                        <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Maps</span>
-                    </div>
-                </div>
-                <div class="bg-blue-400 bg-opacity-50 rounded p-3">
-                    <div class="text-blue-200 flex flex-col items-center p-2">
-                        <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
-                            <i class="fas fa-comments text-blue-600"></i>
-                        </div>
-                        <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Chats</span>
-                    </div>
-                </div>
-                <div class="bg-blue-400 bg-opacity-50 rounded p-3">
-                    <div class="text-blue-200 flex flex-col items-center p-2">
-                        <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
-                            <i class="fas fa-cog text-blue-600"></i>
-                        </div>
-                        <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Settings</span>
-                    </div>
-                </div>
+
+        <div class="container" id="video-container" style="display: none;">
+            <video id="video-preview" playsinline autoplay></video>
         </div>
-    </nav>
 
 
         <script src="https://cdn.jsdelivr.net/npm/@zxing/library@3.0.0/build/zxing.min.js"></script>
@@ -760,11 +719,17 @@
                 try {
                     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
 
+
+                 
+
+
+
                     const videoContainer = document.getElementById('video-container');
                     videoContainer.style.display = 'flex';
 
                     const videoElement = document.getElementById('video-preview');
                     videoElement.srcObject = stream;
+
 
                     const codeReader = new ZXing.BrowserQRCodeReader();
                     codeReader.decodeFromVideoDevice(undefined, 'video-preview', (result, err) => {

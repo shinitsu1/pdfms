@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('brand');
             $table->string('model');
             $table->string('vin');
-            $table->string('vehicle_code');
+            $table->string('unique_identifier')->unique();
             // $table->string('employee_id');
             // $table->string('gender');
             // $table->string('address');

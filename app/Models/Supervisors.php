@@ -10,8 +10,9 @@ class Supervisors extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'username',
+        'photo',
+        'last_name',
+        'first_name',
         'email',
         'phone',
         'password',

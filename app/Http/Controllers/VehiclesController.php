@@ -32,10 +32,10 @@ class VehiclesController extends Controller
 
         // Validate the request
         $request->validate([
-            'plate' => 'required|string',
-            'brand' => 'required|string',
-            'model' => 'required|string',
-            'vin' => 'required|string',
+            'plate' => 'string',
+            'brand' => 'string',
+            'model' => 'string',
+            'vin' => 'string',
             // 'emergency_phone' => 'required|int',
 
         ]);
@@ -55,15 +55,11 @@ class VehiclesController extends Controller
 
     public function create_vehicle(Request $request){
 
-        $number = mt_rand(1000000000, 9999999999);
-        if ($this->vehicleCodeExists($number)) {
-            $number = mt_rand(1000000000, 9999999999);
-        }
-        $request['vehicle_code'] = $number;
+        $uniqueIdentifier = uniqid();
 
         $request->validate([
             'plate' => 'required|string',
-            'brand' => 'required|string',
+            'brand' => 'string',
             'model' => 'required|string',
             'vin' => 'required|string',
             // 'username' => 'required|string',
@@ -73,7 +69,7 @@ class VehiclesController extends Controller
             // 'password' => 'string',
         ]);
         // Vehicles::create($request->all());
-        Vehicles::create([
+        $vehicle = Vehicles::create([
             'plate' => $request->input('plate'),
             'brand' => $request->input('brand'),
             'model' => $request->input('model'),
@@ -82,7 +78,8 @@ class VehiclesController extends Controller
             // 'emergency_phone' => $request->input('emergency_phone'),
             // 'password' => '12345',
             'role' => 'vehicle',
-            'vehicle_code' => $request->input('vehicle_code'),
+            'unique_identifier' => $uniqueIdentifier,
+
         ]);
 
         return redirect()->route('vehicles')->with('message', 'User Added Successfully.');

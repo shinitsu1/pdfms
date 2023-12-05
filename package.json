@@ -17,6 +17,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@zxing/library": "^0.20.0",
         "datatables.net-dt": "^1.13.8"
     }
 }

@@ -19,13 +19,15 @@ class AccountsFactory extends Factory
     {
         return [
             'role' => 'police',
-            'name' => fake()->name(),
+            'last_name' => fake()->lastName(),
+            'first_name' => fake()->firstName(),
             'email' => fake()->unique()->safeEmail(),
             'phone' => fake()->numerify('09#########'),
             // 'employee_id' => fake()->numerify('###-###-###'),
             // 'gender' => fake()->randomElement(['Male', 'Female']),
             // 'address' => fake()->address(),
-            'username' => fake()->userName(),
+            // 'username' => fake()->userName(),
+            'photo' => '/storage/images/17017649261by1.png',
             // 'shift' => fake()->randomElement(['Day', 'Night']),
             // 'password' => Hash::make('12345'),
             // 'emergency_phone' =>fake()->numerify('09#########'),
