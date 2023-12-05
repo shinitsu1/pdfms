@@ -25,6 +25,18 @@ use App\Http\Controllers\LocationController;
 //     return view('welcome');
 // });
 
+Route::get('/mobile', function () {
+    return view('mobile');
+});
+
+Route::get('/qr', function () {
+    return view('qr');
+});
+
+Route::get('/calendar', function () {
+    return view('calendar');
+});
+
 Route::redirect('/', destination: 'login');
 
 Route::get('/dashboard', function () {

@@ -23,7 +23,7 @@
                 <a href="{{ asset('accounts') }}"
                     class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-[#4ECE5D] group-[.selected]:text-white">
                     <i class="ri-account-pin-box-line mr-3 text-lg"></i>
-                    <span class="font-poppins">Accounts</span>
+                    <span class="font-poppins">Officers</span>
                 </a>
             </li>
             <li class="mb-1 group active">
@@ -73,7 +73,7 @@
                                 <td class="text-center">{{ $vehicle->vin }}</td>
                                 <td class="flex justify-center">
                                     <button @click="qrcode = true">
-                                        {!! DNS2D::getBarcodeHTML("$vehicle->vehicle_code", 'QRCODE', 2, 2, 'gray') !!}
+                                        {!! $vehicle->generateQRCode() !!}
                                     </button>
                                 </td>
 
@@ -262,7 +262,7 @@
                                     <div>
                                         <label for="brand"
                                             class="block mb-2 text-sm font-medium text-gray-900">Brand</label>
-                                        <input type="text" name="username"
+                                        <input type="text" name="brand"
                                             class="bg-gray-100 border border-gray-300 text-gray-900" required>
                                     </div>
 
@@ -312,15 +312,19 @@
                     x-transition:leave-end="opacity-0 transform scale-95"
                     class="bg-white rounded-lg overflow-hidden transform transition-all sm:max-w-lg sm:w-full">
 
-                    <div class="flex items-center justify-center p-4 md:p-5 border-b rounded-t">
-                        <h3 class="text-xl font-semibold text-gray-900 items-center">
-                            Vehicle QRCODE
-                            {!! DNS2D::getBarcodeHTML("$vehicle->vehicle_code", 'QRCODE', 10, 10, 'gray') !!}
+                    <div class="p-4 md:p-5 border-b rounded-t">
+                        <div class="flex justify-center p-4 md:p-5">
+                        {!! $vehicle->size(400) !!}
+                        </div>
+                        <h3 class="flex justify-center text-xl font-semibold text-gray-900 items-center">
+                            VEHICLE QR CODE
                         </h3>
+
                     </div>
 
+
                     <div class="flex justify-end p-4 md:p-5">
-                        <a href="{{ route('vehicles.downloadQR', ['number' => $vehicle->vehicle_code]) }}"
+                        <a href="#"
                             class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                             Download
                         </a>
