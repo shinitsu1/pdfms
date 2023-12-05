@@ -61,7 +61,6 @@
                                 <th>Firstname</th>
                                 <th>Email</th>
                                 <th>Action</th>
-
                             </tr>
                         </thead>
                         <tbody>
@@ -71,9 +70,9 @@
                                     <td class="flex justify-center items-center">
                                         <img src="{{ asset($account->photo) }}" width='30' height="30" class="justify-items-center">
                                     </td>
-                                    <td class="border-b border-l border-gray-500">{{ $account->last_name }}</td>
-                                    <td class="border border-gray-500">{{ $account->first_name }}</td>
-                                    <td class="border border-gray-500">{{ $account->email }}</td>
+                                    <td>{{ $account->last_name }}</td>
+                                    <td>{{ $account->first_name }}</td>
+                                    <td>{{ $account->email }}</td>
 
 
                                     <td class="text-center ">
@@ -287,6 +286,8 @@
                                             <label for="phone"
                                                 class="block mb-2 text-sm font-medium text-gray-900">Phone Number</label>
                                             <input type="text" name="phone"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 11)"
+                                            id="phone" data-default-country="ph"
                                                 class="bg-gray-100 border border-gray-300 text-gray-900" required>
                                         </div>
                                     </div>
@@ -313,6 +314,8 @@
         </div>
         </div>
 
+        <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
 
         <script>
             function deleteItem(itemId) {
@@ -328,6 +331,11 @@
                     itemToEdit: null, // Variable to store the selected item
                 }));
             });
+
+            const input = document.querySelector("#phone");
+        window.intlTelInput(input, {
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+        });
         </script>
 
 
@@ -404,41 +412,42 @@
                         style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                         <thead>
                             <tr>
-                                <th>UserID</th>
-                                <th>Name</th>
-                                {{-- <th>Phone</th> --}}
+                                <th>ID</th>
+                                <th>Image</th>
+                                <th>Lastname</th>
+                                <th>Firstname</th>
                                 <th>Email</th>
-                                <th>Role</th>
-                                {{-- <th>Emergency Phone</th> --}}
-                                <th>Action</th>
-                                <th>Action</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($accounts as $account)
                                 <tr x-on:click="itemToEdit = {{ $account->id }};">
                                     <td class="text-center">{{ $account->id }}</td>
-                                    <td class="text-center">{{ $account->name }}</td>
-                                    <td class="text-center">{{ $account->email }}</td>
-                                    <td class="text-center">{{ $account->role }}</td>
-                                    {{-- <td class="text-center">{{ $account->shift }}</td>
-                                    <td class="text-center">{{ $account->emergency_phone }}</td> --}}
+                                    <td class="flex justify-center items-center">
+                                        <img src="{{ asset($account->photo) }}" width='30' height="30" class="justify-items-center">
+                                    </td>
+                                    <td>{{ $account->last_name }}</td>
+                                    <td>{{ $account->first_name }}</td>
+                                    <td>{{ $account->email }}</td>
+
+
                                     <td class="text-center ">
                                         <button
                                             @click="accountEdit = true; itemToEdit = $event.target.getAttribute('data-item-id')"
                                             data-item-id="{{ $account->id }}"
-                                            class="bg-sky-600 text-white px-6 py-2 rounded-xl">
+                                            class="hover:bg-sky-600 text-blue-500 hover:text-white px-6 py-2">
                                             Edit
                                         </button>
-                                    </td>
-                                    <td class="text-red-500 text-center">
+
                                         <button
                                             @click="accountDelete = true; itemToDelete = $event.target.getAttribute('data-item-id')"
                                             data-item-id="{{ $account->id }}"
-                                            class="bg-[#2c50f1] text-white px-4 py-2 rounded-xl">
-                                            Send SMS
+                                            class="hover:bg-red-600 text-red-500 hover:text-white px-6 py-2">
+                                            SendSMS
                                         </button>
                                     </td>
+
                                 </tr>
                             @endforeach
                         </tbody>
@@ -475,33 +484,43 @@
                                         <div class="p-4 md:p-5 space-y-4">
                                             <div class="grid gap-4 mb-4 sm:grid-cols-2">
                                                 <div>
-                                                    <label for="name"
-                                                        class="block mb-2 text-sm font-medium text-gray-900">Name</label>
-                                                    <input type="text" name="name" value="{{ $account->name }}"
-                                                        class="bg-gray-100 border border-gray-300 text-gray-900"
-                                                        required>
+                                                    <label for="UserID"
+                                                        class="block mb-2 text-sm font-medium text-gray-900">UserID</label>
+                                                    <input type="text" name="id" value="{{ $account->id }}"
+                                                        class="bg-gray-100 border border-gray-300 text-gray-900" disabled>
                                                 </div>
                                                 <div>
-                                                    <label for="email"
-                                                        class="block mb-2 text-sm font-medium text-gray-900">Email</label>
+                                                    <label for="created_at"
+                                                        class="block mb-2 text-sm font-medium text-gray-900">Account
+                                                        Created</label>
+                                                    <input type="text" name="created_at" value="{{ $account->created_at }}"
+                                                        class="bg-gray-100 border border-gray-300 text-gray-900" disabled>
+                                                </div>
+                                                <div>
+                                                    <label for="last_name">Lastname</label>
+                                                    <input type="text" name="last_name" value="{{ $account->last_name }}"
+                                                        class="bg-gray-100 border border-gray-600 text-gray-900" required>
+                                                </div>
+
+                                                <div>
+                                                    <label for="first_name">Firstname</label>
+                                                    <input type="text" name="first_name" value="{{ $account->first_name }}"
+                                                        class="bg-gray-100 border border-gray-600 text-gray-900" required>
+                                                </div>
+
+                                                <div>
+                                                    <label for="email">Email</label>
                                                     <input type="text" name="email" value="{{ $account->email }}"
-                                                        class="bg-gray-100 border border-gray-300 text-gray-900"
-                                                        required>
+                                                        class="bg-gray-100 border border-gray-600 text-gray-900" required>
                                                 </div>
+
                                                 <div>
-                                                    <label for="role"
-                                                        class="block mb-2 text-sm font-medium text-gray-900">role</label>
-                                                    <input type="text" name="role" value="{{ $account->role }}"
-                                                        class="bg-gray-100 border border-gray-300 text-gray-900"
-                                                        required>
+                                                    <label for="phone">Phone Number</label>
+                                                    <input type="text" name="phone" value="{{ $account->phone }}"
+                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 11)"
+                                            id="phone" data-default-country="ph"
+                                                        class="bg-gray-100 border border-gray-600 text-gray-900" required>
                                                 </div>
-                                                {{-- <div>
-                                                    <label for="emergency_phone"
-                                                        class="block mb-2 text-sm font-medium text-gray-900">Emergency Phone</label>
-                                                    <input type="text" name="emergency_phone" value="{{ $account->emergency_phone }}"
-                                                        class="bg-gray-100 border border-gray-300 text-gray-900"
-                                                        required>
-                                                </div> --}}
 
                                             </div>
                                         </div>
@@ -555,7 +574,7 @@
                                 <div
                                     class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
                                     <form method="post"
-                                        :action="`{{ route('accounts.delete', '') }}/${itemToDelete}`">
+                                        :action="`{{ route('sms.sms', '') }}/${itemToDelete}`">
                                         @csrf
                                         @method('DELETE')
                                         <button type="button"
@@ -574,79 +593,81 @@
                     </div>
 
 
-                    <!--AdminModal-->
-                    <div x-show="adminNewUsers"
-                        class="fixed inset-0 overflow-y-auto flex items-center justify-center z-20" x-cloak>
-                        <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-                            <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-                        </div>
+                   <!--AdminModal-->
+                   <div x-show="adminNewUsers"
+                   class="fixed inset-0 overflow-y-auto flex items-center justify-center z-20" x-cloak>
+                   <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                       <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                   </div>
 
-                        <div x-show="adminNewUsers" @click.away="adminNewUsers = false"
-                            x-transition:enter="ease-out duration-300"
-                            x-transition:enter-start="opacity-0 transform scale-95"
-                            x-transition:enter-end="opacity-100 transform scale-100"
-                            x-transition:leave="ease-in duration-200"
-                            x-transition:leave-start="opacity-100 transform scale-100"
-                            x-transition:leave-end="opacity-0 transform scale-95"
-                            class="bg-white rounded-lg overflow-hidden transform transition-all sm:max-w-lg sm:w-full">
-                            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
-                                <h3 class="text-xl font-semibold text-gray-900"><i
-                                        class="ri-add-line mr-1 text-lg bg-blue-200 p-4 rounded-full"></i>
-                                    Add New Account
-                                </h3>
-                            </div>
-                            <hr class="bg-black w-[410px]">
-                            <form action="{{ route('accounts.create_account') }}" method="post"
-                                class="pl-5 pr-5 pt-3 pb-3">
-                                @csrf
-                                <div class="p-4 md:p-5 space-y-4">
-                                    <div class="grid gap-4 mb-4 sm:grid-cols-2">
-                                        <div>
-                                            <label for="name"
-                                                class="block mb-2 text-sm font-medium text-gray-900">Name</label>
-                                            <input type="text" name="name"
-                                                class="bg-gray-100 border border-gray-300 text-gray-900"
-                                                required>
-                                        </div>
-                                        <div>
-                                            <label for="email"
-                                                class="block mb-2 text-sm font-medium text-gray-900">email</label>
-                                            <input type="text" name="email"
-                                                class="bg-gray-100 border border-gray-300 text-gray-900"
-                                                required>
-                                        </div>
-                                        <div>
-                                            <label for="role"
-                                                class="block mb-2 text-sm font-medium text-gray-900">role</label>
-                                            <input type="text" name="role"
-                                                class="bg-gray-100 border border-gray-300 text-gray-900"
-                                                required>
-                                        </div>
-                                        {{-- <div>
-                                            <label for="emergency_phone"
-                                                class="block mb-2 text-sm font-medium text-gray-900">Emergency Phone</label>
-                                            <input type="text" name="emergency_phone"
-                                                class="bg-gray-100 border border-gray-300 text-gray-900"
-                                                required>
-                                        </div> --}}
-                                    </div>
-                                </div>
+                   <div x-show="adminNewUsers" @click.away="adminNewUsers = false"
+                       x-transition:enter="ease-out duration-300"
+                       x-transition:enter-start="opacity-0 transform scale-95"
+                       x-transition:enter-end="opacity-100 transform scale-100"
+                       x-transition:leave="ease-in duration-200"
+                       x-transition:leave-start="opacity-100 transform scale-100"
+                       x-transition:leave-end="opacity-0 transform scale-95"
+                       class="bg-white rounded-lg overflow-hidden transform transition-all sm:max-w-lg sm:w-full">
+                       <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                           <h3 class="text-xl font-semibold text-gray-900"><i
+                                   class="ri-add-line mr-1 text-lg bg-blue-200 p-4 rounded-full"></i>
+                               Add New Account
+                           </h3>
+                       </div>
+                       <hr class="bg-black w-[410px]">
+                       <form action="{{ route('accounts.create_account') }}" method="post" enctype="multipart/form-data"
+                           class="pl-5 pr-5 pt-3 pb-3">
+                           @csrf
+                           <div class="p-4 md:p-5 space-y-4">
+                               <div class="grid gap-4 mb-4 sm:grid-cols-2">
+                                   <div>
+                                       <label for="last_name"
+                                           class="block mb-2 text-sm font-medium text-gray-900">Lastname</label>
+                                       <input type="text" name="last_name"
+                                           class="bg-gray-100 border border-gray-300 text-gray-900" required>
+                                   </div>
 
-                                <div class="flex justify-end mt-3">
-                                    <button type="submit"
-                                        class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                                        Create
-                                    </button>
-                            </form>
-                            <div class="absolute mr-[90px]">
-                                <button type="button" @click="adminNewUsers = false"
-                                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
-                                    Cancel
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                   <div>
+                                       <label for="first_name"
+                                           class="block mb-2 text-sm font-medium text-gray-900">Firstname</label>
+                                       <input type="text" name="first_name"
+                                           class="bg-gray-100 border border-gray-300 text-gray-900" required>
+                                   </div>
+
+                                   <div>
+                                       <label for="email"
+                                           class="block mb-2 text-sm font-medium text-gray-900">Email</label>
+                                       <input type="text" name="email"
+                                           class="bg-gray-100 border border-gray-300 text-gray-900" required>
+                                   </div>
+
+                                   <div>
+                                       <label for="phone"
+                                           class="block mb-2 text-sm font-medium text-gray-900">Phone Number</label>
+                                       <input type="text" name="phone" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 11)"
+                                            id="phone" data-default-country="ph"
+                                           class="bg-gray-100 border border-gray-300 text-gray-900" required>
+                                   </div>
+                               </div>
+                               <input class="form-control" name="photo" type="file" id="photo">
+
+                           </div>
+
+                           <div class="flex justify-end mt-3">
+                               <button type="submit"
+                                   class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                   Create
+                               </button>
+                       </form>
+                       <div class="absolute mr-[90px]">
+                           <button type="button" @click="adminNewUsers = false"
+                               class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                               Cancel
+                           </button>
+                       </div>
+                   </div>
+               </div>
+           </div>
             </div>
         </div>
         </div>
