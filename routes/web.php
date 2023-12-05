@@ -74,3 +74,4 @@ Route::get('/tracking', [LocationController::class, 'index'])->name('tracking');
 Route::get('/chat', function () {
         return view('chat'); // Assumes "AboutUs.blade.php" is in the "resources/views" directory.
     })->name('chat');
+
