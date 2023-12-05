@@ -40,7 +40,7 @@ class RegisteredUserController extends Controller
 
 
         $request->validate([
-            'photo' => 'image', // Use the modified variable here
+            'photo' => ['image', 'required'], // Use the modified variable here
             'last_name' => ['required', 'string', 'max:255'],
             'first_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],

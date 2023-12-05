@@ -26,7 +26,7 @@
                     <a href="{{ asset('accounts') }}"
                         class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-[#4ECE5D] group-[.selected]:text-white">
                         <i class="ri-account-pin-box-line mr-3 text-lg"></i>
-                        <span class="font-poppins">Accounts</span>
+                        <span class="font-poppins">Officers</span>
                     </a>
                 </li>
                 <li class="mb-1 group">
@@ -61,7 +61,7 @@
                                 <th>Firstname</th>
                                 <th>Email</th>
                                 <th>Action</th>
-                                <th>Action</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -69,29 +69,29 @@
                                 <tr x-on:click="itemToEdit = {{ $account->id }};">
                                     <td class="text-center">{{ $account->id }}</td>
                                     <td class="flex justify-center items-center">
-                                        <img src="{{ asset($account->photo) }}" width='30' height="30" class="justiy-items-center">
+                                        <img src="{{ asset($account->photo) }}" width='30' height="30" class="justify-items-center">
                                     </td>
-                                    <td class="text-center">{{ $account->last_name }}</td>
-                                    <td class="text-center">{{ $account->first_name }}</td>
-                                    <td class="text-center">{{ $account->email }}</td>
+                                    <td class="border-b border-l border-gray-500">{{ $account->last_name }}</td>
+                                    <td class="border border-gray-500">{{ $account->first_name }}</td>
+                                    <td class="border border-gray-500">{{ $account->email }}</td>
 
 
                                     <td class="text-center ">
                                         <button
                                             @click="accountEdit = true; itemToEdit = $event.target.getAttribute('data-item-id')"
                                             data-item-id="{{ $account->id }}"
-                                            class="bg-sky-600 text-white px-6 py-2 rounded-xl">
+                                            class="hover:bg-sky-600 text-blue-500 hover:text-white px-6 py-2">
                                             Edit
                                         </button>
-                                    </td>
-                                    <td class="text-red-500 text-center">
+
                                         <button
                                             @click="accountDelete = true; itemToDelete = $event.target.getAttribute('data-item-id')"
                                             data-item-id="{{ $account->id }}"
-                                            class="bg-red-600 text-white px-4 py-2 rounded-xl">
+                                            class="hover:bg-red-600 text-red-500 hover:text-white px-6 py-2">
                                             Delete
                                         </button>
                                     </td>
+
                                 </tr>
                             @endforeach
                         </tbody>

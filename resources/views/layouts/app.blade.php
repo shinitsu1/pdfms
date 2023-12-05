@@ -155,13 +155,13 @@
                 /*bg-indigo-500*/
             }
 
-            table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
+            /* table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
                 background-color: #edf2f7 !important;
             }
 
             table.dataTable.stripe tbody tr.even, table.dataTable.display tbody tr.even {
                 background-color: #edf2f7 !important;
-            }
+            } */
 
         </style>
 

@@ -23,7 +23,7 @@
                 <a href="{{ asset('accounts') }}"
                     class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-[#4ECE5D] group-[.selected]:text-white">
                     <i class="ri-account-pin-box-line mr-3 text-lg"></i>
-                    <span class="font-poppins">Accounts</span>
+                    <span class="font-poppins">Officers</span>
                 </a>
             </li>
             <li class="mb-1 group active">

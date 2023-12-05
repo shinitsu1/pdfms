@@ -28,7 +28,7 @@
                     <a href="{{ asset('accounts') }}"
                         class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
                         <i class="ri-account-pin-box-line mr-3 text-lg"></i>
-                        <span class="font-poppins">Accounts</span>
+                        <span class="font-poppins">Officers</span>
                     </a>
                 </li>
                 <li class="mb-1 group">
@@ -78,10 +78,10 @@
                             <a href="{{ asset('accounts') }}">
                                 <div
                                     class="flex items-center justify-between p-4 bg-white hover:bg-blue-200 rounded-md dark:bg-darker">
-                                    <div class="ml-4">
+                                    <div class="ml-1">
                                         <h6
                                             class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light">
-                                            Police Accounts
+                                            Officer Accounts
                                         </h6>
                                         <span class="text-xl font-semibold">{{ $countAccount }}</span>
                                         {{-- <span class="inline-block px-2 py-px ml-2 text-xs text-green-500 bg-green-100 rounded-md">
@@ -111,7 +111,7 @@
                                     </div>
                                     <div>
                                         <span>
-                                            <i class="ri-checkbox-circle-line ml-3 text-6xl text-green-500"></i>
+                                            <i class="ri-steering-2-line ml-3 text-6xl text-blue-500"></i>
                                         </span>
                                     </div>
                                 </div>
@@ -120,7 +120,7 @@
                             <a href="{{ asset('vehicles') }}">
                                 <div
                                     class="flex items-center justify-between p-4 bg-white hover:bg-blue-200 rounded-md dark:bg-darker">
-                                    <div>
+                                    <div class="ml-1">
                                         <h6
                                             class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light">
                                             Available Vehicle
@@ -132,7 +132,7 @@
                                     </div>
                                     <div>
                                         <span>
-                                            <i class="ri-steering-2-line ml-3 text-6xl text-blue-500"></i>
+                                            <i class="ri-checkbox-circle-line ml-3 text-6xl text-blue-500"></i>
                                         </span>
                                     </div>
                                 </div>
