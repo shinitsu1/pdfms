@@ -27,7 +27,7 @@ class AccountsFactory extends Factory
             // 'gender' => fake()->randomElement(['Male', 'Female']),
             // 'address' => fake()->address(),
             // 'username' => fake()->userName(),
-            'photo' => fake()->numerify('#########'),
+            'photo' => '/storage/images/17017649261by1.png',
             // 'shift' => fake()->randomElement(['Day', 'Night']),
             // 'password' => Hash::make('12345'),
             // 'emergency_phone' =>fake()->numerify('09#########'),

@@ -19,7 +19,7 @@ class SupervisorsFactory extends Factory
     {
         return [
             'role' => 'supervisor',
-            'photo' => fake()->numerify('09#########'),
+            'photo' => '/storage/images/17017649261by1.png',
             'last_name' => fake()->lastName(),
             'first_name' =>fake()->firstName(),
             'email' => fake()->unique()->safeEmail(),

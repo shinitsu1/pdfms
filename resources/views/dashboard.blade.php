@@ -603,7 +603,7 @@
             </div>
         </main>
     @endif
- 
+
     @if (Auth::user()->role == 'police')
     <div class="fixed left-[40%] top-[87px] w-[240px]">
         <div class="grid grid-cols-3 gap-2">
@@ -655,6 +655,8 @@
             }
         </script>
     </div>
+
+
 @endif
 </x-app-layout>
 
