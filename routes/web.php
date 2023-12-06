@@ -55,6 +55,9 @@ Route::controller(SupervisorsController::class)->group(function(){
     Route::post('/supervisors/create','create_supervisor')->name('supervisors.create_supervisor');
     Route::delete('/delete/{supervisor}','supervisor_delete')->name('supervisor_delete');
     Route::get('/sms','App\Http\Controllers\SmsController@sms')->name('sms.sms');
+    Route::get('/messenger', 'messenger')->name('messenger.messenger');
+
+
 });
 
 Route::controller(AccountsController::class)->group(function(){

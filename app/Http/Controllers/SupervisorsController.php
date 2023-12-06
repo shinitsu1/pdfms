@@ -106,6 +106,10 @@ class SupervisorsController extends Controller
 
         return redirect()->route('supervisors')->with('message', 'User Added Successfully.');
     }
+
+    public function messenger(){
+        return view ('messenger');
+    }
 }
 
 

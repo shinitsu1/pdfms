@@ -19,6 +19,7 @@ class SmsController extends Controller
 
         if ($message->getStatus() == 0) {
             echo "The message was sent successfully\n";
+
         } else {
             echo "The message failed with status: " . $message->getStatus() . "\n";
         }
