@@ -730,7 +730,6 @@
                         <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Maps</span>
                     </div>
                 </div>
-
                 <div class="bg-blue-400 bg-opacity-50 rounded p-3">
                     <div class="text-blue-200 flex flex-col items-center p-2">
                         <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
@@ -746,7 +745,6 @@
                         </div>
                         <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Settings</span>
                     </div>
-                    <!-- Add other icons and text similarly -->
                 </div>
         </div>
     </nav>
