@@ -57,7 +57,7 @@
 
             <!-- Logo (visible on larger screens) -->
             <div class="md:flex items-center space-x-4 hide-on-small z-10 relative">
-                <img src="{{ asset('image/logo.png') }}"  alt="Your Logo" class="h-8" /> <!-- Your logo -->
+                <img src="{{ asset('image/FLT_White.png') }}"  alt="Your Logo" class="h-8" /> <!-- Your logo -->
             </div>
 
             <!-- Hello, Name -->
