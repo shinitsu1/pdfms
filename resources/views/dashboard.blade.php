@@ -96,7 +96,11 @@
                             <a href="{{ asset('accounts') }}">
                                 <div
                                     class="flex items-center justify-between p-4 bg-white hover:bg-blue-200 rounded-md dark:bg-darker">
+
+                                   
+
                                     <div class="ml-1">
+
                                         <h6
                                             class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light">
                                             Officer Accounts
@@ -138,7 +142,11 @@
                             <a href="{{ asset('vehicles') }}">
                                 <div
                                     class="flex items-center justify-between p-4 bg-white hover:bg-blue-200 rounded-md dark:bg-darker">
+
+                              
+
                                     <div class="ml-1">
+
                                         <h6
                                             class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light">
                                             Available Vehicle
@@ -621,16 +629,14 @@
             </div>
         </main>
     @endif
-
+ 
     @if (Auth::user()->role == 'police')
-    <div class="fixed left-[40%] top-[87px] w-[240px]">
+    <div class="fixed left-[40%] top-[87px] w-[250px]">
         <div class="grid grid-cols-3 gap-2">
             <div class="flex flex-col items-center justify-center bg-blue-200 rounded-lg shadow-xl min-h-[80px]">
                 <img src="{{ asset('images/telephone.png') }}" alt="Your Image" class="w-10 h-auto rounded-lg">
                 <span>Call</span>
             </div>
-
-
             <button id="scanButton" type="button" class="flex flex-col items-center justify-center bg-blue-200 rounded-lg shadow-xl min-h-[80px]">
                 <img src="{{ asset('images/qr (1).png') }}" alt="Your Image" class="w-10 h-auto rounded-lg">
                 Scan
@@ -702,9 +708,14 @@
                         <span class="font-poppins">Settings</span>
                     </a>
                 </li>
-            </ul>
+            </ul>         
+            <div class="flex flex-col items-center justify-center bg-blue-200 rounded-lg shadow-xl min-h-[80px]">
+                <img src="{{ asset('images/comment.png') }}" alt="Your Image" class="w-10 h-auto rounded-lg">
+                <span>Message</div>
+
         </div>
     </div>
+
 
 
     <!----Resize mobile----->
@@ -751,6 +762,49 @@
         </div>
     </nav>
 
+       <!-- Search bar -->
+       <div class="mt-4 relative">
+        <div class="flex items-center justify-center relative right-[20%]  w-[350px]">
+            <input
+                type="text"
+                placeholder="Search..."
+                class="w-full px-5 py-2  border-gray-300 focus:outline-none focus:border-blue-500">
+            <button
+                type="button"
+                class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-blue-500 group-hover:bg-blue-300 px-2 py-2"
+            >
+             
+                    <i class="fas fa-search text-white"></i>
+              
+            </button>
+        </div>
+    </div>
+    
+
+    <div class="container" id="video-container" style="display: none;">
+        <video id="video-preview" playsinline autoplay></video>
+    </div>
+</div>
+
+        <!----Resize  web----->
+        <div class="block md:hidden fixed left-3 top-[87px] w-[240px] h-[86%] bg-blue-200 rounded-3xl p-4 overflow-y-auto">
+            <ul class="mt-2">
+                <li class="mb-1 group active">
+                    <a href="{{ asset('/') }}" class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
+                        <i class="fas fa-inbox mr-3 text-lg"></i>
+                        <span class="font-poppins">Inbox</span>
+                    </a>
+                </li>
+                <li class="mb-1 group">
+                    <a href="{{ asset('/') }}"
+                        class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
+                        <i class="fas fa-map-marker-alt mr-3 text-lg"></i>
+                        <span class="font-poppins">Maps</span>
+                    </a>
+                </li>
+                <li class="mb-1 group">
+
+
 
         <script src="https://cdn.jsdelivr.net/npm/@zxing/library@3.0.0/build/zxing.min.js"></script>
         <script>
@@ -762,11 +816,17 @@
                 try {
                     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
 
+
+                 
+
+
+
                     const videoContainer = document.getElementById('video-container');
                     videoContainer.style.display = 'flex';
 
                     const videoElement = document.getElementById('video-preview');
                     videoElement.srcObject = stream;
+
 
                     const codeReader = new ZXing.BrowserQRCodeReader();
                     codeReader.decodeFromVideoDevice(undefined, 'video-preview', (result, err) => {
@@ -789,8 +849,6 @@
             }
         </script>
     </div>
-
-
 @endif
 </x-app-layout>
 
