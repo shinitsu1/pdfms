@@ -81,7 +81,7 @@
                                     <button @click="accountEdit = true;"
                                         itemToEdit=$event.target.getAttribute('data-item-id')"
                                         data-item-id="{{ $vehicle->id }}"
-                                        class="bg-sky-600 text-white px-6 py-2 rounded-xl">
+                                        class="hover:bg-sky-600 text-blue-500 hover:text-white px-6 py-2">
                                         Edit
                                     </button>
                                 </td>
@@ -89,7 +89,7 @@
                                     <button
                                         @click="accountDelete = true; itemToDelete = $event.target.getAttribute('data-item-id')"
                                         data-item-id="{{ $vehicle->id }}"
-                                        class="bg-red-600 text-white px-4 py-2 rounded-xl">
+                                        class="hover:bg-red-600 text-red-500 hover:text-white px-6 py-2">
                                         Delete
                                     </button>
                                 </td>
@@ -243,7 +243,7 @@
                         <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
                             <h3 class="text-xl font-semibold text-gray-900"><i
                                     class="ri-add-line mr-1 text-lg bg-blue-200 p-4 rounded-full"></i>
-                                Add New Account
+                                Add New Vehicle
                             </h3>
                         </div>
                         <hr class="bg-black w-[410px]">
