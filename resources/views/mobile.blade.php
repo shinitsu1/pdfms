@@ -57,20 +57,20 @@
 
             <!-- Logo (visible on larger screens) -->
             <div class="md:flex items-center space-x-4 hide-on-small z-10 relative">
-                <img src="{{ asset('image/FLT_White.png') }}"  alt="Your Logo" class="h-8" /> <!-- Your logo -->
+                <img src="{{ asset('images/FLT_White.png') }}"  alt="Your Logo" class="h-8" /> <!-- Your logo -->
             </div>
 
             <!-- Hello, Name -->
             <div class="flex flex-col text-white md:flex-row md:items-right md:space-x-2 md:ml-auto z-10 relative">
                 <span class="text-lg font-normal">Hello,</span>
 
-                <span class="text-xl font-bold">John Doe</span> <!-- Replace with user's name -->
+                <span class="text-xl font-bold">Kurt Nanalis</span> <!-- Replace with user's name -->
             </div>
 
             <!-- Profile Image -->
             <div class="rounded-full h-9 w-9 flex items-center justify-center overflow-hidden ml-auto z-10 relative">
                 <!-- This assumes you have a 'public' folder where your images are stored -->
-                <img src="{{ asset('image/user.png') }}"  alt="User profile" class="h-full w-full object-cover" />
+                <img src="{{ asset('images/kurt.jpg') }}"  alt="User profile" class="h-full w-full object-cover" />
                 <!-- Replace with user's profile image -->
             </div>
         </header>
@@ -89,36 +89,12 @@
                       </a></li>
                     <li> <a href="#" class="text-blue-500 flex items-center py-2">
                         <i class="fas fa-comments mr-2"></i> <!-- Chat icon -->
-                        Chat
+                        Chats
                       </a></li>
-                      <li>
-                        <a href="#" class="text-blue-500 flex items-center py-2">
-                          <i class="fas fa-flag mr-2"></i> <!-- Report icon -->
-                          Report
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" class="text-blue-500 flex items-center py-2">
-                          <i class="far fa-calendar-alt mr-2"></i> <!-- Calendar icon -->
-                          Calendar
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" class="text-blue-500 flex items-center py-2">
-                          <i class="fas fa-lightbulb mr-2"></i> <!-- Tips icon -->
-                          Tips
-                        </a>
-                      </li>
                       <li>
                         <a href="#" class="text-blue-500 flex items-center py-2">
                           <i class="fas fa-cog mr-2"></i> <!-- Settings icon -->
                           Settings
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" class="text-blue-500 flex items-center py-2">
-                          <i class="fas fa-ellipsis-h mr-2"></i> <!-- Ellipsis (horizontal) icon -->
-                          More
                         </a>
                       </li>
                   </ul>
@@ -134,23 +110,24 @@
                             <!-- Icons for the first layer -->
                             <!-- Icon 1 -->
                             <div class="ml-6 flex flex-col items-center">
-                                <img src="{{ asset('image/call.png') }}" alt="Your Image" class="w-10 h-auto rounded-lg">
-                                <span style="font-size: 0.75rem;" class="text-black font-bold mt-1">Video Call</span>
-                            </div>
+                              <img src="{{ asset('images/telephone.png') }}" alt="Your Image" class="w-10 h-auto rounded-lg">
+                              <span style="font-size: 0.75rem;" class="text-black font-bold mt-1">Voice Call</span>
+                          </div>
 
-                            <!-- Icon 2 -->
-                            <div class="ml-6 flex flex-col items-center">
-                                <img src="{{ asset('image/notify.png') }}" alt="Your Image" class="w-10 h-auto rounded-lg">
-                                <span style="font-size: 0.75rem;" class="text-black font-bold mt-1">Notifications</span>
-                            </div>
-                            <!-- Icon 3 -->
-                            <div class="ml-6 mr-6 flex flex-col items-center">
-                                <img src="{{ asset('image/message.png') }}" alt="Your Image" class="w-10 h-auto rounded-lg">
-                                <span style="font-size: 0.75rem;" class="text-black font-bold  mt-1">Messages</span>
-                            </div>
-                        </div>
+                          <!-- Icon 2 -->
+                          <div class="ml-6 flex flex-col items-center">
+                              <img src="{{ asset('images/comment.png') }}" alt="Your Image" class="w-10 h-auto rounded-lg">
+                              <span style="font-size: 0.75rem;" class="text-black font-bold mt-1">Send SMS</span>
+                          </div>
+                          <!-- Icon 3 -->
+                          <div id="qrButton" class="ml-6 mr-6 flex flex-col items-center">
+                              <img src="{{ asset('images/qr (1).png') }}" alt="Your Image" class="w-10 h-auto rounded-lg">
+                              <span style="font-size: 0.75rem;" class="text-black font-bold mt-1">Scan QR Code</span>
+                          </div>
+                        </a>
                     </div>
                 </div>
+              </div>
 
             <!-- Search bar -->
             <div class="flex items-center justify-center mt-0 relative p-4 ">
@@ -171,21 +148,7 @@
 
 
             </div>
-                <div class="flex items-center">
-                    <!-- Content on the left side -->
-                    <div class="flex-1 bg-blue-500 text-white rounded-2xl p-6 flex items-center">
-                      <div>
-                        <h2 class="text-xl font-bold mb-2">FleetLink</h2>
-                        <p class="text-sm">Fleet Tracking Vehicle.</p>
-                        <!-- Other content on the left side -->
-                        <!-- ...
-                      </div> -->
-                      <!-- Image inside the blue container -->
-                      <div class="ml-6">
-                        <img src="{{ asset('image/car.png') }}" alt="Your Image" class="w-55 h-auto rounded-lg">
-                      </div>
-                    </div>
-                  </div>
+                
           </main>
 
        <!-- Sidebar for larger screens -->
@@ -218,43 +181,10 @@
             </div>
             <!-- Icon 4 -->
             <div class="text-blue-500 flex flex-col items-center p-2">
-                <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
-                    <i class="fas fa-flag text-blue-600" ></i>
-                </div>
-                <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Report</span>
-            </div>
-        </div>
-
-        <!-- Second layer of icons -->
-        <div class="flex justify-around items-center py-2">
-            <!-- Icons for the second layer -->
-            <!-- Icon 5 -->
-            <div class="text-blue-500 flex flex-col items-center p-2">
-                <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
-                    <i class="far fa-calendar-alt text-blue-600" ></i>
-                </div>
-                <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Calendar</span>
-            </div>
-            <!-- Icon 6 -->
-            <div class="text-blue-500 flex flex-col items-center p-2">
-                <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
-                    <i class="fas fa-lightbulb text-blue-600" ></i>
-                </div>
-                <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Tips</span>
-            </div>
-            <!-- Icon 7 -->
-            <div class="text-blue-500 flex flex-col items-center p-2">
-                <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
-                    <i class="fas fa-cog text-blue-600" ></i>
-                </div>
-                <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Setting</span>
-            </div>
-            <!-- Icon 8 -->
-            <div class="text-blue-500 flex flex-col items-center p-2">
-                <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
-                    <i class="fas fa-ellipsis-h text-blue-600" ></i>
-                </div>
-                <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">More</span>
+              <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
+                  <i class="fas fa-cog text-blue-600" ></i>
+              </div>
+              <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Setting</span>
             </div>
         </div>
     </div>
