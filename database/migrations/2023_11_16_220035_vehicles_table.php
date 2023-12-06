@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('brand');
             $table->string('model');
             $table->string('vin');
+            $table->string('name');
             $table->string('unique_identifier')->unique();
             // $table->string('employee_id');
             // $table->string('gender');

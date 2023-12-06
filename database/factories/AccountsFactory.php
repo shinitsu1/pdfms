@@ -22,6 +22,7 @@ class AccountsFactory extends Factory
             'last_name' => fake()->lastName(),
             'first_name' => fake()->firstName(),
             'email' => fake()->unique()->safeEmail(),
+            'name' => 'vehicle',
             'phone' => fake()->numerify('09#########'),
             // 'employee_id' => fake()->numerify('###-###-###'),
             // 'gender' => fake()->randomElement(['Male', 'Female']),

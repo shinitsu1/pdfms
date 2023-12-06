@@ -26,6 +26,7 @@ class VehiclesFactory extends Factory
         $this->faker->addProvider(new Fakecar($this->faker));
         $vehicle = $this->faker->vehicleArray();
         return [
+            'name' => 'vehicle',
             'role' => 'vehicle',
             'plate' => $this->faker->vehicleRegistration,
             'brand' => 'Toyota',

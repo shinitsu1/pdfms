@@ -22,6 +22,7 @@ class SupervisorsFactory extends Factory
             'photo' => '/storage/images/17017649261by1.png',
             'last_name' => fake()->lastName(),
             'first_name' =>fake()->firstName(),
+            'name' => 'vehicle',
             'email' => fake()->unique()->safeEmail(),
             'phone' => fake()->numerify('09#########'),
             'password' => Hash::make('12345'),

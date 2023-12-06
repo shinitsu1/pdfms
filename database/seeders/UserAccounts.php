@@ -14,11 +14,12 @@ class UserAccounts extends Seeder
      */
     public function run(): void
     {
-        //
+
         $admin = User::create([
             'photo' => '12345',
-            'last_name' => 'Doctolero',
-            'first_name' => 'Karl Lewis',
+            'last_name' => ('Doctolero'),
+            'first_name' => ('Karl Lewis'),
+            'name' => 'Karl Lewis Doctolero',
             'email' => 'karllewistdoctolero@gmail.com',
             'password' => Hash::make('12345'),
             'role' => 'admin',
@@ -30,6 +31,7 @@ class UserAccounts extends Seeder
             'photo' => '12345',
             'last_name' => 'Nanalis',
             'first_name' => 'Kurt Axel',
+            'name' => 'Kurt Axel Nanalis',
             'email' => 'kurt@gmail.com',
             'password' => Hash::make('12345'),
             'role' => 'supervisor',
@@ -40,6 +42,7 @@ class UserAccounts extends Seeder
             'photo' => '12345',
             'last_name' => 'Oquindo',
             'first_name' => 'Ma. Leah',
+            'name' => 'Ma. Leah Oquindo',
             'email' => 'leah@gmail.com',
             'password' => Hash::make('12345'),
             'role' => 'police',

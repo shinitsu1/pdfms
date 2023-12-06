@@ -14,6 +14,7 @@ class Location extends Seeder
     public function run(): void
     {
       $locations = ModelsLocation::create([
+            'last_name' => 'try',
             'vehicle_name' => 'Honda Vios',
             'name' => 'Leah Oquindo',
             'vehiclePlate' => 'PRN-876',
@@ -22,6 +23,7 @@ class Location extends Seeder
         ]);
 
         $locations = ModelsLocation::create([
+            'last_name' => 'try',
             'vehicle_name' => 'Toyota Hilux',
             'name' => 'Kurt Axel Nanalis',
             'vehiclePlate' => 'CAL-801',
@@ -30,6 +32,7 @@ class Location extends Seeder
         ]);
 
         $locations = ModelsLocation::create([
+            'last_name' => 'try',
             'vehicle_name' => 'Toyota Hilux',
             'name' => 'Kurt Axel Nanalis',
             'vehiclePlate' => 'CAL-823',
@@ -38,6 +41,7 @@ class Location extends Seeder
         ]);
 
         $locations = ModelsLocation::create([
+            'last_name' => 'Htry',
             'vehicle_name' => 'Toyota Hilux',
             'name' => 'Kurt Axel Nanalis',
             'vehiclePlate' => 'CAL-823',
