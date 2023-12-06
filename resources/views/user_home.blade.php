@@ -652,7 +652,121 @@
             </div>
         </div>
         </div>
+        <div class="flex">
+            <aside class="bg-white p-2 md:w-1/4 h-screen top-0 left-0 overflow-y-auto border-r border-gray-200">
+                <nav>
+                  <!-- Navigation links for larger screens -->
+                  <ul class="mt-8">
+                    <li>  <a href="#" class="text-blue-500 flex items-center py-2">
+                        <i class="fas fa-inbox mr-2"></i> <!-- Inbox icon -->
+                        Inbox
+                      </a></li>
+                    <li> <a href="#" class="text-blue-500 flex items-center py-2">
+                        <i class="fas fa-map-marker-alt mr-2"></i> <!-- Maps icon -->
+                        Maps
+                      </a></li>
+                    <li> <a href="#" class="text-blue-500 flex items-center py-2">
+                        <i class="fas fa-comments mr-2"></i> <!-- Chat icon -->
+                        Chats
+                      </a></li>
+                      <li>
+                        <a href="#" class="text-blue-500 flex items-center py-2">
+                          <i class="fas fa-cog mr-2"></i> <!-- Settings icon -->
+                          Settings
+                        </a>
+                      </li>
+                  </ul>
+                </nav>
+              </aside>
 
+
+            <!-- Left side content -->
+            <main class="p-5 md:w-3/4 min-h-screen">
+                <div class="flex items-center justify-center">
+                    <div class="flex bg-white text-white rounded-2xl flex items-center">
+                        <div class="flex justify-around items-center py-2" id="iconContainer">
+                            <!-- Icons for the first layer -->
+                            <!-- Icon 1 -->
+                            <div class="ml-6 flex flex-col items-center">
+                              <img src="{{ asset('images/telephone.png') }}" alt="Your Image" class="w-10 h-auto rounded-lg">
+                              <span style="font-size: 0.75rem;" class="text-black font-bold mt-1">Voice Call</span>
+                          </div>
+
+                          <!-- Icon 2 -->
+                          <div class="ml-6 flex flex-col items-center">
+                              <img src="{{ asset('images/comment.png') }}" alt="Your Image" class="w-10 h-auto rounded-lg">
+                              <span style="font-size: 0.75rem;" class="text-black font-bold mt-1">Send SMS</span>
+                          </div>
+                          <!-- Icon 3 -->
+                          <div id="qrButton" class="ml-6 mr-6 flex flex-col items-center">
+                              <img src="{{ asset('images/qr (1).png') }}" alt="Your Image" class="w-10 h-auto rounded-lg">
+                              <span style="font-size: 0.75rem;" class="text-black font-bold mt-1">Scan QR Code</span>
+                          </div>
+                        </a>
+                    </div>
+                </div>
+              </div>
+
+            <!-- Search bar -->
+            <div class="flex items-center justify-center mt-0 relative p-4 ">
+              <input
+                type="text"
+                placeholder="Search..."
+                class="w-full px-5 py-2 rounded-3xl border-gray-300   "
+              />
+              <button
+              type="button"
+              class="absolute right-3 top-1/2 transform -translate-y-1/2 bg-blue-500 group-hover:bg-blue-300 px-2 py-2 rounded-full "
+            >
+            <span class="bg-blue-600 rounded-full p-2">
+                <i class="fas fa-search text-white"></i>
+              </span>
+
+            </button>
+
+
+            </div>
+                
+          </main>
+
+       <!-- Sidebar for larger screens -->
+
+  <nav id="mobileMenu" class="hidden md:hidden fixed bottom-0 w-full bg-blue-200">
+    <div class="flex flex-col">
+        <!-- First layer of icons -->
+        <div class="flex justify-around items-center py-2">
+            <!-- Icons for the first layer -->
+            <!-- Icon 1 -->
+            <div class="text-blue-500 flex flex-col items-center p-2">
+                <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
+                    <i class="fas fa-inbox text-blue-600" ></i>
+                </div>
+                <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Inbox</span>
+            </div>
+            <!-- Icon 2 -->
+            <div class="text-blue-500 flex flex-col items-center p-2">
+                <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
+                    <i class="fas fa-map-marker-alt text-blue-600" ></i>
+                </div>
+                <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">QR</span>
+            </div>
+            <!-- Icon 3 -->
+            <div class="text-blue-500 flex flex-col items-center p-2">
+                <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
+                    <i class="fas fa-comments text-blue-600" ></i>
+                </div>
+                <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Chats</span>
+            </div>
+            <!-- Icon 4 -->
+            <div class="text-blue-500 flex flex-col items-center p-2">
+              <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
+                  <i class="fas fa-cog text-blue-600" ></i>
+              </div>
+              <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Setting</span>
+            </div>
+        </div>
+    </div>
+</nav>
 
         <script>
             function deleteItem(itemId) {
