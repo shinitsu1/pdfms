@@ -28,8 +28,8 @@ class VehiclesFactory extends Factory
         return [
             'role' => 'vehicle',
             'plate' => $this->faker->vehicleRegistration,
-            'brand' => $vehicle['brand'],
-            'model' => $vehicle['model'],
+            'brand' => 'Toyota',
+            'model' => 'Hilux',
             'vin' => $this->faker->vin,
             'unique_identifier' => fake()->numerify('##########'),
             // 'phone' => fake()->numerify('09#########'),

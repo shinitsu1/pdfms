@@ -54,7 +54,7 @@ Route::controller(SupervisorsController::class)->group(function(){
     Route::patch('/supervisors/update/{id}','update')->name('supervisors.update');
     Route::post('/supervisors/create','create_supervisor')->name('supervisors.create_supervisor');
     Route::delete('/delete/{supervisor}','supervisor_delete')->name('supervisor_delete');
-    Route::get('/sms','App\Http\Controllers\SmsController@sms');
+    Route::get('/sms','App\Http\Controllers\SmsController@sms')->name('sms.sms');
 });
 
 Route::controller(AccountsController::class)->group(function(){

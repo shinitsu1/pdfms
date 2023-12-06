@@ -64,7 +64,7 @@
                         @foreach ($data as $supervisor)
                             <tr x-on:click="itemToEdit = {{ $supervisor->id }};">
                                 <td class="text-center">{{ $supervisor->id }}</td>
-                                <td class="justify-center">
+                                <td class="flex justify-center">
                                     <img src="{{ asset($supervisor->photo) }}" width='30' height="30">
                                 </td>
                                 <td>{{ $supervisor->last_name }}</td>
