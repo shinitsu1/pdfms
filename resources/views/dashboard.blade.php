@@ -647,32 +647,17 @@
             <input
                 type="text"
                 placeholder="Search..."
-                class="w-full px-5 py-2 rounded-3xl border-gray-300 focus:outline-none focus:border-blue-500">
+                class="w-full px-5 py-2  border-gray-300 focus:outline-none focus:border-blue-500">
             <button
                 type="button"
-                class="absolute right-3 top-1/2 transform -translate-y-1/2 bg-blue-500 group-hover:bg-blue-300 px-2 py-2 rounded-full"
+                class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-blue-500 group-hover:bg-blue-300 px-2 py-2"
             >
-                <span class="bg-blue-600 rounded-full p-2">
+             
                     <i class="fas fa-search text-white"></i>
-                </span>
+              
             </button>
         </div>
     </div>
-    <div class="flex items-center justify-content mt-4 w-[400px]  relative right-[30%]">
-        <!-- Content on the left side -->
-        <div class="flex-1 bg-blue-500 text-white rounded-2xl p-6 flex items-center mt-20px">
-            <div>
-                <h2 class="text-xl font-bold mb-2">FleetLink</h2>
-                <p class="text-sm">Fleet Tracking Vehicle.</p>
-            <!-- Other content on the left side -->
-            <!-- ...
-          </div> -->
-          <!-- Image inside the blue container -->
-          <div class="ml-6">
-            <img src="{{ asset('images/car.png') }}" alt="Your Image" class="w-55 h-auto rounded-lg">
-          </div>
-        </div>
-      </div>
     
 
     <div class="container" id="video-container" style="display: none;">
@@ -728,7 +713,7 @@
         <!-- First layer of icons -->
         <div class="flex justify-center items-center py-3 gap-20">
             <!-- Icon 1 -->
-            <div class="bg-blue-200 bg-opacity-50 rounded p-3">
+            <div class="bg-blue-400 bg-opacity-50 rounded p-3">
                 <div class="text-blue-200 flex flex-col items-center p-2">
                     <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
                         <i class="fas fa-inbox text-blue-600"></i>
@@ -737,7 +722,7 @@
                 </div>
             </div>
                 <!-- Icon 2 -->
-                <div class="bg-blue-200 bg-opacity-50 rounded p-3">
+                <div class="bg-blue-400 bg-opacity-50 rounded p-3">
                     <div class="text-blue-200 flex flex-col items-center p-2">
                         <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
                             <i class="fas fa-map-marker-alt text-blue-600"></i>
@@ -746,7 +731,7 @@
                     </div>
                 </div>
 
-                <div class="bg-blue-200 bg-opacity-50 rounded p-3">
+                <div class="bg-blue-400 bg-opacity-50 rounded p-3">
                     <div class="text-blue-200 flex flex-col items-center p-2">
                         <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
                             <i class="fas fa-comments text-blue-600"></i>
@@ -754,7 +739,7 @@
                         <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Chats</span>
                     </div>
                 </div>
-                <div class="bg-blue-200 bg-opacity-50 rounded p-3">
+                <div class="bg-blue-400 bg-opacity-50 rounded p-3">
                     <div class="text-blue-200 flex flex-col items-center p-2">
                         <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
                             <i class="fas fa-cog text-blue-600"></i>
