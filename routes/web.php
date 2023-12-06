@@ -9,6 +9,8 @@ use App\Models\Supervisors;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SmsController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\DialPadController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -33,9 +35,17 @@ Route::get('/qr', function () {
     return view('qr');
 });
 
+Route::get('/maps', function () {
+    return view('maps');
+});
+
 Route::get('/calendar', function () {
     return view('calendar');
 });
+
+Route::get('/dialpad', [VoiceController::class, 'showDialpad']);
+
+
 
 Route::redirect('/', destination: 'login');
 
