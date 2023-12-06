@@ -1,4 +1,22 @@
 <x-app-layout>
+    <style>
+/* CSS for mobile screens */
+@media (max-width: 768px) {
+    /* Hide the web menu on smaller screens */
+    .md\:block {
+        display: none;
+    }
+
+    /* Show the mobile menu */
+    .md\:hidden {
+        display: block;
+    }
+
+    /* Adjust styles for mobile menu */
+    /* ... (your responsive styles for mobile) ... */
+}
+
+        </style>
 
     @if (Auth::user()->role == 'admin')
         <div class="fixed left-3 top-[87px] w-[240px] h-[86%] bg-blue-200 rounded-3xl p-4">
@@ -10,13 +28,13 @@
                         <span class="font-poppins">Dashboard</span>
                     </a>
                 </li>
-                <li class="mb-1 group">
+                {{-- <li class="mb-1 group">
                     <a href="{{ asset('supervisors') }}"
                         class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
                         <i class="ri-admin-fill mr-3 text-lg"></i>
                         <span class="font-poppins">Admins</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="mb-1 group">
                     <a href="{{ asset('supervisors') }}"
                         class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
@@ -45,7 +63,7 @@
         <main
             class="fixed top-[86px] w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
             <!-- START DASHBOARD -->
-            <div class="bg-slate-200 h-screen w-full overflow-y-auto rounded-2xl ml-2">
+            <div class="bg-slate-200 h-screen w-full overflow-y-auto rounded-2xl ml-2 pb-[100px]">
                 <main>
                     <!-- Content -->
                     <div class="mt-2">
@@ -76,7 +94,8 @@
                             </a>
                             <!-- Users card -->
                             <a href="{{ asset('accounts') }}">
-                                <div class="flex items-center justify-between p-4 bg-white hover:bg-blue-200 rounded-md dark:bg-darker">
+                                <div
+                                    class="flex items-center justify-between p-4 bg-white hover:bg-blue-200 rounded-md dark:bg-darker">
                                     <div class="ml-4">
                                         <h6
                                             class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light">
@@ -96,7 +115,8 @@
                             </a>
                             <!-- Orders card -->
                             <a href="{{ asset('vehicles') }}">
-                                <div class="flex items-center justify-between p-4 bg-white hover:bg-blue-200 rounded-md dark:bg-darker">
+                                <div
+                                    class="flex items-center justify-between p-4 bg-white hover:bg-blue-200 rounded-md dark:bg-darker">
                                     <div class="ml-4">
                                         <h6
                                             class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light">
@@ -116,7 +136,8 @@
                             </a>
                             <!-- Tickets card -->
                             <a href="{{ asset('vehicles') }}">
-                                <div class="flex items-center justify-between p-4 bg-white hover:bg-blue-200 rounded-md dark:bg-darker">
+                                <div
+                                    class="flex items-center justify-between p-4 bg-white hover:bg-blue-200 rounded-md dark:bg-darker">
                                     <div>
                                         <h6
                                             class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light">
@@ -148,9 +169,52 @@
                                     </div>
                                 </div>
 
-                                <!-- Chart -->
-                                <div class="relative p-4 h-72">
-                                    <canvas id="barChart"></canvas>
+                                <!-- BarChart //relative p-4 h-72-->
+                                <div class="p-2">
+                                    <div class="w-[100%] h-[100%] flex justify-center items-center">
+                                        <canvas id="myBarChart" class="w-[100%] h-[100%]"></canvas>
+                                    </div>
+
+                                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                                    <script>
+                                        const barchart = document.getElementById('myBarChart');
+
+                                        new Chart(barchart, {
+                                            type: 'bar',
+                                            data: {
+                                                labels: ['Supervisors', 'Administrators', 'Officers'],
+                                                datasets: [{
+                                                    label: 'Admin',
+                                                    data: [
+                                                        {{ $countSupervisor }},
+                                                        {{ $countAccount }},
+                                                        {{ $countVehicle }}
+                                                    ],
+                                                    backgroundColor: [
+                                                        'rgba(255, 99, 132, 0.2)',
+                                                        'rgba(255, 159, 64, 0.2)',
+                                                        'rgba(255, 205, 86, 0.2)',
+
+                                                    ],
+                                                    borderColor: [
+                                                        'rgb(255, 99, 132)',
+                                                        'rgb(255, 159, 64)',
+                                                        'rgb(255, 205, 86)',
+
+                                                    ],
+                                                    borderWidth: 1
+                                                }]
+                                            },
+                                            options: {
+                                                scales: {
+                                                    y: {
+                                                        beginAtZero: true
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    </script>
                                 </div>
                             </div>
 
@@ -158,68 +222,102 @@
                             <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
                                 <!-- Card header -->
                                 <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Doughnut Chart</h4>
+                                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Polar Area Chart
+                                    </h4>
                                     <div class="flex items-center">
 
                                     </div>
                                 </div>
-                                <!-- Chart -->
-                                <div class="relative p-4 h-72">
-                                    <canvas id="doughnutChart"></canvas>
+                                {{-- Doughnut Chart --}}
+                                <div>
+                                    <canvas id="myChart" class="w-[70%] h-[20%]"></canvas>
                                 </div>
+
+                                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                                <script>
+                                    const ctx = document.getElementById('myChart');
+
+                                    new Chart(ctx, {
+                                        type: 'polarArea',
+                                        data: {
+                                            labels: ['Supervisors', 'Police', 'Vehicles'],
+                                            datasets: [{
+                                                label: 'Number of Users',
+                                                data: [
+                                                    {{ $countSupervisor }},
+                                                    {{ $countAccount }},
+                                                    {{ $countVehicle }}
+                                                ],
+                                                borderWidth: 1
+                                            }]
+                                        },
+                                        options: {
+                                            scales: {
+                                                y: {
+                                                    beginAtZero: true
+                                                }
+                                            }
+                                        }
+                                    });
+                                </script>
+                            </div>
+                            {{-- Doughnut Chart --}}
+                        </div>
+                    </div>
+
+                    <!-- Two grid columns -->
+                    <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-3">
+                        <!-- Active users chart -->
+                        <div class="col-span-1 bg-white rounded-md dark:bg-darker">
+                            <!-- Card header -->
+                            <div class="p-4 border-b dark:border-primary">
+                                <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Active users right
+                                    now</h4>
+                            </div>
+                            <p class="p-4">
+                                <span class="text-2xl font-medium text-gray-500 dark:text-light"
+                                    id="usersCount">0</span>
+                                <span class="text-sm font-medium text-gray-500 dark:text-primary">Users</span>
+                            </p>
+                            <!-- Chart -->
+                            <div class="relative p-4">
+                                <canvas id="activeUsersChart"></canvas>
                             </div>
                         </div>
 
-                        <!-- Two grid columns -->
-                        <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-3">
-                            <!-- Active users chart -->
-                            <div class="col-span-1 bg-white rounded-md dark:bg-darker">
-                                <!-- Card header -->
-                                <div class="p-4 border-b dark:border-primary">
-                                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Active users right
-                                        now</h4>
-                                </div>
-                                <p class="p-4">
-                                    <span class="text-2xl font-medium text-gray-500 dark:text-light"
-                                        id="usersCount">0</span>
-                                    <span class="text-sm font-medium text-gray-500 dark:text-primary">Users</span>
-                                </p>
-                                <!-- Chart -->
-                                <div class="relative p-4">
-                                    <canvas id="activeUsersChart"></canvas>
+                        <!-- Line chart card -->
+                        <div class="col-span-2 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
+                            <!-- Card header -->
+                            <div class="flex items-center justify-between p-4 border-b dark:border-primary">
+                                <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Line Chart</h4>
+                                <div class="flex items-center">
+                                    <button class="relative focus:outline-none" x-cloak
+                                        @click="isOn = !isOn; $parent.updateLineChart()">
+                                        <div
+                                            class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
+                                        </div>
+                                        <div class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
+                                            :class="{
+                                                'translate-x-0  bg-white dark:bg-primary-100': !
+                                                    isOn,
+                                                'translate-x-6 bg-primary-light dark:bg-primary': isOn
+                                            }">
+                                        </div>
+                                    </button>
                                 </div>
                             </div>
-
-                            <!-- Line chart card -->
-                            <div class="col-span-2 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
-                                <!-- Card header -->
-                                <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Line Chart</h4>
-                                    <div class="flex items-center">
-                                        <button class="relative focus:outline-none" x-cloak
-                                            @click="isOn = !isOn; $parent.updateLineChart()">
-                                            <div
-                                                class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
-                                            </div>
-                                            <div class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
-                                                :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !
-                                                    isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }">
-                                            </div>
-                                        </button>
-                                    </div>
-                                </div>
-                                <!-- Chart -->
-                                <div class="relative p-4 h-72">
-                                    <canvas id="lineChart"></canvas>
-                                </div>
+                            <!-- Chart -->
+                            <div class="relative p-4 h-72">
+                                <canvas id="lineChart"></canvas>
                             </div>
                         </div>
                     </div>
-                </main>
             </div>
         </main>
+        </div>
+        </main>
     @endif
-
 
 
     @if (Auth::user()->role == 'supervisor')
@@ -254,7 +352,7 @@
                 </a>
             </li> --}}
                 <li class="mb-1 group">
-                    <a href="{{ asset('chatify') }}"
+                    <a href="{{ asset('messaging') }}"
                         class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
                         <i class="ri-calendar-2-fill mr-3 text-lg"></i>
                         <span class="font-poppins">Messages</span>
@@ -372,93 +470,55 @@
                                 <!-- Card header -->
                                 <div class="flex items-center justify-between p-4 border-b dark:border-primary">
                                     <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Bar Chart</h4>
-                                    <div class="flex items-center space-x-2">
-                                        <h2 class="text-xl font-bold">Waste Collection</h2>
-                                        <span class="text-sm font-semibold text-gray-500">OCTOBER 2023</span>
-                                        <div class="flex items-end flex-grow w-full mt-2 space-x-2 sm:space-x-3">
-                                            <div class="relative flex flex-col items-center flex-grow pb-5 group">
-                                                <span class="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">300</span>
-                                                <div class="relative flex justify-center w-full h-8 bg-indigo-200"></div>
-                                                <div class="relative flex justify-center w-full h-6 bg-indigo-300"></div>
-                                                <div class="relative flex justify-center w-full h-16 bg-indigo-400"></div>
-                                                <span class="absolute bottom-0 text-xs font-bold">178</span>
-                                            </div>
-                                            <div class="relative flex flex-col items-center flex-grow pb-5 group">
-                                                <span class="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">350</span>
-                                                <div class="relative flex justify-center w-full h-10 bg-indigo-200"></div>
-                                                <div class="relative flex justify-center w-full h-6 bg-indigo-300"></div>
-                                                <div class="relative flex justify-center w-full h-20 bg-indigo-400"></div>
-                                                <span class="absolute bottom-0 text-xs font-bold">179</span>
-                                            </div>
-                                            <div class="relative flex flex-col items-center flex-grow pb-5 group">
-                                                <span class="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">360</span>
-                                                <div class="relative flex justify-center w-full h-10 bg-indigo-200"></div>
-                                                <div class="relative flex justify-center w-full h-8 bg-indigo-300"></div>
-                                                <div class="relative flex justify-center w-full h-20 bg-indigo-400"></div>
-                                                <span class="absolute bottom-0 text-xs font-bold">180</span>
-                                            </div>
-                                            <div class="relative flex flex-col items-center flex-grow pb-5 group">
-                                                <span class="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">370</span>
-                                                <div class="relative flex justify-center w-full h-10 bg-indigo-200"></div>
-                                                <div class="relative flex justify-center w-full h-6 bg-indigo-300"></div>
-                                                <div class="relative flex justify-center w-full h-24 bg-indigo-400"></div>
-                                                <span class="absolute bottom-0 text-xs font-bold">181</span>
-                                            </div>
-                                            <div class="relative flex flex-col items-center flex-grow pb-5 group">
-                                                <span class="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">365</span>
-                                                <div class="relative flex justify-center w-full h-10 bg-indigo-200"></div>
-                                                <div class="relative flex justify-center w-full h-8 bg-indigo-300"></div>
-                                                <div class="relative flex justify-center w-full h-20 bg-indigo-400"></div>
-                                                <span class="absolute bottom-0 text-xs font-bold">182</span>
-                                            </div>
-                                            <div class="relative flex flex-col items-center flex-grow pb-5 group">
-                                                <span class="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">380</span>
-                                                <div class="relative flex justify-center w-full h-12 bg-indigo-200"></div>
-                                                <div class="relative flex justify-center w-full h-8 bg-indigo-300"></div>
-                                                <div class="relative flex justify-center w-full h-24 bg-indigo-400"></div>
-                                                <span class="absolute bottom-0 text-xs font-bold">183</span>
-                                            </div>
-                                            <div class="relative flex flex-col items-center flex-grow pb-5 group">
-                                                <span class="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">410</span>
-                                                <div class="relative flex justify-center w-full h-12 bg-indigo-200"></div>
-                                                <div class="relative flex justify-center w-full h-16 bg-indigo-300"></div>
-                                                <div class="relative flex justify-center w-full h-20 bg-indigo-400"></div>
-                                                <span class="absolute bottom-0 text-xs font-bold">184</span>
-                                            </div>
-                                            <div class="relative flex flex-col items-center flex-grow pb-5 group">
-                                                <span class="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">390</span>
-                                                <div class="relative flex justify-center w-full h-12 bg-indigo-200"></div>
-                                                <div class="relative flex justify-center w-full h-10 bg-indigo-300"></div>
-                                                <div class="relative flex justify-center w-full h-24 bg-indigo-400"></div>
-                                                <span class="absolute bottom-0 text-xs font-bold">185</span>
-                                            </div>
-                                            <div class="relative flex flex-col items-center flex-grow pb-5 group">
-                                                <span class="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">480</span>
-                                                <div class="relative flex justify-center w-full h-12 bg-indigo-200"></div>
-                                                <div class="relative flex justify-center w-full h-10 bg-indigo-300"></div>
-                                                <div class="relative flex justify-center w-full h-32 bg-indigo-400"></div>
-                                                <span class="absolute bottom-0 text-xs font-bold">186</span>
-                                            </div>
-                                            <div class="relative flex flex-col items-center flex-grow pb-5 group">
-                                                <span class="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">470</span>
-                                                <div class="relative flex justify-center w-full h-12 bg-indigo-200"></div>
-                                                <div class="relative flex justify-center w-full h-12 bg-indigo-300"></div>
-                                                <div class="relative flex justify-center w-full bg-indigo-400 h-28"></div>
-                                                <span class="absolute bottom-0 text-xs font-bold">187</span>
-                                            </div>
-                                            <div class="relative flex flex-col items-center flex-grow pb-5 group">
-                                                <span class="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">500</span>
-                                                <div class="relative flex justify-center w-full h-8 bg-indigo-200"></div>
-                                                <div class="relative flex justify-center w-full h-8 bg-indigo-300"></div>
-                                                <div class="relative flex justify-center w-full h-40 bg-indigo-400"></div>
-                                                <span class="absolute bottom-0 text-xs font-bold">188</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </div>
+
                                 </div>
 
-                                <!-- Chart -->
+                                <div class="p-2">
+                                    <div class="w-[100%] h-[100%] flex justify-center items-center">
+                                        <canvas id="myBarChart" class="w-[100%] h-[100%]"></canvas>
+                                    </div>
+
+                                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                                    <script>
+                                        const barchart = document.getElementById('myBarChart');
+
+                                        new Chart(barchart, {
+                                            type: 'bar',
+                                            data: {
+                                                labels: ['Supervisors', 'Administrators', 'Officers'],
+                                                datasets: [{
+                                                    label: 'Admin',
+                                                    data: [
+                                                        {{ $countSupervisor }},
+                                                        {{ $countAccount }},
+                                                        {{ $countVehicle }}
+                                                    ],
+                                                    backgroundColor: [
+                                                        'rgba(255, 99, 132, 0.2)',
+                                                        'rgba(255, 159, 64, 0.2)',
+                                                        'rgba(255, 205, 86, 0.2)',
+
+                                                    ],
+                                                    borderColor: [
+                                                        'rgb(255, 99, 132)',
+                                                        'rgb(255, 159, 64)',
+                                                        'rgb(255, 205, 86)',
+
+                                                    ],
+                                                    borderWidth: 1
+                                                }]
+                                            },
+                                            options: {
+                                                scales: {
+                                                    y: {
+                                                        beginAtZero: true
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    </script>
+                                </div>
 
                             </div>
 
@@ -466,17 +526,48 @@
                             <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
                                 <!-- Card header -->
                                 <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Doughnut Chart</h4>
+                                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Polar Area Chart
+                                    </h4>
                                     <div class="flex items-center">
 
                                     </div>
                                 </div>
-                                <!-- Chart -->
-                                <div class="relative p-4 h-72">
-                                    <canvas id="doughnutChart"></canvas>
+                                {{-- Doughnut Chart --}}
+                                <div>
+                                    <canvas id="myChart" class="w-[70%] h-[20%]"></canvas>
                                 </div>
+
+                                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                                <script>
+                                    const ctx = document.getElementById('myChart');
+
+                                    new Chart(ctx, {
+                                        type: 'polarArea',
+                                        data: {
+                                            labels: ['Supervisors', 'Police', 'Vehicles'],
+                                            datasets: [{
+                                                label: 'Number of Users',
+                                                data: [
+                                                    {{ $countSupervisor }},
+                                                    {{ $countAccount }},
+                                                    {{ $countVehicle }}
+                                                ],
+                                                borderWidth: 1
+                                            }]
+                                        },
+                                        options: {
+                                            scales: {
+                                                y: {
+                                                    beginAtZero: true
+                                                }
+                                            }
+                                        }
+                                    });
+                                </script>
                             </div>
-                        </div>
+                            {{-- Doughnut Chart --}}
+                        </div </div>
 
                         <!-- Two grid columns -->
                         <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-3">
@@ -510,8 +601,11 @@
                                                 class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
                                             </div>
                                             <div class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
-                                                :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !
-                                                    isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }">
+                                                :class="{
+                                                    'translate-x-0  bg-white dark:bg-primary-100': !
+                                                        isOn,
+                                                    'translate-x-6 bg-primary-light dark:bg-primary': isOn
+                                                }">
                                             </div>
                                         </button>
                                     </div>
@@ -527,7 +621,190 @@
             </div>
         </main>
     @endif
+ 
+    @if (Auth::user()->role == 'police')
+    <div class="fixed left-[40%] top-[87px] w-[250px]">
+        <div class="grid grid-cols-3 gap-2">
+            <div class="flex flex-col items-center justify-center bg-blue-200 rounded-lg shadow-xl min-h-[80px]">
+                <img src="{{ asset('images/telephone.png') }}" alt="Your Image" class="w-10 h-auto rounded-lg">
+                <span>Call</span>
+            </div>
+            
+            
+            <button id="scanButton" type="button" class="flex flex-col items-center justify-center bg-blue-200 rounded-lg shadow-xl min-h-[80px]">
+                <img src="{{ asset('images/qr (1).png') }}" alt="Your Image" class="w-10 h-auto rounded-lg">
+                Scan
+            </button>
+            
+            <div class="flex flex-col items-center justify-center bg-blue-200 rounded-lg shadow-xl min-h-[80px]">
+                <img src="{{ asset('images/comment.png') }}" alt="Your Image" class="w-10 h-auto rounded-lg">
+                <span>Message</div>
+        </div>
+
+       <!-- Search bar -->
+       <div class="mt-4 relative">
+        <div class="flex items-center justify-center relative right-[20%]  w-[350px]">
+            <input
+                type="text"
+                placeholder="Search..."
+                class="w-full px-5 py-2 rounded-3xl border-gray-300 focus:outline-none focus:border-blue-500">
+            <button
+                type="button"
+                class="absolute right-3 top-1/2 transform -translate-y-1/2 bg-blue-500 group-hover:bg-blue-300 px-2 py-2 rounded-full"
+            >
+                <span class="bg-blue-600 rounded-full p-2">
+                    <i class="fas fa-search text-white"></i>
+                </span>
+            </button>
+        </div>
+    </div>
+    <div class="flex items-center justify-content mt-4 w-[400px]  relative right-[30%]">
+        <!-- Content on the left side -->
+        <div class="flex-1 bg-blue-500 text-white rounded-2xl p-6 flex items-center mt-20px">
+            <div>
+                <h2 class="text-xl font-bold mb-2">FleetLink</h2>
+                <p class="text-sm">Fleet Tracking Vehicle.</p>
+            <!-- Other content on the left side -->
+            <!-- ...
+          </div> -->
+          <!-- Image inside the blue container -->
+          <div class="ml-6">
+            <img src="{{ asset('images/car.png') }}" alt="Your Image" class="w-55 h-auto rounded-lg">
+          </div>
+        </div>
+      </div>
+    
+
+    <div class="container" id="video-container" style="display: none;">
+        <video id="video-preview" playsinline autoplay></video>
+    </div>
+</div>
+
+        <!----Resize  web----->
+        <div class="block md:hidden fixed left-3 top-[87px] w-[240px] h-[86%] bg-blue-200 rounded-3xl p-4 overflow-y-auto">
+            <ul class="mt-2">
+                <li class="mb-1 group active">
+                    <a href="{{ asset('/') }}" class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
+                        <i class="fas fa-inbox mr-3 text-lg"></i>
+                        <span class="font-poppins">Inbox</span>
+                    </a>
+                </li>
+                <li class="mb-1 group">
+                    <a href="{{ asset('/') }}"
+                        class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
+                        <i class="fas fa-map-marker-alt mr-3 text-lg"></i>
+                        <span class="font-poppins">Maps</span>
+                    </a>
+                </li>
+                <li class="mb-1 group">
+
+                    <a href="{{ asset('chatting') }}"
+                        class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
+                        <i class="fas fa-comments mr-3 text-lg"></i>
+                        <span class="font-poppins">Chats</span>
+                    </a>
+                </li>
+                {{-- <li class="mb-1 group">
+                <a href="{{ asset('calendar')}}" class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
+                    <i class="ri-user-fill mr-3 text-lg"></i>
+                    <span class="font-poppins">Calendar</span>
+                </a>
+            </li> --}}
+                <li class="mb-1 group">
+                    <a href="{{ asset('/') }}"
+                        class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
+                        <i class="fas fa-cog mr-3 text-lg"></i>
+                        <span class="font-poppins">Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+      
+    
+    <!----Resize mobile----->
+   <nav id="mobileMenu" class="hidden md:block fixed bottom-5 w-full">
+    <div class="flex flex-col">
+        <!-- First layer of icons -->
+        <div class="flex justify-center items-center py-3 gap-20">
+            <!-- Icon 1 -->
+            <div class="bg-blue-200 bg-opacity-50 rounded p-3">
+                <div class="text-blue-200 flex flex-col items-center p-2">
+                    <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
+                        <i class="fas fa-inbox text-blue-600"></i>
+                    </div>
+                    <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Inbox</span>
+                </div>
+            </div>
+                <!-- Icon 2 -->
+                <div class="bg-blue-200 bg-opacity-50 rounded p-3">
+                    <div class="text-blue-200 flex flex-col items-center p-2">
+                        <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
+                            <i class="fas fa-map-marker-alt text-blue-600"></i>
+                        </div>
+                        <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Maps</span>
+                    </div>
+                </div>
+
+                <div class="bg-blue-200 bg-opacity-50 rounded p-3">
+                    <div class="text-blue-200 flex flex-col items-center p-2">
+                        <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
+                            <i class="fas fa-comments text-blue-600"></i>
+                        </div>
+                        <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Chats</span>
+                    </div>
+                </div>
+                <div class="bg-blue-200 bg-opacity-50 rounded p-3">
+                    <div class="text-blue-200 flex flex-col items-center p-2">
+                        <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
+                            <i class="fas fa-cog text-blue-600"></i>
+                        </div>
+                        <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Settings</span>
+                    </div>
+                    <!-- Add other icons and text similarly -->
+                </div>
+        </div>
+    </nav>
 
 
+        <script src="https://cdn.jsdelivr.net/npm/@zxing/library@3.0.0/build/zxing.min.js"></script>
+        <script>
+            document.getElementById('scanButton').addEventListener('click', function () {
+                openDefaultCamera();
+            });
 
+            async function openDefaultCamera() {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+
+                    const videoContainer = document.getElementById('video-container');
+                    videoContainer.style.display = 'flex';
+
+                    const videoElement = document.getElementById('video-preview');
+                    videoElement.srcObject = stream;
+
+                    const codeReader = new ZXing.BrowserQRCodeReader();
+                    codeReader.decodeFromVideoDevice(undefined, 'video-preview', (result, err) => {
+                        if (result) {
+                            alert('QR Code Scanned: ' + result.text);
+                            // Do something with the scanned result
+
+                            const tracks = stream.getTracks();
+                            tracks.forEach(track => track.stop());
+
+                            videoContainer.style.display = 'none';
+                        }
+                        if (err && !(err instanceof ZXing.NotFoundException)) {
+                            console.error(err);
+                        }
+                    });
+                } catch (error) {
+                    console.error('Error opening camera:', error);
+                }
+            }
+        </script>
+    </div>
+@endif
 </x-app-layout>
+
+
