@@ -291,8 +291,8 @@
                                 </svg>
                             </div>
                             <input type="search" id="default-search" class="block w-[17rem] ml-0 mt-2 p-2 pl-5 text-x text-gray-900 text-center border border-neutral-100 rounded-full bg-neutral-200 focus:ring-blue-500 focus:border-nuetral-200 dark:bg-neutral-200 dark:border-neutral-200 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Message" required>
-                        </div> 
-                        
+                        </div>
+
                         <!-- Chat list items -->
                         <ul>
                             <li class="">
@@ -317,8 +317,8 @@
                     </div>
                 </div>
             </div>
-    
-            
+
+
             <!-- Second Chat Container -->
             <div class="w-4/5">
                 <div class="p-6 border-2 h-[6rem] border-neutral-300 rounded-2xl dark:border-neutral-300 rounded-l-none  rounded-b-none mt-14">
@@ -326,11 +326,11 @@
                     <div class="rounded-l-none max-h-[38rem] overflow-y-auto flex items-center">
                         <img class="mr-3 rounded-full w-11 h-13" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
                         <div>
-                            <span class="text-2xl font-semibold font-medium dark:text-black hover:text-white-800 dark:hover:text-white-800">Leah Oquindo</span>
+                            <span class="text-2xl font-semibolddark:text-black hover:text-white-800 dark:hover:text-white-800">Leah Oquindo</span>
                         </div>
                     </div>
                 </div>
-            
+
                 <div class="p-4 border-2  pt-5 h-[27rem] border-neutral-300 rounded-2xl dark:border-neutral-300 rounded-l-none rounded-b-none rounded-t-none">
                     <!-- Chat Container -->
                     <div class="rounded-l-none max-h-[14rem] overflow-y-auto flex items-center">
@@ -341,7 +341,7 @@
                                     </div>
                                 </div>
                             </div>
-                        
+
                 <div class="border-2 h-[4rem] border-neutral-300 rounded-2xl dark:border-neutral-300 rounded-l-none rounded-t-none">
                 <!-- Chat Container -->
 
@@ -376,7 +376,7 @@
                 </div>
             </div>
         </body>
-    
+
     @endif
 
 
