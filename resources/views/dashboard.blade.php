@@ -694,20 +694,6 @@
 
 
 
-    @if (Auth::user()->role == 'police')
-    <div class="fixed left-[40%] top-[87px] w-[240px]">
-        <div class="grid grid-cols-3 gap-2">
-            <div class="flex items-center justify-center bg-red-500 rounded-lg shadow-xl min-h-[50px]">Call</div>
-            <button id="scanButton" type="button" class="flex items-center justify-center bg-blue-500 rounded-lg shadow-xl min-h-[50px]">
-                Scan
-            </button>
-            <div class="flex items-center justify-center bg-green-500 rounded-lg shadow-xl min-h-[50px]">Message</div>
-        </div>
-
-        <div class="container" id="video-container" style="display: none;">
-            <video id="video-preview" playsinline autoplay></video>
-        </div>
-
 
         <script src="https://cdn.jsdelivr.net/npm/@zxing/library@3.0.0/build/zxing.min.js"></script>
         <script>

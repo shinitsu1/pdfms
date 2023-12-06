@@ -71,9 +71,9 @@
                                     <td class="flex justify-center items-center">
                                         <img src="{{ asset($account->photo) }}" width='30' height="30" class="justify-items-center">
                                     </td>
-                                    <td class="border-b border-l border-gray-500">{{ $account->last_name }}</td>
-                                    <td class="border border-gray-500">{{ $account->first_name }}</td>
-                                    <td class="border border-gray-500">{{ $account->email }}</td>
+                                    <td>{{ $account->last_name }}</td>
+                                    <td>{{ $account->first_name }}</td>
+                                    <td>{{ $account->email }}</td>
 
 
                                     <td class="text-center ">
