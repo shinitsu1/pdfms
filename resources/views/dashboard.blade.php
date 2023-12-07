@@ -421,23 +421,30 @@
                             </div>
 
                             <!-- Users card -->
-                            <div class="flex items-center justify-between p-4 bg-white rounded-md dark:bg-darker">
-                                <div class="ml-4">
-                                    <h6
-                                        class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light">
-                                        Police Accounts
-                                    </h6>
-                                    <span class="text-xl font-semibold">{{ $countAccount }}</span>
-                                    {{-- <span class="inline-block px-2 py-px ml-2 text-xs text-green-500 bg-green-100 rounded-md">
-                                +2.6%
-                                </span> --}}
+                            <a href="{{ asset('accounts') }}">
+                                <div
+                                    class="flex items-center justify-between p-4 bg-white hover:bg-blue-200 rounded-md dark:bg-darker">
+
+                                   
+
+                                    <div class="ml-1">
+
+                                        <h6
+                                            class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light">
+                                            Officer Accounts
+                                        </h6>
+                                        <span class="text-xl font-semibold">{{ $countAccount }}</span>
+                                        {{-- <span class="inline-block px-2 py-px ml-2 text-xs text-green-500 bg-green-100 rounded-md">
+                            +2.6%
+                            </span> --}}
+                                    </div>
+                                    <div>
+                                        <span>
+                                            <i class="ri-star-smile-fill ml-3 text-6xl text-blue-500"></i>
+                                        </span>
+                                    </div>
                                 </div>
-                                <div>
-                                    <span>
-                                        <i class="ri-star-smile-fill ml-3 text-6xl text-blue-500"></i>
-                                    </span>
-                                </div>
-                            </div>
+                            </a>
 
                             <!-- Orders card -->
                             <div class="flex items-center justify-between p-4 bg-white rounded-md dark:bg-darker">
