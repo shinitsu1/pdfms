@@ -52,9 +52,10 @@ Route::middleware('auth')->group(function () {
 Route::controller(SupervisorsController::class)->group(function(){
     Route::get('/supervisors','index')->middleware(['auth', 'verified'])->name('supervisors');
     Route::patch('/supervisors/update/{id}','update')->name('supervisors.update');
-    Route::post('/supervisors/create','create_supervisor')->name('supervisors.create_supervisor');
+    Route::post('/supervisors','create_supervisor')->name('supervisors.create_supervisor');
     Route::delete('/delete/{supervisor}','supervisor_delete')->name('supervisor_delete');
     Route::get('/sms','App\Http\Controllers\SmsController@sms')->name('sms.sms');
+
 });
 
 Route::controller(AccountsController::class)->group(function(){
@@ -90,5 +91,4 @@ Route::get('/chat', function () {
     Route::get('/user_home', function () {
         return view('user_home'); // Assumes "AboutUs.blade.php" is in the "resources/views" directory.
     })->name('user_home');
-
 
