@@ -377,7 +377,7 @@
                     <a href="{{ asset('accounts') }}"
                         class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
                         <i class="ri-admin-fill mr-3 text-lg"></i>
-                        <span class="font-poppins">Officers</span>
+                        <span class="font-poppins">Officer Accounts</span>
                     </a>
                 </li>
                 <li class="mb-1 group">
@@ -387,7 +387,6 @@
                         <span class="font-poppins">Tracking</span>
                     </a>
                 </li>
-                
                 {{-- <li class="mb-1 group">
                     <a href="{{ asset('calendar') }}"
                         class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
@@ -396,7 +395,7 @@
                     </a>
                 </li> --}}
                 <li class="mb-1 group">
-                    <a href="{{ asset('messages') }}"
+                    <a href="{{ asset('chatify') }}"
                         class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
                         <i class="ri-calendar-2-fill mr-3 text-lg"></i>
                         <span class="font-poppins">Messages</span>
@@ -650,12 +649,13 @@
                                    </div>
 
                                    <div>
-                                       <label for="phone"
-                                           class="block mb-2 text-sm font-medium text-gray-900">Phone Number</label>
-                                       <input type="text" name="phone" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 11)"
-                                            id="phone" data-default-country="ph"
-                                           class="bg-gray-100 border border-gray-300 text-gray-900" required>
-                                   </div>
+                                    <label for="phone"
+                                    class="block mb-2 text-sm font-medium text-gray-900">Phone Number</label>
+                                <input type="tel" name="phone"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 11)"
+                                    id="phone" data-default-country="ph"
+                                    class="bg-gray-100 border border-gray-300 text-gray-900" required>
+                            </div>
                                </div>
                                <input class="form-control" name="photo" type="file" id="photo">
 
@@ -681,6 +681,10 @@
         </div>
 
 
+        <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
+
+
         <script>
             function deleteItem(itemId) {
                 // Set the itemToDelete value based on the clicked item's ID
@@ -695,6 +699,11 @@
                     itemToEdit: null, // Variable to store the selected item
                 }));
             });
+
+            const input = document.querySelector("#phone");
+        window.intlTelInput(input, {
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+        });
         </script>
 
     @endif
