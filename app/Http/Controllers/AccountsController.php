@@ -31,7 +31,7 @@ class AccountsController extends Controller
             'last_name' => 'required',
             'first_name' => 'required',
             'email' => 'required',
-
+            'name'=>'string',
             // 'email' => 'required', 'email', Rule::unique('accounts', 'email'),
             // 'phone' => 'required',
             'role' => 'string',
@@ -51,6 +51,7 @@ class AccountsController extends Controller
         Accounts::create([
             'last_name' => $request->input('last_name'),
             'first_name' => $request->input('first_name'),
+            'name'=>'name',
             'email' => $request->input('email'),
             'role' => 'police',
             'phone' => $request->input('phone'),
@@ -60,6 +61,7 @@ class AccountsController extends Controller
         User::create([
             'photo' => $accountsData["photo"], // Use the modified variable here
             'last_name' => $request->input('last_name'),
+            'name'=>'name',
             'first_name' => $request->input('first_name'),
             'email' => $request->input('email'),
             'phone' => $request->input('phone'),

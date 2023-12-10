@@ -70,6 +70,7 @@ class SupervisorsController extends Controller
             'photo' => 'image',
             'last_name' => 'required|string',
             'first_name' => 'required|string',
+            'name' => 'string',
             'phone' => 'string',
             'role' => 'nullable|string|min:6',
             'email' => 'required', 'email', Rule::unique('students', 'email'),
@@ -88,6 +89,7 @@ class SupervisorsController extends Controller
             'photo' => $accountsData["photo"], // Use the modified variable here
             'last_name' => $request->input('last_name'),
             'first_name' => $request->input('first_name'),
+            'name' => 'name',
             'email' => $request->input('email'),
             'phone' => $request->input('phone'),
             'password' => '12345',
@@ -98,6 +100,7 @@ class SupervisorsController extends Controller
             'photo' => $accountsData["photo"], // Use the modified variable here
             'last_name' => $request->input('last_name'),
             'first_name' => $request->input('first_name'),
+            'name' => 'name',
             'email' => $request->input('email'),
             'phone' => $request->input('phone'),
             'password' => '12345',

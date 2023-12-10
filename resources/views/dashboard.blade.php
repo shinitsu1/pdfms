@@ -56,6 +56,13 @@
                         <span class="font-poppins">Vehicles</span>
                     </a>
                 </li>
+                <li class="mb-1 group">
+                    <a href="{{ asset('chatify') }}"
+                        class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
+                        <i class="ri-calendar-2-fill mr-3 text-lg"></i>
+                        <span class="font-poppins">Messages</span>
+                    </a>
+                </li>
             </ul>
         </div>
 
@@ -414,23 +421,30 @@
                             </div>
 
                             <!-- Users card -->
-                            <div class="flex items-center justify-between p-4 bg-white rounded-md dark:bg-darker">
-                                <div class="ml-4">
-                                    <h6
-                                        class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light">
-                                        Police Accounts
-                                    </h6>
-                                    <span class="text-xl font-semibold">{{ $countAccount }}</span>
-                                    {{-- <span class="inline-block px-2 py-px ml-2 text-xs text-green-500 bg-green-100 rounded-md">
-                                +2.6%
-                                </span> --}}
+                            <a href="{{ asset('accounts') }}">
+                                <div
+                                    class="flex items-center justify-between p-4 bg-white hover:bg-blue-200 rounded-md dark:bg-darker">
+
+
+
+                                    <div class="ml-1">
+
+                                        <h6
+                                            class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light">
+                                            Officer Accounts
+                                        </h6>
+                                        <span class="text-xl font-semibold">{{ $countAccount }}</span>
+                                        {{-- <span class="inline-block px-2 py-px ml-2 text-xs text-green-500 bg-green-100 rounded-md">
+                            +2.6%
+                            </span> --}}
+                                    </div>
+                                    <div>
+                                        <span>
+                                            <i class="ri-star-smile-fill ml-3 text-6xl text-blue-500"></i>
+                                        </span>
+                                    </div>
                                 </div>
-                                <div>
-                                    <span>
-                                        <i class="ri-star-smile-fill ml-3 text-6xl text-blue-500"></i>
-                                    </span>
-                                </div>
-                            </div>
+                            </a>
 
                             <!-- Orders card -->
                             <div class="flex items-center justify-between p-4 bg-white rounded-md dark:bg-darker">
@@ -671,55 +685,10 @@
     </div>
 </div>
 
-        <!----Resize  web----->
-        <div class="block md:hidden fixed left-3 top-[87px] w-[240px] h-[86%] bg-blue-200 rounded-3xl p-4 overflow-y-auto">
-            <ul class="mt-2">
-                <li class="mb-1 group active">
-                    <a href="{{ asset('/') }}" class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
-                        <i class="fas fa-inbox mr-3 text-lg"></i>
-                        <span class="font-poppins">Inbox</span>
-                    </a>
-                </li>
-                <li class="mb-1 group">
-                    <a href="{{ asset('/') }}"
-                        class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
-                        <i class="fas fa-map-marker-alt mr-3 text-lg"></i>
-                        <span class="font-poppins">Maps</span>
-                    </a>
-                </li>
-                <li class="mb-1 group">
-
-                    <a href="{{ asset('chatting') }}"
-                        class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
-                        <i class="fas fa-comments mr-3 text-lg"></i>
-                        <span class="font-poppins">Chats</span>
-                    </a>
-                </li>
-                {{-- <li class="mb-1 group">
-                <a href="{{ asset('calendar')}}" class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
-                    <i class="ri-user-fill mr-3 text-lg"></i>
-                    <span class="font-poppins">Calendar</span>
-                </a>
-            </li> --}}
-                <li class="mb-1 group">
-                    <a href="{{ asset('/') }}"
-                        class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
-                        <i class="fas fa-cog mr-3 text-lg"></i>
-                        <span class="font-poppins">Settings</span>
-                    </a>
-                </li>
-            </ul>
-            <div class="flex flex-col items-center justify-center bg-blue-200 rounded-lg shadow-xl min-h-[80px]">
-                <img src="{{ asset('images/comment.png') }}" alt="Your Image" class="w-10 h-auto rounded-lg">
-                <span>Message</div>
-
-        </div>
-    </div>
-
 
 
     <!----Resize mobile----->
-   <nav id="mobileMenu" class="hidden md:block fixed bottom-5 w-full">
+   <nav id="mobileMenu" class=" block fixed bottom-5 w-full">
     <div class="flex flex-col">
         <!-- First layer of icons -->
         <div class="flex justify-center items-center py-3 gap-20">
@@ -733,23 +702,24 @@
                 </div>
             </div>
                 <!-- Icon 2 -->
-                <div class="bg-blue-400 bg-opacity-50 rounded p-3">
+                <a href="{{ asset('maps') }}" class="bg-blue-400 bg-opacity-50 rounded p-3">
                     <div class="text-blue-200 flex flex-col items-center p-2">
                         <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
                             <i class="fas fa-map-marker-alt text-blue-600"></i>
                         </div>
                         <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Maps</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="bg-blue-400 bg-opacity-50 rounded p-3">
+                <a href="{{ asset('chatify') }}"class="bg-blue-400 bg-opacity-50 rounded p-3">
                     <div class="text-blue-200 flex flex-col items-center p-2">
                         <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
                             <i class="fas fa-comments text-blue-600"></i>
                         </div>
                         <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Chats</span>
-                    </div>
+
                 </div>
+            </a>
                 <div class="bg-blue-400 bg-opacity-50 rounded p-3">
                     <div class="text-blue-200 flex flex-col items-center p-2">
                         <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
@@ -763,7 +733,7 @@
     </nav>
 
        <!-- Search bar -->
-       <div class="mt-4 relative">
+       {{-- <div class="mt-4 relative">
         <div class="flex items-center justify-center relative right-[20%]  w-[350px]">
             <input
                 type="text"
@@ -778,7 +748,7 @@
 
             </button>
         </div>
-    </div>
+    </div> --}}
 
 
     <div class="container" id="video-container" style="display: none;">
@@ -787,23 +757,6 @@
 </div>
 
         <!----Resize  web----->
-        <div class="block md:hidden fixed left-3 top-[87px] w-[240px] h-[86%] bg-blue-200 rounded-3xl p-4 overflow-y-auto">
-            <ul class="mt-2">
-                <li class="mb-1 group active">
-                    <a href="{{ asset('/') }}" class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
-                        <i class="fas fa-inbox mr-3 text-lg"></i>
-                        <span class="font-poppins">Inbox</span>
-                    </a>
-                </li>
-                <li class="mb-1 group">
-                    <a href="{{ asset('/') }}"
-                        class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
-                        <i class="fas fa-map-marker-alt mr-3 text-lg"></i>
-                        <span class="font-poppins">Maps</span>
-                    </a>
-                </li>
-                <li class="mb-1 group">
-
 
 
         <script src="https://cdn.jsdelivr.net/npm/@zxing/library@3.0.0/build/zxing.min.js"></script>

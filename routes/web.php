@@ -82,7 +82,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/dashboard', [DashboardController::class, 'countUsersByRole'])->middleware(['auth', 'verified'])->name('dashboard');
-require __DIR__.'/auth.php';
+
+
+Route::get('/maps', function () {
+    return view('maps');
+});
+
 
 Route::get('/tracking', [LocationController::class, 'index'])->name('tracking');
 
@@ -93,5 +98,5 @@ Route::get('/chat', function () {
     Route::get('/user_home', function () {
         return view('user_home'); // Assumes "AboutUs.blade.php" is in the "resources/views" directory.
     })->name('user_home');
-
+    require __DIR__.'/auth.php';
 
