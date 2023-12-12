@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('department');
+            $table->string('position');
             $table->string('phone')->unique();
             $table->string('password');
             $table->timestamps();

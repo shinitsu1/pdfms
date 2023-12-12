@@ -23,6 +23,8 @@ class SupervisorsFactory extends Factory
             'last_name' => fake()->lastName(),
             'first_name' =>fake()->firstName(),
             'name' => 'vehicle',
+            'department' => 'administrator',
+            'position' => 'Patrolman',
             'email' => fake()->unique()->safeEmail(),
             'phone' => fake()->numerify('09#########'),
             'password' => Hash::make('12345'),

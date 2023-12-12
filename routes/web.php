@@ -98,5 +98,8 @@ Route::get('/chat', function () {
     Route::get('/user_home', function () {
         return view('user_home'); // Assumes "AboutUs.blade.php" is in the "resources/views" directory.
     })->name('user_home');
+
+
+
     require __DIR__.'/auth.php';
 

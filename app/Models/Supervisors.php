@@ -14,6 +14,8 @@ class Supervisors extends Model
         'last_name',
         'first_name',
         'email',
+        'department',
+        'position',
         'phone',
         'password',
         'role',

@@ -78,6 +78,7 @@ class VehiclesController extends Controller
             // 'emergency_phone' => $request->input('emergency_phone'),
             // 'password' => '12345',
             'role' => 'vehicle',
+            'name' => 'vehicle',
             'unique_identifier' => $uniqueIdentifier,
 
         ]);

@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone');
             $table->string('name');
+            $table->string('department');
+            $table->string('position');
             // $table->string('employee_id');
             // $table->string('gender');
             // $table->string('address');

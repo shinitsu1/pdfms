@@ -46,15 +46,20 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             // 'role' => ['required', 'string', 'max: 10'],
+            'department' => ['required'],
+            'position' => ['required'],
         ]);
 
         $user = User::create([
             'photo' => $accountsData["photo"], // Use the modified variable here
             'last_name' => $request->last_name,
             'first_name' => $request->first_name,
+            'name' => 'name',
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => 'admin',
+            'department' => $request->department,
+            'position' => $request->position,
         ]);
 
         event(new Registered($user));

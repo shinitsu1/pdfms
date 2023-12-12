@@ -39,8 +39,10 @@ class SupervisorsController extends Controller
             'last_name' => 'string',
             'first_name' => 'string',
             'email' => 'email',
-            // 'phone' => 'string',
+            'phone' => 'string',
             'password' => 'nullable|string|min:6',
+            'department' => ['required', 'string'],
+            'position' => ['required', 'string'],
             // 'role' => 'string',
         ]);
 
@@ -49,7 +51,9 @@ class SupervisorsController extends Controller
             'last_name' => $request->input('last_name'),
             'first_name' => $request->input('first_name'),
             'email' => $request->input('email'),
-            // 'phone' => $request->input('phone'),
+            'department' =>$request->input('department'),
+            'position' => $request->input('position'),
+            'phone' => $request->input('phone'),
             'password' => $request->has('password') ? bcrypt($request->input('password')) : $data->password,
             // 'role' => $request->input('role'),
         ]);
@@ -73,7 +77,7 @@ class SupervisorsController extends Controller
             'name' => 'string',
             'phone' => 'string',
             'role' => 'nullable|string|min:6',
-            'email' => 'required', 'email', Rule::unique('students', 'email'),
+            'email' => 'required', 'email', Rule::unique('supervisor', 'email'),
             'password' => 'nullable|string|min:6',
         ]);
 
@@ -92,6 +96,8 @@ class SupervisorsController extends Controller
             'name' => 'name',
             'email' => $request->input('email'),
             'phone' => $request->input('phone'),
+            'department' => $request->input('department'),
+            'position' => $request->input('position'),
             'password' => '12345',
             'role' => 'supervisor',
         ]);
@@ -103,8 +109,11 @@ class SupervisorsController extends Controller
             'name' => 'name',
             'email' => $request->input('email'),
             'phone' => $request->input('phone'),
+            'department' => $request->input('department'),
+            'position' => $request->input('position'),
             'password' => '12345',
             'role' => 'supervisor',
+
         ]);
 
         return redirect()->route('supervisors')->with('message', 'User Added Successfully.');

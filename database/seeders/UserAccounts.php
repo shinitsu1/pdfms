@@ -23,6 +23,8 @@ class UserAccounts extends Seeder
             'email' => 'karllewistdoctolero@gmail.com',
             'password' => Hash::make('12345'),
             'role' => 'admin',
+            'department' => 'administrator',
+            'position' => 'Patrolman'
 
         ]);
 
@@ -35,6 +37,9 @@ class UserAccounts extends Seeder
             'email' => 'kurt@gmail.com',
             'password' => Hash::make('12345'),
             'role' => 'supervisor',
+            'department' => 'administrator',
+            'position' => 'Patrolman'
+
         ]);
 
         // seeding residents
@@ -46,6 +51,9 @@ class UserAccounts extends Seeder
             'email' => 'leah@gmail.com',
             'password' => Hash::make('12345'),
             'role' => 'police',
+            'department' => 'administrator',
+            'position' => 'Patrolman'
+
         ]);
 
     }

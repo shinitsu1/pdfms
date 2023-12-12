@@ -22,7 +22,7 @@
                 <a href="{{ asset('accounts') }}"
                     class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-[#4ECE5D] group-[.active]:text-white group-[.selected]:bg-[#4ECE5D] group-[.selected]:text-white">
                     <i class="ri-account-pin-box-line mr-3 text-lg"></i>
-                    <span class="font-poppins">Accounts</span>
+                    <span class="font-poppins">Officers</span>
                 </a>
             </li>
             <li class="mb-1 group">
@@ -61,6 +61,8 @@
                             <th>Lastname</th>
                             <th>Firstname</th>
                             <th>Email</th>
+                            <th>Deparment</th>
+                            <th>Position</th>
                             {{-- <th>Phone #</th> --}}
                             <th>Actions</th>
                             {{-- <th>Action</th> --}}
@@ -77,6 +79,9 @@
                                 <td>{{ $supervisor->last_name }}</td>
                                 <td>{{ $supervisor->first_name }}</td>
                                 <td>{{ $supervisor->email }}</td>
+                                <td>{{ $supervisor->department }}</td>
+                                <td>{{ $supervisor->position }}</td>
+
                                 {{-- <td>{{ $supervisor->phone }}</td> --}}
                                 {{-- <td class="text-center ">
                                     <button
@@ -230,11 +235,56 @@
                                                     class="bg-gray-100 border border-gray-600 text-gray-900" required>
                                             </div>
 
-                                            {{-- <div>
+
+                                            <div>
                                                 <label for="phone">Phone Number</label>
                                                 <input type="text" name="phone" value="{{ $item->phone }}"
                                                     class="bg-gray-100 border border-gray-600 text-gray-900" required>
-                                            </div> --}}
+                                            </div>
+
+                                            <div>
+                                                <label for="department"
+                                                    class="block mb-2 text-sm font-medium text-gray-900">Deparment</label>
+                                                    <select name="department" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-2">
+                                                        <option value="" {{$supervisor->department ==  "" ? 'selected' : ''}}></option>
+                                                        <option value="Admin PNCO" {{$supervisor->department ==  "Admin PNCO" ? 'selected' : ''}}>Admin PNCO</option>
+                                                        <option value="Operation PNCO" {{$supervisor->department ==  "Operation PNCO" ? 'selected' : ''}}>Operation PNCO</option>
+                                                        <option value="Investigation PNCO" {{$supervisor->department ==  "Investigation PNCO" ? 'selected' : ''}}>Investigation PNCO</option>
+                                                        <option value="Finance PNCO" {{$supervisor->department ==  "Finance PNCO" ? 'selected' : ''}}>Finance PNCO</option>
+                                                        <option value="Logistics PNCO" {{$supervisor->department ==  "Logistics PNCO" ? 'selected' : ''}}>Logistics PNCO</option>
+                                                        <option value="Police Clearance PNCO" {{$supervisor->department ==  "Police Clearance PNCO" ? 'selected' : ''}}>Police Clearance PNCO</option>
+                                                        <option value="Intel PNCO" {{$supervisor->department ==  "Intel PNCO" ? 'selected' : ''}}>Intel PNCO</option>
+                                                    </select>
+                                                    @error('department')
+                                                            <p class="text-red-500 text-xs p-1">
+                                                                {{$message}}
+                                                            </p>
+                                                    @enderror
+                                            </div>
+
+                                            <div>
+                                                <label for="position"
+                                                    class="block mb-2 text-sm font-medium text-gray-900">Position</label>
+                                                    <select name="position" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white  mb-2">
+                                                        <option value="" {{$supervisor->position ==  "" ? 'selected' : ''}}></option>
+                                                        <option value="Police Captain Deputy" {{$supervisor->position ==  "Police Captain Deputy" ? 'selected' : ''}}>Police Captain Deputy</option>
+                                                        <option value="Police Executive Master Sergeant" {{$supervisor->position ==  "Police Executive Master Sergeant" ? 'selected' : ''}}>Police Executive Master Sergeant</option>
+                                                        <option value="Station's Support and Services Officer" {{$supervisor->position ==  "Station's Support and Services Officer" ? 'selected' : ''}}>Station's Support and Services Officer</option>
+                                                        <option value="Police Lieutenant" {{$supervisor->position ==  "Police Lieutenant" ? 'selected' : ''}}>Police Lieutenant</option>
+                                                        <option value="Police Chief Master Sergeant" {{$supervisor->position ==  "Police Chief Master Sergeant" ? 'selected' : ''}}>Police Chief Master Sergeant</option>
+                                                        <option value="Police Master Sergeant" {{$supervisor->position ==  "Police Master Sergeant" ? 'selected' : ''}}>Police Master Sergeant</option>
+                                                        <option value="Police Staff Sergeant" {{$supervisor->position ==  "Police Staff Sergeant" ? 'selected' : ''}}>Police Staff Sergeant</option>
+                                                        <option value="Police Corporal" {{$supervisor->position ==  "Police Corporal" ? 'selected' : ''}}>Police Corporal</option>
+                                                        <option value="Police Major" {{$supervisor->position ==  "Police Major" ? 'selected' : ''}}>Police Major</option>
+                                                        <option value="Patrolman" {{$supervisor->position ==  "Patrolman" ? 'selected' : ''}}>Patrolman</option>
+                                                        <option value="Patrolwoman" {{$supervisor->position ==  "Patrolwoman" ? 'selected' : ''}}>Patrolwoman</option>
+                                                    </select>
+                                                    @error('position')
+                                                            <p class="text-red-500 text-xs p-1">
+                                                                {{$message}}
+                                                            </p>
+                                                    @enderror
+                                            </div>
                                         </div>
                                     </div>
 
@@ -464,8 +514,57 @@
                                             id="phone" data-default-country="ph"
                                             class="bg-gray-100 border border-gray-300 text-gray-900" required>
                                     </div>
+
+                                    <div>
+                                        <label for="department"
+                                            class="block mb-2 text-sm font-medium text-gray-900">Deparment</label>
+                                            <select name="department" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-2">
+                                                <option value="" {{old('department') ==  "" ? 'selected' : ''}}></option>
+                                                <option value="Admin PNCO" {{old('department') ==  "Admin PNCO" ? 'selected' : ''}}>Admin PNCO</option>
+                                                <option value="Operation PNCO" {{old('department') ==  "Operation PNCO" ? 'selected' : ''}}>Operation PNCO</option>
+                                                <option value="Investigation PNCO" {{old('department') ==  "Investigation PNCO" ? 'selected' : ''}}>Investigation PNCO</option>
+                                                <option value="Finance PNCO" {{old('department') ==  "Finance PNCO" ? 'selected' : ''}}>Finance PNCO</option>
+                                                <option value="Logistics PNCO" {{old('department') ==  "Logistics PNCO" ? 'selected' : ''}}>Logistics PNCO</option>
+                                                <option value="Police Clearance PNCO" {{old('department') ==  "Police Clearance PNCO" ? 'selected' : ''}}>Police Clearance PNCO</option>
+                                                <option value="Intel PNCO" {{old('department') ==  "Intel PNCO" ? 'selected' : ''}}>Intel PNCO</option>
+                                            </select>
+                                            @error('department')
+                                                    <p class="text-red-500 text-xs p-1">
+                                                        {{$message}}
+                                                    </p>
+                                            @enderror
+                                    </div>
+
+                                    <div>
+                                        <label for="position"
+                                            class="block mb-2 text-sm font-medium text-gray-900">Position</label>
+                                            <select name="position" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white  mb-2">
+                                                <option value="" {{old('position') ==  "" ? 'selected' : ''}}></option>
+                                                <option value="Police Captain Deputy" {{old('position') ==  "Police Captain Deputy" ? 'selected' : ''}}>Police Captain Deputy</option>
+                                                <option value="Police Executive Master Sergeant" {{old('position') ==  "Police Executive Master Sergeant" ? 'selected' : ''}}>Police Executive Master Sergeant</option>
+                                                <option value="Station's Support and Services Officer" {{old('position') ==  "Station's Support and Services Officer" ? 'selected' : ''}}>Station's Support and Services Officer</option>
+                                                <option value="Police Lieutenant" {{old('position') ==  "Police Lieutenant" ? 'selected' : ''}}>Police Lieutenant</option>
+                                                <option value="Police Chief Master Sergeant" {{old('position') ==  "Police Chief Master Sergeant" ? 'selected' : ''}}>Police Chief Master Sergeant</option>
+                                                <option value="Police Master Sergeant" {{old('position') ==  "Police Master Sergeant" ? 'selected' : ''}}>Police Master Sergeant</option>
+                                                <option value="Police Staff Sergeant" {{old('position') ==  "Police Staff Sergeant" ? 'selected' : ''}}>Police Staff Sergeant</option>
+                                                <option value="Police Corporal" {{old('position') ==  "Police Corporal" ? 'selected' : ''}}>Police Corporal</option>
+                                                <option value="Police Major" {{old('position') ==  "Police Major" ? 'selected' : ''}}>Police Major</option>
+                                                <option value="Patrolman" {{old('position') ==  "Patrolman" ? 'selected' : ''}}>Patrolman</option>
+                                                <option value="Patrolwoman" {{old('position') ==  "Patrolwoman" ? 'selected' : ''}}>Patrolwoman</option>
+                                            </select>
+                                            @error('position')
+                                                    <p class="text-red-500 text-xs p-1">
+                                                        {{$message}}
+                                                    </p>
+                                            @enderror
+                                    </div>
+
                                 </div>
-                                <input class="form-control" name="photo" type="file" id="photo">
+
+
+                                <div>
+                                    <input class="form-control" name="photo" type="file" id="photo">
+                                </div>
                             </div>
 
                             <div class="flex justify-end mt-3">

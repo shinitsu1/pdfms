@@ -14,6 +14,8 @@ class Accounts extends Model
         'first_name',
         'name',
         'email',
+        'department',
+        'position',
         'role',
         'phone',
         'photo',

@@ -24,6 +24,8 @@ class AccountsFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'name' => 'vehicle',
             'phone' => fake()->numerify('09#########'),
+            'department' => 'administrator',
+            'position' => 'Patrolman',
             // 'employee_id' => fake()->numerify('###-###-###'),
             // 'gender' => fake()->randomElement(['Male', 'Female']),
             // 'address' => fake()->address(),
