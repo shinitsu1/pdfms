@@ -25,6 +25,10 @@ use App\Http\Controllers\LocationController;
 //     return view('welcome');
 // });
 
+// Route::get('/scanner', function () {
+//     return view('scanner');
+// });
+
 Route::get('/mobile', function () {
     return view('mobile');
 });
@@ -74,6 +78,7 @@ Route::controller(VehiclesController::class)->group(function(){
     Route::delete('/vehicles/delete/{vehicle}','destroy')->name('vehicles.destroy');
     Route::post('/vehicles/create','create_vehicle')->name('vehicles.create_vehicle');
     Route::get('/download/{number}','downloadQR')->name('vehicles.downloadQR');
+    Route::get('/scanner', 'scan');
 });
 
 

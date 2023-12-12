@@ -16,6 +16,12 @@ class VehiclesController extends Controller
         return view('vehicles', compact('vehicles'));
     }
 
+    public function scan(Request $request){
+        $data = Vehicles::where('unique_identifier')->get();
+
+        return view('scanner', compact('data'));
+    }
+
     public function destroy(Vehicles $vehicle){
         $vehicle->delete();
 
