@@ -53,6 +53,8 @@ class AccountsController extends Controller
             'first_name' => $request->input('first_name'),
             'name'=>'name',
             'email' => $request->input('email'),
+            'department' => $request->input('department'),
+            'position' => $request->input('position'),
             'role' => 'police',
             'phone' => $request->input('phone'),
             'photo' => $accountsData["photo"], // Use the modified variable here
@@ -64,6 +66,8 @@ class AccountsController extends Controller
             'name'=>'name',
             'first_name' => $request->input('first_name'),
             'email' => $request->input('email'),
+            'department' => $request->input('department'),
+            'position' => $request->input('position'),
             'phone' => $request->input('phone'),
             'password' => '12345',
             'role' => 'supervisor',
@@ -85,6 +89,8 @@ class AccountsController extends Controller
             'first_name' => 'string',
             'email' => 'email',
             'phone' => 'string',
+            'department' => ['required'],
+            'position' => ['required'],
 
             // 'emergency_phone' => 'required|int',
 
@@ -96,6 +102,8 @@ class AccountsController extends Controller
             'first_name' => $request->input('first_name'),
             'email' => $request->input('email'),
             'phone' => $request->input('phone'),
+            'department' => $request->input('department'),
+            'position' => $request->input('position'),
 
             // 'emergency_phone' => $request->input('emergency_phone'),
         ]);
