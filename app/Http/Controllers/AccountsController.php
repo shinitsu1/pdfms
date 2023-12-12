@@ -70,7 +70,7 @@ class AccountsController extends Controller
             'position' => $request->input('position'),
             'phone' => $request->input('phone'),
             'password' => '12345',
-            'role' => 'supervisor',
+            'role' => 'police',
         ]);
         return redirect()->route('accounts')->with('message', 'User Added Successfully.');
     }
