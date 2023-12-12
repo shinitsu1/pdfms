@@ -6,7 +6,7 @@
     <meta name="description" content="FleetLink - Your Location and Weather Information">
     <title>FleetLink</title>
     <style>
-        /* Your existing styles here */
+        
 
         body {
             margin: 0;
