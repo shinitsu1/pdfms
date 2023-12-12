@@ -81,7 +81,21 @@
                                 <td>{{ $supervisor->email }}</td>
                                 <td>{{ $supervisor->department }}</td>
                                 <td>{{ $supervisor->position }}</td>
+                                <td class="text-center">
+                                    <button
+                                    @click="supervisorEdit = true; itemToEdit = $event.target.getAttribute('data-item-id')"
+                                    data-item-id="{{ $supervisor->id }}"
+                                    class="hover:bg-sky-600 text-blue-500 hover:text-white px-4 py-2">
+                                    <i class="ri-edit-fill"></i>
+                                </button>
 
+                                <button
+                                    @click="supervisorDelete = true; itemToDelete = $event.target.getAttribute('data-item-id')"
+                                    data-item-id="{{ $supervisor->id }}"
+                                    class="hover:bg-red-600 text-red-500 hover:text-white px-4 py-2">
+                                    <i class="ri-delete-bin-fill"></i>
+                                </button>
+                                </td>
                                 {{-- <td>{{ $supervisor->phone }}</td> --}}
                                 {{-- <td class="text-center ">
                                     <button
@@ -97,7 +111,7 @@
                                         Delete
                                     </button>
                                 </td> --}}
-                                <td class="px-4 py-3 flex items-center justify-center">
+                                {{-- <td class="px-4 py-3 flex items-center justify-center">
                                     <button id="apple-imac-27-dropdown-button"
                                         data-dropdown-toggle="apple-imac-27-dropdown"
                                         class="inline-flex items-center text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 p-1.5 dark:hover-bg-gray-800 text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
@@ -156,7 +170,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                </td>
+                                </td> --}}
 
                             </tr>
                         @endforeach
