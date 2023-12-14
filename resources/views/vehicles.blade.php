@@ -64,6 +64,7 @@
                             <th>Model</th>
                             <th>VIN</th>
                             <th>QrCode</th>
+                            <th>Status</th>
                             {{-- <th>Emergency Phone</th> --}}
                             <th>Action</th>
                             <th>Action</th>
@@ -72,15 +73,21 @@
                     <tbody>
                         @foreach ($vehicles as $vehicle)
                             <tr x-on:click="itemToEdit = {{ $vehicle->id }};">
+
                                 <td class="text-center">{{ $vehicle->id }}</td>
                                 <td class="text-center">{{ $vehicle->plate }}</td>
                                 <td class="text-center">{{ $vehicle->brand }}</td>
                                 <td class="text-center">{{ $vehicle->model }}</td>
                                 <td class="text-center">{{ $vehicle->vin }}</td>
                                 <td class="flex justify-center">
-                                    <button @click="qrcode = true">
+                                    <button @click="qrcode = true" data-item-id="{{ $vehicle->id }}">
                                         {!! $vehicle->generateQRCode() !!}
                                     </button>
+                                </td>
+                                <td class="text-center">
+                                    <a href="/vehicle/{{ $vehicle->id }}" class="btn btn-sm btn-{{ $vehicle->status ? 'success bg-green-500' : 'danger bg-red-500' }} px-2 py-2 rounded">
+                                        {{ $vehicle->status ? 'Available' : 'Unavailable' }}
+                                    </a>
                                 </td>
 
                                 <td class="text-center ">

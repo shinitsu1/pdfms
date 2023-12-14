@@ -27,10 +27,11 @@ class Vehicles extends Model
 
     public function generateQRCode()
     {
-        return QrCode::size(40)->color(0,0,0)->generate($this->unique_identifier);
+        // return QrCode::size(40)->color(0,0,0)->generate($this->unique_identifier);
+        return QrCode::size(40)->color(0,0,0)->generate($this->plate. ' ' .$this->model);
     }
 
     public function size() {
-        return QrCode::size(200)->color(0,0,0)->generate($this->unique_identifier);
+        return QrCode::size(200)->color(0,0,0)->generate($this->plate. ' ' .$this->model);
     }
 }

@@ -14,12 +14,14 @@ class DashboardController extends Controller
         $countSupervisor = Supervisors::where('role', 'supervisor')->count();
         $countVehicle = Vehicles::where('role', 'vehicle')->count();
         $countAccount = Accounts::where('role', 'police')->count();
+        $countAvailable = Vehicles::where('status', '1')->count();
 
 
         return view('dashboard',
         ['countSupervisor' => $countSupervisor,
         'countVehicle' => $countVehicle,
         'countAccount' => $countAccount,
+        'countAvailable' => $countAvailable,
        ]
         );
     }

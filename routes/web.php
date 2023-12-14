@@ -79,6 +79,7 @@ Route::controller(VehiclesController::class)->group(function(){
     Route::post('/vehicles/create','create_vehicle')->name('vehicles.create_vehicle');
     Route::get('/download/{number}','downloadQR')->name('vehicles.downloadQR');
     Route::get('/scanner', 'scan');
+    Route::get('/vehicle/{vehicleId}', 'status');
 });
 
 

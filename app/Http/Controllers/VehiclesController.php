@@ -17,7 +17,7 @@ class VehiclesController extends Controller
     }
 
     public function scan(Request $request){
-        $data = Vehicles::where('unique_identifier')->get();
+        $data = Vehicles::where('plate')->get();
 
         return view('scanner', compact('data'));
     }
@@ -59,6 +59,22 @@ class VehiclesController extends Controller
         return redirect()->route('vehicles')->with('message', 'User updated successfully');
     }
 
+    public function status($vehicleId){
+        $vehicle = Vehicles::find($vehicleId);
+
+        if($vehicle){
+            if($vehicle->status){
+                $vehicle->status = 0;
+            }
+            else{
+                $vehicle->status = 1;
+            }
+            $vehicle->save();
+        }
+        return back();
+    }
+
+
     public function create_vehicle(Request $request){
 
         $uniqueIdentifier = uniqid();
@@ -85,6 +101,7 @@ class VehiclesController extends Controller
             // 'password' => '12345',
             'role' => 'vehicle',
             'name' => 'vehicle',
+            'status' => '1',
             'unique_identifier' => $uniqueIdentifier,
 
         ]);
