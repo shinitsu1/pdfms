@@ -33,6 +33,7 @@ class VehiclesFactory extends Factory
             'model' => 'Hilux',
             'vin' => $this->faker->vin,
             'unique_identifier' => fake()->numerify('##########'),
+            'status' => fake()->randonElement([0,1]),
             // 'phone' => fake()->numerify('09#########'),
             // 'employee_id' => fake()->numerify('###-###-###'),
             // 'gender' => fake()->randomElement(['Male', 'Female']),

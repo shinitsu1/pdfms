@@ -89,7 +89,7 @@ class VehiclesController extends Controller
 
         ]);
 
-        return redirect()->route('vehicles')->with('message', 'User Added Successfully.');
+        return redirect()->route('vehicles')->with('message', 'Vehicle Added Successfully.');
     }
 
     public function vehicleCodeExists($number){

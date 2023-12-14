@@ -18,6 +18,7 @@ class Vehicles extends Model
         'role',
         'unique_identifier',
         'name',
+        'status',
         // 'username',
         // 'phone',
         // 'emergency_phone',
