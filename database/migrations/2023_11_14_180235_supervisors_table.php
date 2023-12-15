@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('phone')->unique();
             $table->string('password');
             $table->timestamps();
+            $table->string('confirmation_token')->after('password'); 
+            
         });
     }
 
@@ -29,7 +31,9 @@ return new class extends Migration
      * Reverse the migrations.
      */
     public function down(): void
-    {
-        Schema::dropIfExists('supervisors');
+    { 
+        Schema::table('supervisors', function (Blueprint $table) {
+        $table->dropColumn('confirmation_token');
+    }); 
     }
 };

@@ -17,6 +17,9 @@ class Supervisors extends Model
         'phone',
         'password',
         'role',
+        'confirmation_token',
+        
         // Add other attributes as needed
     ];
+    protected $table = 'supervisors';
 }

@@ -651,10 +651,12 @@
                 <img src="{{ asset('images/telephone.png') }}" alt="Your Image" class="w-10 h-auto rounded-lg">
                 <span class="mt-2">Call</span>
             </div>
+            <button id="scanButton">
             <div class="flex flex-col items-center justify-center bg-blue-200 rounded-lg shadow-xl min-h-[80px] w-full p-4">
-                <img src="{{ asset('images/qr (1).png') }}" alt="Your Image" class="w-10 h-auto rounded-lg">
+                <img src="{{ asset('images/qr (1).png') }}" alt="san" class="w-10 h-auto rounded-lg">
                 <span class="mt-2">Scan</span>
             </div>
+            </button>
             <div class="flex flex-col items-center justify-center bg-blue-200 rounded-lg shadow-xl min-h-[80px] w-full p-4">
                 <img src="{{ asset('images/comment.png') }}" alt="Your Image" class="w-10 h-auto rounded-lg">
                 <span class="mt-1">Message</span>
@@ -688,10 +690,7 @@
         </div>
     </div>
     
-    <div class="container" id="video-container" style="display: none;">
-        <video id="video-preview" playsinline autoplay></video>
-    </div>
-</div>
+   
 
     <!----Resize mobile----->
     <nav id="mobileMenu" class="block fixed bottom-5 w-full">
@@ -716,6 +715,7 @@
                         <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Maps</span>
                     </div>
                 </div>
+                <a href="{{ asset('chatify') }}">
                 <div class="bg-blue-400 bg-opacity-50 rounded p-3">
                     <div class="text-blue-200 flex flex-col items-center p-2">
                         <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
@@ -724,6 +724,8 @@
                         <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Chats</span>
                     </div>
                 </div>
+                </a>
+
                 <div class="bg-blue-400 bg-opacity-50 rounded p-3">
                     <div class="text-blue-200 flex flex-col items-center p-2">
                         <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
@@ -737,9 +739,6 @@
         </div>
     </nav>
     
-   
-
-
         <script src="https://cdn.jsdelivr.net/npm/@zxing/library@3.0.0/build/zxing.min.js"></script>
         <script>
             document.getElementById('scanButton').addEventListener('click', function () {

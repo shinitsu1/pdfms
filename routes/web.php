@@ -9,6 +9,8 @@ use App\Models\Supervisors;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SmsController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\QRCodeController;
+use App\Http\Controllers\PasswordConfirmationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,5 +92,14 @@ Route::get('/chat', function () {
     Route::get('/user_home', function () {
         return view('user_home'); // Assumes "AboutUs.blade.php" is in the "resources/views" directory.
     })->name('user_home');
+
+    Route::get('/mapss', function () {
+        return view('mapss'); // Assumes "AboutUs.blade.php" is in the "resources/views" directory.
+    })->name('maps');
+
+    Route::get('/generate-qrcode', [QRCodeController::class, 'generateQRCode']);
+
+    Route::get('/confirm-password/{token}', [PasswordConfirmationController::class, 'confirm'])->name('confirm-password');
+
 
 

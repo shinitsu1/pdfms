@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Supervisors;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ConfirmPasswordMail;
+use Illuminate\Support\Str;
 
 class SupervisorsController extends Controller
 {
@@ -93,6 +95,15 @@ class SupervisorsController extends Controller
             'password' => '12345',
             'role' => 'supervisor',
         ]);
+        $confirmationToken = Str::random(40);
+        $confirmationLink = route('confirm-password', ['token' => $confirmationToken]);
+    
+        // Assuming you have the supervisor's email from the form
+        $supervisorEmail = $request->input('email');
+    
+        // Send email for password change
+        Mail::to($supervisorEmail)->send(new ConfirmPasswordMail($confirmationLink, 'Change Password'));
+    
 
         User::create([
             'photo' => $accountsData["photo"], // Use the modified variable here
@@ -103,7 +114,12 @@ class SupervisorsController extends Controller
             'password' => '12345',
             'role' => 'supervisor',
         ]);
+        
+        
 
+
+
+        
         return redirect()->route('supervisors')->with('message', 'User Added Successfully.');
     }
 }
