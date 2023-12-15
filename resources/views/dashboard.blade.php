@@ -589,7 +589,7 @@
                                 </script>
                             </div>
                             {{-- Doughnut Chart --}}
-                        </div </div>
+                        </div>
 
                         <!-- Two grid columns -->
                         <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-3">
