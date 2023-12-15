@@ -93,6 +93,7 @@ class SupervisorsController extends Controller
             'photo' => $accountsData["photo"], // Use the modified variable here
             'last_name' => $request->input('last_name'),
             'first_name' => $request->input('first_name'),
+            'employee_id' => $request->input('employee_id'),
             'name' => 'name',
             'email' => $request->input('email'),
             'phone' => $request->input('phone'),
@@ -106,6 +107,7 @@ class SupervisorsController extends Controller
             'photo' => $accountsData["photo"], // Use the modified variable here
             'last_name' => $request->input('last_name'),
             'first_name' => $request->input('first_name'),
+            'employee_id' => $request->input('employee_id'),
             'name' => 'name',
             'email' => $request->input('email'),
             'phone' => $request->input('phone'),

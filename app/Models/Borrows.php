@@ -5,22 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Supervisors extends Model
+class Borrows extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'photo',
         'last_name',
         'first_name',
         'employee_id',
-        'email',
-        'department',
         'position',
-        'phone',
-        'password',
-        'role',
-        'name',
-        // Add other attributes as needed
+        'department',
+        'plate',
+        'brand',
+        'model',
+        'vin',
+        'time_in',
+        'time_out',
     ];
 }

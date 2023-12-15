@@ -15,6 +15,7 @@ class Vehicles extends Model
         'brand',
         'model',
         'vin',
+        'user',
         'role',
         'unique_identifier',
         'name',

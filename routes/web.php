@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StatusController;
 use App\Http\Controllers\SupervisorsController;
 use App\Http\Controllers\VehiclesController;
 use App\Models\Supervisors;
@@ -78,11 +79,16 @@ Route::controller(VehiclesController::class)->group(function(){
     Route::delete('/vehicles/delete/{vehicle}','destroy')->name('vehicles.destroy');
     Route::post('/vehicles/create','create_vehicle')->name('vehicles.create_vehicle');
     Route::get('/download/{number}','downloadQR')->name('vehicles.downloadQR');
-    Route::get('/scanner', 'scan');
+    Route::get('/scanner', 'scan')->name('scanner');
+    Route::get('/scanner/data/{id}', 'data');
     Route::get('/vehicle/{vehicleId}', 'status');
     Route::patch('/vehicle/status/{plate}','updateStatus');
+    Route::post('/vehicles/borrow','borrow')->name('vehicles.borrow');
 
 });
+
+    Route::get('/status', [StatusController::class, 'index']);
+
 
 
 Route::get('/dashboard', function () {

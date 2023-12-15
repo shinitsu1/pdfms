@@ -11,20 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('supervisors', function (Blueprint $table) {
-            //
+        //
+        Schema::create('borrows', function (Blueprint $table) {
             $table->id();
-            $table->string('role');
-            $table->string('photo');
             $table->string('last_name');
             $table->string('first_name');
             $table->string('employee_id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('department');
             $table->string('position');
-            $table->string('phone')->unique();
-            $table->string('password');
+            $table->string('department');
+            $table->string('vin');
+            $table->string('plate');
+            $table->string('brand');
+            $table->string('model');
+            $table->string('time_in');
+            $table->string('time_out');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -34,6 +35,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('supervisors');
+        //
+        Schema::dropIfExists('borrows');
     }
 };

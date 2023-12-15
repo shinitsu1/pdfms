@@ -54,6 +54,7 @@ class RegisteredUserController extends Controller
             'photo' => $accountsData["photo"], // Use the modified variable here
             'last_name' => $request->last_name,
             'first_name' => $request->first_name,
+            'employee_id' => $request->employee_id,
             'name' => 'name',
             'email' => $request->email,
             'password' => Hash::make($request->password),

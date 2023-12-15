@@ -37,6 +37,13 @@
                     </a>
                 </li>
                 <li class="mb-1 group">
+                    <a href="{{ asset('status') }}"
+                        class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-[#4ECE5D] group-[.selected]:text-white">
+                        <i class="ri-admin-fill mr-3 text-lg"></i>
+                        <span class="font-poppins">Vehicle Status</span>
+                    </a>
+                </li>
+                <li class="mb-1 group">
                     <a href="{{ asset('chatify') }}"
                         class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
                         <i class="ri-calendar-2-fill mr-3 text-lg"></i>
@@ -66,6 +73,7 @@
                                 <th>Image</th>
                                 <th>Lastname</th>
                                 <th>Firstname</th>
+                                <th>EmployeeID</th>
                                 <th>Email</th>
                                 <th>Department</th>
                                 <th>Position</th>
@@ -81,6 +89,7 @@
                                     </td>
                                     <td>{{ $account->last_name }}</td>
                                     <td>{{ $account->first_name }}</td>
+                                    <td>{{ $account->employee_id }}</td>
                                     <td>{{ $account->email }}</td>
                                     <td>{{ $account->department }}</td>
                                     <td>{{ $account->position }}</td>
@@ -327,6 +336,13 @@
                                         </div>
 
                                         <div>
+                                            <label for="employee_id"
+                                                class="block mb-2 text-sm font-medium text-gray-900">employee_id</label>
+                                            <input type="text" name="employee_id"
+                                                class="bg-gray-100 border border-gray-300 text-gray-900" required>
+                                        </div>
+
+                                        <div>
                                             <label for="email"
                                                 class="block mb-2 text-sm font-medium text-gray-900">Email</label>
                                             <input type="text" name="email"
@@ -463,13 +479,14 @@
                         <span class="font-poppins">Tracking</span>
                     </a>
                 </li>
-                {{-- <li class="mb-1 group">
-                    <a href="{{ asset('calendar') }}"
-                        class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">
-                        <i class="ri-user-fill mr-3 text-lg"></i>
-                        <span class="font-poppins">Calendar</span>
+                <li class="mb-1 group">
+                    <a href="{{ asset('status') }}"
+                        class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-[#4ECE5D] group-[.selected]:text-white">
+                        <i class="ri-admin-fill mr-3 text-lg"></i>
+                        <span class="font-poppins">Vehicle Status</span>
                     </a>
-                </li> --}}
+                </li>
+
                 <li class="mb-1 group">
                     <a href="{{ asset('chatify') }}"
                         class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-500 group-[.selected]:text-white">

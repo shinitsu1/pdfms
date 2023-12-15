@@ -24,6 +24,7 @@ class UserFactory extends Factory
             'photo' => fake()->numerify('#########'),
             'last_name' => fake()->lastName(),
             'first_name' => fake()->firstName(),
+            'employee_id' => fake()->numerify('#####'),
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),

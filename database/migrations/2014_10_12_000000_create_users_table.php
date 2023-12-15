@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('photo', 255);
             $table->string('last_name');
             $table->string('first_name');
+            $table->string('employee_id');
             $table->string('name');
             $table->string('department');
             $table->string('position');

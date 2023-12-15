@@ -51,6 +51,7 @@ class AccountsController extends Controller
         Accounts::create([
             'last_name' => $request->input('last_name'),
             'first_name' => $request->input('first_name'),
+            'employee_id' => $request->input('employee_id'),
             'name'=>'name',
             'email' => $request->input('email'),
             'department' => $request->input('department'),
@@ -63,6 +64,7 @@ class AccountsController extends Controller
         User::create([
             'photo' => $accountsData["photo"], // Use the modified variable here
             'last_name' => $request->input('last_name'),
+            'employee_id' => $request->input('employee_id'),
             'name'=>'name',
             'first_name' => $request->input('first_name'),
             'email' => $request->input('email'),

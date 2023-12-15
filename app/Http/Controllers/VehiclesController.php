@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\Borrows;
+use App\Models\User;
 use App\Models\Vehicles;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Milon\Barcode\Facades\DNS1DFacade as DNS2D;
 
@@ -12,6 +16,7 @@ class VehiclesController extends Controller
     //
     public function index() {
         $vehicles = Vehicles::where('role', 'vehicle')->get();
+
 
         return view('vehicles', compact('vehicles'));
     }
@@ -142,4 +147,29 @@ class VehiclesController extends Controller
         return response(base64_decode($QrCode))->withHeaders($headers);
     }
 
+    public function borrow( Request $request){
+        $data = Borrows::create([
+        'last_name' => $request->input('last_name'),
+        'first_name' => $request->input('first_name'),
+        'employee_id' => $request->input('employee_id'),
+        'position' => $request->input('position'),
+        'vin' => $request->input('vin'),
+        'department' => $request->input('department'),
+        'plate' => $request->input('plate'),
+        'brand' => $request->input('brand'),
+        'model' => $request->input('model'),
+        'time_in' => 'data',
+        'time_out' => 'data',
+        ]);
+
+        // $data = Borrows::find($id);
+
+        // $data->update([
+        //     'time_in' => $request->input('created_at'),
+        //     'time_out' => $request->input('updated_at'),
+        // ]);
+
+
+        return redirect()->route('scanner')->with('message', 'You are now connected into the vehicle.');
+    }
 }

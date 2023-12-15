@@ -22,6 +22,7 @@ class SupervisorsFactory extends Factory
             'photo' => '/storage/images/17017649261by1.png',
             'last_name' => fake()->lastName(),
             'first_name' =>fake()->firstName(),
+            'employee_id' => fake()->numerify('#####'),
             'name' => 'vehicle',
             'department' => 'administrator',
             'position' => 'Patrolman',

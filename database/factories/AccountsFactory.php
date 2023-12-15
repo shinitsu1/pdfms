@@ -21,6 +21,7 @@ class AccountsFactory extends Factory
             'role' => 'police',
             'last_name' => fake()->lastName(),
             'first_name' => fake()->firstName(),
+            'employee_id' => fake()->numerify('#####'),
             'email' => fake()->unique()->safeEmail(),
             'name' => 'vehicle',
             'phone' => fake()->numerify('09#########'),

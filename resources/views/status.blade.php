@@ -26,14 +26,14 @@
                     <span class="font-poppins">Officers</span>
                 </a>
             </li>
-            <li class="mb-1 group active">
+            <li class="mb-1 group ">
                 <a href="{{ asset('vehicles') }}"
                     class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-[#4ECE5D] group-[.selected]:text-white">
                     <i class="ri-user-fill mr-3 text-lg"></i>
                     <span class="font-poppins">Vehicles</span>
                 </a>
             </li>
-            <li class="mb-1 group">
+            <li class="mb-1 group active">
                 <a href="{{ asset('status') }}"
                     class="flex items-center py-2 px-4 text-black hover:bg-blue-400 hover:text-gray-100 rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-[#4ECE5D] group-[.selected]:text-white">
                     <i class="ri-admin-fill mr-3 text-lg"></i>
@@ -58,68 +58,57 @@
         <div id='recipients' class="p-5 mt-5 lg:mt-0 rounded-2xl shadow bg-gray-200">
             <!--AlphineModal-->
             <div x-data="{ qrcode: false, accountDelete: false, adminNewUsers: false, accountEdit: false, itemToDelete: null, itemToEdit: null }">
-                <button @click="adminNewUsers = true"
-                    class="mb-2 text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center"><i
-                        class="ri-add-line mr-1 text-lg"></i>Add New Vehicle</button>
+
                 <table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                     <thead>
                         <tr>
-                            <th>UserID</th>
-                            <th>Plate Number</th>
-                            {{-- <th>Phone</th> --}}
+
+
+                            <th>LastName</th>
+                            <th>FirstName</th>
+                            <th>EmployeeID</th>
+                            <th>Position</th>
+                            <th>department</th>
+                            <th>Plate</th>
+                            <th>VIN</th>
                             <th>Brand</th>
                             <th>Model</th>
-                            <th>VIN</th>
-                            <th>QrCode</th>
-                            <th>Status</th>
-                            {{-- <th>Emergency Phone</th> --}}
-                            <th>Action</th>
-                            <th>Action</th>
+                            <th>In</th>
+                            <th>Out</th>
+
+
+
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($vehicles as $vehicle)
-                            <tr x-on:click="itemToEdit = {{ $vehicle->id }};">
+                        @foreach ($status as $report)
+                            <tr>
 
-                                <td class="text-center">{{ $vehicle->id }}</td>
-                                <td class="text-center">{{ $vehicle->plate }}</td>
-                                <td class="text-center">{{ $vehicle->brand }}</td>
-                                <td class="text-center">{{ $vehicle->model }}</td>
-                                <td class="text-center">{{ $vehicle->vin }}</td>
-                                <td class="flex justify-center">
-                                    <button @click="qrcode = true" data-item-id="{{ $vehicle->id }}">
-                                        {!! $vehicle->generateQRCode() !!}
-                                    </button>
-                                </td>
-                                <td class="text-center">
-                                    <a href="/vehicle/{{ $vehicle->id }}" class="btn btn-sm btn-{{ $vehicle->status ? 'success bg-green-500' : 'danger bg-red-500' }} px-2 py-2 rounded">
-                                        {{ $vehicle->status ? 'Available' : 'Unavailable' }}
-                                    </a>
-                                </td>
 
-                                <td class="text-center ">
-                                    <button @click="accountEdit = true;"
-                                        itemToEdit=$event.target.getAttribute('data-item-id')"
-                                        data-item-id="{{ $vehicle->id }}"
-                                        class="hover:bg-sky-600 text-blue-500 hover:text-white px-6 py-2">
-                                        Edit
-                                    </button>
-                                </td>
-                                <td class="text-red-500 text-center">
-                                    <button
-                                        @click="accountDelete = true; itemToDelete = $event.target.getAttribute('data-item-id')"
-                                        data-item-id="{{ $vehicle->id }}"
-                                        class="hover:bg-red-600 text-red-500 hover:text-white px-6 py-2">
-                                        Delete
-                                    </button>
-                                </td>
+                                <td class="text-center">{{ $report->last_name }}</td>
+                                <td class="text-center">{{ $report->first_name }}</td>
+                                <td class="text-center">{{ $report->employee_id }}</td>
+                                <td class="text-center">{{ $report->position }}</td>
+                                <td class="text-center">{{ $report->department }}</td>
+                                <td class="text-center">{{ $report->plate }}</td>
+                                <td class="text-center">{{ $report->vin }}</td>
+                                <td class="text-center">{{ $report->brand }}</td>
+                                <td class="text-center">{{ $report->model }}</td>
+                                <td class="text-center">{{ $report->created_at }}</td>
+                                <td class="text-center"> --- </td>
+
+
+
+
+
+
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
 
                 <!-- Edit Modal -->
-                <div x-show="accountEdit" class="fixed inset-0 overflow-y-auto flex items-center justify-center z-20"
+                {{-- <div x-show="accountEdit" class="fixed inset-0 overflow-y-auto flex items-center justify-center z-20"
                     x-cloak>
                     <div class="fixed inset-0 transition-opacity" aria-hidden="true">
                         <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
@@ -379,7 +368,7 @@
                 itemToEdit: null, // Variable to store the selected item
             }));
         });
-    </script>
+    </script> --}}
 
 
 

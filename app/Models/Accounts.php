@@ -12,6 +12,7 @@ class Accounts extends Model
     protected $fillable = [
         'last_name',
         'first_name',
+        'employee_id',
         'name',
         'email',
         'department',
