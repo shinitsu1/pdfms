@@ -12,7 +12,7 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
         <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
 
-
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 
         <!-- Fonts -->

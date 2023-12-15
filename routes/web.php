@@ -80,6 +80,8 @@ Route::controller(VehiclesController::class)->group(function(){
     Route::get('/download/{number}','downloadQR')->name('vehicles.downloadQR');
     Route::get('/scanner', 'scan');
     Route::get('/vehicle/{vehicleId}', 'status');
+    Route::patch('/vehicle/status/{plate}','updateStatus');
+
 });
 
 

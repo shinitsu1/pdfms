@@ -645,40 +645,50 @@
     @endif
 
     @if (Auth::user()->role == 'police')
-    <div class="fixed left-[40%] top-[87px] w-[250px]">
-        <div class="grid grid-cols-3 gap-2">
-            <div class="flex flex-col items-center justify-center bg-blue-200 rounded-lg shadow-xl min-h-[80px]">
+    <div class="fixed left-1/2 transform -translate-x-1/2 top-[97px] md:top-[120px] w-full md:w-[100%] max-w-[280px] flex justify-center flex-col items-center">
+        <div class="flex justify-between gap-2 w-full">
+            <div class="flex flex-col items-center justify-center bg-blue-200 rounded-lg shadow-xl min-h-[80px] w-full p-4">
                 <img src="{{ asset('images/telephone.png') }}" alt="Your Image" class="w-10 h-auto rounded-lg">
                 <span>Call</span>
             </div>
+            <div class="flex flex-col items-center justify-center bg-blue-200 rounded-lg shadow-xl min-h-[80px] w-full p-4">
             <button id="scanButton" type="button" class="flex flex-col items-center justify-center bg-blue-200 rounded-lg shadow-xl min-h-[80px]">
                 <img src="{{ asset('images/qr (1).png') }}" alt="Your Image" class="w-10 h-auto rounded-lg">
                 Scan
             </button>
-
-            <div class="flex flex-col items-center justify-center bg-blue-200 rounded-lg shadow-xl min-h-[80px]">
+            </div>
+            <div class="flex flex-col items-center justify-center bg-blue-200 rounded-lg shadow-xl min-h-[80px] w-full p-4">
                 <img src="{{ asset('images/comment.png') }}" alt="Your Image" class="w-10 h-auto rounded-lg">
-                <span>Message</div>
+                <span>Message</span>
+            </div>
         </div>
 
-       <!-- Search bar -->
-       <div class="mt-4 relative">
-        <div class="flex items-center justify-center relative right-[20%]  w-[350px]">
-            <input
-                type="text"
-                placeholder="Search..."
-                class="w-full px-5 py-2  border-gray-300 focus:outline-none focus:border-blue-500">
+        <div class="mt-4 relative w-full md:w-80">
+            <div class="flex items-center justify-center">
+                <input
+                    type="text"
+                    placeholder="Search..."
+                    class="w-full px-5 py-2 border-gray-300 focus:outline-none focus:border-blue-500"
+                >
+                <button
+                    type="button"
+                    class="bg-blue-500 group-hover:bg-blue-300 px-2 py-2 hidden md:block"
+                >
+                    <i class="fas fa-search text-white"></i>
+                </button>
+            </div>
             <button
                 type="button"
-                class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-blue-500 group-hover:bg-blue-300 px-2 py-2"
+                class="bg-blue-500 group-hover:bg-blue-300 px-2 py-2 block md:hidden absolute top-[50%] right-0 transform translate-y-[-50%]"
             >
-
-                    <i class="fas fa-search text-white"></i>
-
+                <i class="fas fa-search text-white"></i>
             </button>
         </div>
-    </div>
 
+        <div class="container" id="video-container" style="display: none;">
+            <video id="video-preview" playsinline autoplay></video>
+        </div>
+    </div>
 
     <div class="container" id="video-container" style="display: none;">
         <video id="video-preview" playsinline autoplay></video>
@@ -688,38 +698,40 @@
 
 
     <!----Resize mobile----->
-   <nav id="mobileMenu" class=" block fixed bottom-5 w-full">
-    <div class="flex flex-col">
-        <!-- First layer of icons -->
-        <div class="flex justify-center items-center py-3 gap-20">
-            <!-- Icon 1 -->
-            <div class="bg-blue-400 bg-opacity-50 rounded p-3">
-                <div class="text-blue-200 flex flex-col items-center p-2">
-                    <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
-                        <i class="fas fa-inbox text-blue-600"></i>
+    <nav id="mobileMenu" class="block fixed bottom-5 w-full">
+        <div class="flex flex-col">
+            <!-- First layer of icons -->
+            <div class="flex justify-center items-center py-3 gap-5 md:gap-10">
+                <!-- Icon 1 -->
+                <div class="bg-blue-400 bg-opacity-50 rounded p-3">
+                    <div class="text-blue-200 flex flex-col items-center p-2">
+                        <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
+                            <i class="fas fa-inbox text-blue-600"></i>
+                        </div>
+                        <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Inbox</span>
                     </div>
-                    <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Inbox</span>
                 </div>
-            </div>
                 <!-- Icon 2 -->
-                <a href="{{ asset('maps') }}" class="bg-blue-400 bg-opacity-50 rounded p-3">
+		<a href="{{ asset('maps') }}">
+                <div class="bg-blue-400 bg-opacity-50 rounded p-3">
                     <div class="text-blue-200 flex flex-col items-center p-2">
                         <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
                             <i class="fas fa-map-marker-alt text-blue-600"></i>
                         </div>
                         <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Maps</span>
                     </div>
-                </a>
-
-                <a href="{{ asset('chatify') }}"class="bg-blue-400 bg-opacity-50 rounded p-3">
+                </div>
+		</a>
+		<a href="{{ asset('chatify') }}">
+                <div class="bg-blue-400 bg-opacity-50 rounded p-3">
                     <div class="text-blue-200 flex flex-col items-center p-2">
                         <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
                             <i class="fas fa-comments text-blue-600"></i>
                         </div>
                         <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Chats</span>
-
+                    </div>
                 </div>
-            </a>
+		</a>
                 <div class="bg-blue-400 bg-opacity-50 rounded p-3">
                     <div class="text-blue-200 flex flex-col items-center p-2">
                         <div class="rounded bg-white bg-opacity-50 backdrop-blur-md m-2 w-6 h-6 flex items-center justify-center">
@@ -727,8 +739,9 @@
                         </div>
                         <span style="font-size: 0.75rem; margin-top: -0.4rem;" class="text-black font-bold">Settings</span>
                     </div>
-                    <!-- Add other icons and text similarly -->
-                </div>
+
+                <!-- Add other icons and text similarly -->
+            </div>
         </div>
     </nav>
 

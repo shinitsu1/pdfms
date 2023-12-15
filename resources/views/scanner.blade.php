@@ -9,12 +9,18 @@
             </div>
             <div class="col-md-6">
                 <button onclick="startScanner()">Open Camera</button>
-                <button onclick="stopScanner()">Close Camera</button>
-                <label>SCAN QRCODE</label>
-                <input type="text" name="text" id="try" readonly="" placeholder="scan qrcode" class="form-control">
-
-                <label>Model</label>
-                <input type="model" name="model" id="model" readonly="" placeholder="Model" class="form-control">
+                <button onclick="stopScanner()">Close Camera</button><br>
+                <label>Plate Number: </label>
+                <input type="text" name="text" id="try" readonly="" placeholder="Plate Number" class="form-control">
+                <br>
+                <label>Model: </label>
+                <input type="text" name="model" id="model" readonly="" placeholder="Model" class="form-control">
+                <br>
+                <label>Brand: </label>
+                <input type="text" name="brand" id="brand" readonly="" placeholder="Brand" class="form-control">
+                <br>
+                <label>VIN: </label>
+                <input type="text" name="vin" id="vin" readonly="" placeholder="vin" class="form-control">
             </div>
         </div>
     </div>
@@ -45,8 +51,32 @@
 
                 // Set the model information to the "model" input field
                 document.getElementById('model').value = qrData[1] || '';
+
+                document.getElementById('brand').value = qrData[2] || '';
+
+                document.getElementById('vin').value = qrData[3] || '';
+
+                updateStatus(qrData[0]);
             });
         }
+
+        function updateStatus(plate) {
+    fetch(`/vehicle/status/${plate}`, {
+        method: 'PATCH',
+    })
+    .then(response => {
+    if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json();
+})
+.then(data => {
+    console.log(data); // Log the response from the server
+})
+.catch(error => {
+    console.error('There was a problem with the fetch operation:', error);
+});
+}
 
         function stopScanner() {
             if (scanner) {
