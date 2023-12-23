@@ -65,7 +65,7 @@
 
 
                             <th>LastName</th>
-                            <th>FirstName</th>
+                            {{-- <th>FirstName</th> --}}
                             <th>EmployeeID</th>
                             <th>Position</th>
                             <th>department</th>
@@ -86,7 +86,7 @@
 
 
                                 <td class="text-center">{{ $report->last_name }}</td>
-                                <td class="text-center">{{ $report->first_name }}</td>
+                                {{-- <td class="text-center">{{ $report->first_name }}</td> --}}
                                 <td class="text-center">{{ $report->employee_id }}</td>
                                 <td class="text-center">{{ $report->position }}</td>
                                 <td class="text-center">{{ $report->department }}</td>
@@ -96,12 +96,6 @@
                                 <td class="text-center">{{ $report->model }}</td>
                                 <td class="text-center">{{ $report->created_at }}</td>
                                 <td class="text-center"> --- </td>
-
-
-
-
-
-
                             </tr>
                         @endforeach
                     </tbody>

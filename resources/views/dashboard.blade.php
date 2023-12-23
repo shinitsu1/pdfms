@@ -659,7 +659,7 @@
                 <span>Call</span>
             </div>
             <div class="flex flex-col items-center justify-center bg-blue-200 rounded-lg shadow-xl min-h-[80px] w-full p-4">
-            <button id="scanButton" type="button" class="flex flex-col items-center justify-center bg-blue-200 rounded-lg shadow-xl min-h-[80px]">
+            <button onclick="startScanner()" id="scanButton" type="button" class="flex flex-col items-center justify-center bg-blue-200 rounded-lg shadow-xl min-h-[80px]">
                 <img src="{{ asset('images/qr (1).png') }}" alt="Your Image" class="w-10 h-auto rounded-lg">
                 Scan
             </button>
@@ -695,12 +695,16 @@
         <div class="container" id="video-container" style="display: none;">
             <video id="video-preview" playsinline autoplay></video>
         </div>
+
+        <div>
+            <label>Plate Number: </label>
+            <input type="text" name="plate" id="plate" readonly=""
+                placeholder="Plate Number" class="form-control">
+        </div>
     </div>
 
-    <div class="container" id="video-container" style="display: none;">
-        <video id="video-preview" playsinline autoplay></video>
-    </div>
-</div>
+
+
 
 
 
@@ -752,29 +756,6 @@
         </div>
     </nav>
 
-       <!-- Search bar -->
-       {{-- <div class="mt-4 relative">
-        <div class="flex items-center justify-center relative right-[20%]  w-[350px]">
-            <input
-                type="text"
-                placeholder="Search..."
-                class="w-full px-5 py-2  border-gray-300 focus:outline-none focus:border-blue-500">
-            <button
-                type="button"
-                class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-blue-500 group-hover:bg-blue-300 px-2 py-2"
-            >
-
-                    <i class="fas fa-search text-white"></i>
-
-            </button>
-        </div>
-    </div> --}}
-
-
-    <div class="container" id="video-container" style="display: none;">
-        <video id="video-preview" playsinline autoplay></video>
-    </div>
-</div>
 
         <!----Resize  web----->
 
@@ -802,7 +783,7 @@
 
 
                     const codeReader = new ZXing.BrowserQRCodeReader();
-                    codeReader.decodeFromVideoDevice(undefined, 'video-preview', (result, err) => {
+                    codeReader.decodeFromVideoDevice(plate, 'video-preview', (result, err) => {
                         if (result) {
                             alert('QR Code Scanned: ' + result.text);
                             // Do something with the scanned result

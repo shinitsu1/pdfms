@@ -113,27 +113,6 @@
             });
         }
 
-
-
-
-        function updateStatus(plate) {
-            fetch(`/vehicle/status/${plate}`, {
-                    method: 'PATCH',
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log(data); // Log the response from the server
-                })
-                .catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
-                });
-        }
-
         function stopScanner() {
             if (scanner) {
                 scanner.stop();
@@ -142,10 +121,6 @@
             }
         }
     </script>
-
-
-
-
 
 
 

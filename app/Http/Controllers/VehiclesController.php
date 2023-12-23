@@ -79,21 +79,6 @@ class VehiclesController extends Controller
         return back();
     }
 
-    public function updateStatus($plate) {
-        $vehicle = Vehicles::find($plate);
-
-    if($vehicle){
-        $vehicle->status = !$vehicle->status; // Toggle the status
-
-        $vehicle->save();
-
-        return response()->json(['status' => $vehicle->status]);
-    }
-
-    return response()->json(['error' => 'Vehicle not found'], 404);
-    }
-
-
 
 
     public function create_vehicle(Request $request){
